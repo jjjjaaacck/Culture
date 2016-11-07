@@ -40,24 +40,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getData() {
-//        let dateFormat = DateFormatter()
-//        dateFormat.dateFormat = "yyyy/MM/dd"
-//        let date = dateFormat.string(from: datePicker.date)
         model.removeAll()
         
         let filter = NSPredicate(format:"startDate <= %@ AND endDate >= %@", datePicker.date as CVarArg, datePicker.date as CVarArg)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
             self.data = task as! [MainData]
         }
-//        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { task in
-//            self.data = task.result as! [MainData]
-//            return nil
-//        }
-//        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith(successBlock: { (task) -> AnyObject? in
-//            self.data = task.result as! [MainData]
-//            return nil
-//            })
-//        infos = coreDataController.getInfoByDate(date)
         
         tableView.reloadData()
         tableView.contentOffset = CGPoint(x: 0, y: 0)
@@ -75,26 +63,11 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.title.text = data[indexPath.row].title
             cell.address.text = data[indexPath.row].informations[0].location
             setCategoryImage(Int(data[indexPath.row].category), category: cell.category)
-            if let endDate = data[indexPath.row].endDate {
-                cell.time.text = dateToString(date: data[indexPath.row].startDate!) + " ~ "
-                    + dateToString(date: endDate)
-            }
-            else {
-                cell.time.text = dateToString(date: data[indexPath.row].startDate!)
-            }
+            
+            cell.time.text = (data[indexPath.row].endDate != nil ) ?
+                dateToString(date: data[indexPath.row].startDate!) + " ~ "
+                + dateToString(date: data[indexPath.row].endDate!) : dateToString(date: data[indexPath.row].startDate!)
         }
-        
-//        if !infos.isEmpty {
-//            cell.title.text = model[(indexPath as NSIndexPath).row].title!
-//            cell.address.text = infos[indexPath.row].location!
-//            cell.category = setCategoryImage(Int(model[(indexPath as NSIndexPath).row].category!), category: cell.category)
-//            if infos[indexPath.row].endTime! != "" {
-//                cell.time.text = infos[indexPath.row].startTime! + " ~ " + infos[indexPath.row].endTime!
-//            }
-//            else {
-//                cell.time.text = infos[indexPath.row].startTime!
-//            }
-//        }
         return cell
     }
     

@@ -17,6 +17,7 @@ enum ButtonType: Int {
 }
 
 protocol MainIntroViewDelegate {
+    func mainIntroViewSessionButtonClick()
     func mainIntroViewWebButtonClick()
     func mainIntroViewSalesButtonClick()
     func mainIntroViewShareButtonClick()
@@ -196,7 +197,7 @@ class MainIntroView: UIView {
     //MARK: Action
     
     func sessionButtonClick() {
-        
+        delegate?.mainIntroViewSessionButtonClick()
     }
     
     func webButtonClick() {

@@ -191,11 +191,19 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         }
         else if segue.identifier == "showSession" {
             let sessionTblViewController: SessionTableViewController = segue.destination as! SessionTableViewController
-            sessionTblViewController.infos = sender as! [Info]
+            sessionTblViewController.informations = sender as! [Information]
         }
     }
     
     //MARK: MainIntroViewDelegate
+    
+    func mainIntroViewSessionButtonClick() {
+        var sender = [Information]()
+        for information in self.data.informations {
+            sender.append(information)
+        }
+        self.performSegue(withIdentifier: "showSession", sender: sender )
+    }
     
     func mainIntroViewWebButtonClick() {
         self.performSegue(withIdentifier: "showWeb", sender: self.data.webUrl)

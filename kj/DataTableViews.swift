@@ -127,7 +127,10 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         else {
             cell.activityLocation.text = data.informations[0].location
         }
-        cell.activityTime.text = (data.endDate != nil ) ? "\(data.startDate!) ~ \(data.endDate!)" : "\(data.startDate!)"
+        
+        cell.activityTime.text = (data.endDate != nil ) ? dateToString(date: data.startDate!) + " ~ " + dateToString(date: data.endDate!) : dateToString(date: data.startDate!)
+        
+//        cell.activityTime.text = (data.endDate != nil ) ? "\(data.startDate!) ~ \(data.endDate!)" : "\(data.startDate!)"
         cell.setCategory(data.category)
         cell.setBookMarkImage(data.bookMark)
         
@@ -162,6 +165,12 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
             
             return nil
         }
+    }
+    
+    func dateToString(date: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.string(from: date)
     }
     
     func isHiddenTable() -> Bool {
