@@ -1,0 +1,71 @@
+PODS:
+  - Alamofire (4.0.1)
+  - Bolts-Swift (1.3.0)
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
+  - GoogleMaps (2.1.0):
+    - GoogleMaps/Maps (= 2.1.0)
+  - GoogleMaps/Base (2.1.0)
+  - GoogleMaps/Maps (2.1.0):
+    - GoogleMaps/Base (= 2.1.0)
+  - GooglePlacePicker (2.1.0):
+    - GoogleMaps (= 2.1.0)
+    - GooglePlaces (= 2.1.0)
+  - GooglePlaces (2.1.0):
+    - GoogleMaps/Base (= 2.1.0)
+  - Kingfisher (3.1.4)
+  - R.swift (3.1.0):
+    - R.swift.Library (~> 3.0.2)
+  - R.swift.Library (3.0.2)
+  - Realm (2.0.2):
+    - Realm/Headers (= 2.0.2)
+  - Realm/Headers (2.0.2)
+  - RealmSwift (2.0.2):
+    - Realm (= 2.0.2)
+  - SnapKit (3.0.2)
+  - SwiftyJSON (3.1.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Bolts-Swift
+  - ChameleonFramework
+  - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
+  - Kingfisher
+  - R.swift
+  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - SnapKit (~> 3.0)
+  - SwiftyJSON
+
+EXTERNAL SOURCES:
+  RealmSwift:
+    :branch: master
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  RealmSwift:
+    :commit: be0555b550093bb65629055861ac2a0d9ab00e4f
+    :git: https://github.com/realm/realm-cocoa.git
+    :submodules: true
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  GoogleMaps: 06589b9a38097bce0cd6e90f0fd9b5e4b4a9344c
+  GooglePlacePicker: a2228b447d10008bcb765a6a081f415e8599e5d4
+  GooglePlaces: 16e96266483b8010e9f275399403647978523c86
+  Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
+  R.swift: 14400e5784224d1e4e59a8fc5549198c7e8fe360
+  R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
+  Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
+  RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+
+PODFILE CHECKSUM: 7dcfd3f65c38d878687c9844a8b08a6893db0b49
+
+COCOAPODS: 1.0.1
