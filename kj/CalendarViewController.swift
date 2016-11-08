@@ -13,7 +13,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
-    var model = [Model]()
     var data = [MainData]()
     
     var coreDataController = CoreDataController()
@@ -40,7 +39,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func getData() {
-        model.removeAll()
         
         let filter = NSPredicate(format:"startDate <= %@ AND endDate >= %@", datePicker.date as CVarArg, datePicker.date as CVarArg)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
@@ -85,12 +83,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showCalendarDetail", sender: model[(indexPath as NSIndexPath).row].title!)
+        performSegue(withIdentifier: "showCalendarDetail", sender: data[indexPath.row].id)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let transitionViewController = segue.destination as! TransitionViewController
-        transitionViewController.searchTitle = sender as! String
+        transitionViewController.mainDataId = sender as! String
     }
     
     func setCategoryImage(_ categoryName:Int, category:UIImageView) {

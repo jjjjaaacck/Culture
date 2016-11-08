@@ -20,6 +20,8 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         
+        tableView.bounces = false
+        
         menuButton.target = self.revealViewController()
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -64,7 +66,7 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return (allLocations?.count)!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -77,18 +79,24 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
         locationResultViewController.location = sender as! String
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width/9.25, height: 30))
-        label.center.x = tableView.center.x
-        label.font = UIFont(name: "System", size: 15)
-        label.textColor = UIColor(red:0.45, green:0.45, blue:0.45, alpha:1)
-        label.text = locationTitle[section]
-        view.addSubview(label)
-        view.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1)
-        return view
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return locationTitle[section]
     }
+//    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
+//        let label = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width/9.25, height: 30))
+//        label.center.x = tableView.center.x
+//        label.font = UIFont(name: "System", size: 15)
+//        label.textColor = UIColor(red:0.45, green:0.45, blue:0.45, alpha:1)
+//        label.text = locationTitle[section]
+//        view.addSubview(label)
+//        view.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1)
+//        return view
+//    }
+    
+    
     
     /*func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return locationTitle
