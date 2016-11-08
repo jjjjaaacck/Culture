@@ -37,7 +37,7 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         //print(currentLocation.latitude,currentLocation.longitude)
-        let filter = NSPredicate(format: "ANY informations.latitude BETWEEN {%@, %@} AND informations.longitude BETWEEN {%@, %@}", currentLocation.latitude - 0.01, currentLocation.latitude + 0.01, currentLocation.longitude - 0.01, currentLocation.longitude + 0.01)
+        let filter = NSPredicate(format: "ANY informations.latitude BETWEEN {%@, %@} AND ANY informations.longitude BETWEEN {%@, %@}", currentLocation.latitude - 0.01, currentLocation.latitude + 0.01, currentLocation.longitude - 0.01, currentLocation.longitude + 0.01)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
             self.data = task as! [MainData]
         }

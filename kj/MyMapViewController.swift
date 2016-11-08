@@ -120,10 +120,7 @@ class MyMapViewController: UIViewController,CLLocationManagerDelegate ,GMSMapVie
                 
                 didFindMyLocation = true
             }
-            
         }
     }
-
-
 }
 

@@ -129,8 +129,6 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.activityTime.text = (data.endDate != nil ) ? dateToString(date: data.startDate!) + " ~ " + dateToString(date: data.endDate!) : dateToString(date: data.startDate!)
-        
-//        cell.activityTime.text = (data.endDate != nil ) ? "\(data.startDate!) ~ \(data.endDate!)" : "\(data.startDate!)"
         cell.setCategory(data.category)
         cell.setBookMarkImage(data.bookMark)
         

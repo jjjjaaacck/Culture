@@ -18,6 +18,7 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
     let coreDataController = CoreDataController()
     var idCompare: String = ""
     var location = ""
+    var data = [MainData]()
     var model = [Model]()
     var infos = [Info]()
     var finalInfos = [Info]()
@@ -26,8 +27,8 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
-            DispatchQueue.main.async(execute: {
+//        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
+//            DispatchQueue.main.async(execute: {
                 self.load()
                 self.titleBar.topItem?.title = self.location
                 self.tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
@@ -36,27 +37,33 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
                 
                 self.tableView.dataSource = self
                 self.tableView.delegate = self
-            })
-        }
+//            })
+//        }
     }
     
     func load() {
-//        if location == "台北" {
-//            infos = coreDataController.getInfoByLocation("台北", location2: "臺北")
-//        }
-//        else if location == "台中" {
-//            infos = coreDataController.getInfoByLocation("台中", location2: "臺中")
-//        }
-//        else if location == "台南" {
-//            infos = coreDataController.getInfoByLocation("台南", location2: "臺南")
-//        }
-//        else if location == "台東" {
-//            infos = coreDataController.getInfoByLocation("台東", location2: "臺東")
-//        }
-//        else{
-//            infos = coreDataController.getInfoByLocation(location, location2: location)
-//        }
-//        
+        
+        var filter = NSPredicate()
+        if location == "台北" {
+            filter = NSPredicate(format: "ANY informations.location CONTAINS '台北' OR ANY informations.location CONTAINS '臺北'")
+        }
+        else if location == "台中" {
+            filter = NSPredicate(format: "ANY informations.location CONTAINS '台中' OR ANY informations.location CONTAINS '臺中'")
+        }
+        else if location == "台南" {
+            filter = NSPredicate(format: "ANY informations.location CONTAINS '台南' OR ANY informations.location CONTAINS '臺南'")
+        }
+        else if location == "台東" {
+            filter = NSPredicate(format: "ANY informations.location CONTAINS '台東' OR ANY informations.location CONTAINS '臺東'")
+        }
+        else{
+            filter = NSPredicate(format: "ANY informations.location CONTAINS %@", location)
+        }
+        
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
+            self.data = task as! [MainData]
+        }
+        
 //        for info in infos {
 //            if (idCompare.range(of: info.modelId!) == nil) {
 //                var temp = coreDataController.getModelById(info.modelId!)
@@ -78,30 +85,26 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationSearchCell", for: indexPath) as! LocationSearchTblViewCell
-        cell.title.text = model[(indexPath as NSIndexPath).row].title!
-        cell.address.text = finalInfos[(indexPath as NSIndexPath).row].location!
-        cell.category = setCategoryImage(Int(model[(indexPath as NSIndexPath).row].category!), category: cell.category)
-        if finalInfos[(indexPath as NSIndexPath).row].endTime! != "" {
-            cell.time.text = finalInfos[(indexPath as NSIndexPath).row].startTime! + " ~ " + finalInfos[(indexPath as NSIndexPath).row].endTime!
-        }
-        else {
-            cell.time.text = finalInfos[(indexPath as NSIndexPath).row].startTime!
-        }
+        cell.title.text = data[indexPath.row].title
+        cell.address.text = data[indexPath.row].informations[0].location
+        cell.category = setCategoryImage(Int(data[indexPath.row].category), category: cell.category)
+        cell.time.text = data[indexPath.row].informations[0].endTime == nil ? dateToString(date: data[indexPath.row].informations[0].startTime!) : dateToString(date: data[indexPath.row].informations[0].startTime!) + " ~ " + dateToString(date: data[indexPath.row].informations[0].endTime!)
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.count
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showLocationDetail", sender: model[(indexPath as NSIndexPath).row].title!)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showLocationDetail", sender: data[indexPath.row].id)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let transitionViewController = segue.destination as! TransitionViewController
-        transitionViewController.searchTitle = sender as! String
+        transitionViewController.mainDataId = sender as! String
     }
     
     func setCategoryImage(_ categoryName:Int, category:UIImageView)->UIImageView{
@@ -142,6 +145,12 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         
         category.image = image
         return category
+    }
+    
+    func dateToString(date: Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return dateFormatter.string(from: date)
     }
 
 }

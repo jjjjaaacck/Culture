@@ -70,8 +70,8 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = allLocations?[(indexPath as NSIndexPath).section]
-        performSegue(withIdentifier: "showLocationSearchResult", sender: section![(indexPath as NSIndexPath).row])
+        let section = allLocations?[indexPath.section]
+        performSegue(withIdentifier: "showLocationSearchResult", sender: section![indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
