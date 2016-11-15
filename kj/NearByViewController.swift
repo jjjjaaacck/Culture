@@ -16,11 +16,7 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
     var coreDataController = CoreDataController()
     
     var data = [MainData]()
-    
-//    var model = [Model]()
-//    var infos = [Info]()
-//    var finalInfos = [Info]()
-//    var idCompare = ""
+
     
     @IBOutlet var tableView: UITableView!
     @IBAction func back(_ sender: UIBarButtonItem) {

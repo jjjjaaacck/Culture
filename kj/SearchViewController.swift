@@ -21,6 +21,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     var coreDataController = CoreDataController()
     var searchText = ""
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.modalPresentationStyle = .custom
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()

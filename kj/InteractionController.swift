@@ -30,18 +30,18 @@ class InteractionController: UIPercentDrivenInteractiveTransition {
         let viewTranslation = gestureRecognizer.translation(in: gestureRecognizer.view!.superview!)
         switch gestureRecognizer.state {
         case .began:
-        
+            
             transitionInProgress = true
             presentingVC.dismiss(animated: true, completion: nil)
-        
+            
         case .changed:
-        
+            
             let const = CGFloat(fminf(fmaxf(Float(viewTranslation.y / -800.0), 0.0), 1.0))
             shouldCompleteTransition = const > 0.13
             update(const)
-
+            
         case .cancelled, .ended:
-        
+            
             transitionInProgress = false
             if !shouldCompleteTransition || gestureRecognizer.state == .cancelled {
                 cancel()
@@ -49,9 +49,9 @@ class InteractionController: UIPercentDrivenInteractiveTransition {
             else {
                 finish()
             }
-      
+            
         default: break
-        
+            
         }
     }
 }

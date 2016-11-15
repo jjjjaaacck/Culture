@@ -71,6 +71,7 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = allLocations?[indexPath.section]
+        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showLocationSearchResult", sender: section![indexPath.row])
     }
     

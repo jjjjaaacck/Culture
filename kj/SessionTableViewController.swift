@@ -6,21 +6,30 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
     
     var informations = [Information]()
     
-    
-    @IBOutlet var tableview: UITableView!
-    
-    @IBAction func backButtonClick(_ sender: UIBarButtonItem) {
+    @IBOutlet weak var tableView: UITableView!
+   
+    @IBAction func backClick(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: {})
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+//        
+//        self.view.addSubview(tableView)
+//        
+//        tableView.snp.makeConstraints { (make) in
+//            make.top.equalTo(titleBar.snp.bottom)
+//            make.leading.equalTo(self.view)
+//            make.trailing.equalTo(self.view)
+//            make.bottom.equalTo(self.view)
+//        }
     
         let nib: UINib = UINib(nibName: "SessionTblViewCell", bundle: nil)
-        tableview.register(nib, forCellReuseIdentifier: "sessionCell")
-        tableview.dataSource = self
-        tableview.delegate = self
+        tableView.register(nib, forCellReuseIdentifier: "sessionCell")
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
     }
     
     //MARK : UITableViewDelegate

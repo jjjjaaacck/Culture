@@ -3,7 +3,7 @@ import UIKit
 
 class OptionAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     
-    let isPresenting :Bool
+    let isPresenting: Bool
     
     init(isPresenting: Bool){
         
@@ -17,10 +17,10 @@ class OptionAnimator: NSObject, UIViewControllerAnimatedTransitioning{
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-    
+        
         let containerView = transitionContext.containerView
         let bounds = UIScreen.main.bounds
-
+        
         if isPresenting{
             let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!      //將進來的view controller
             
@@ -31,9 +31,9 @@ class OptionAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             containerView.addSubview(toViewController.view)
             
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
-                    toViewController.view.frame = finalFrameForPresentVC
-                }, completion: { (finished) in
-                    transitionContext.completeTransition(true)
+                toViewController.view.frame = finalFrameForPresentVC
+            }, completion: { (finished) in
+                transitionContext.completeTransition(true)
             })
         }
         else {
@@ -43,9 +43,9 @@ class OptionAnimator: NSObject, UIViewControllerAnimatedTransitioning{
             
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
                 fromViewController.view.frame = fromViewController.view.frame.offsetBy(dx: 0, dy: -bounds.size.height)
-                }, completion: { (finished) in
-                    transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            }, completion: { (finished) in
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             })
         }
-    }    
+    }
 }

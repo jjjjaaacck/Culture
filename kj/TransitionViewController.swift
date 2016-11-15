@@ -26,14 +26,12 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     
     @IBOutlet var detailScrollView: DetailScrollView!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.commonInit()
+    @IBAction func closeButtonClick() {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.commonInit()
     }
     
@@ -111,78 +109,78 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         return data.informations[0].latitude == 0.0 && data.informations[0].longitude == 0.0 ? false : true
     }
     
-//    func shareButtonClick(sender: UIButton){
-//        let shareDetails : NSMutableDictionary
-//        let title1 = model[index].title!
-//        let title = data.title
-//        let des = model[index].detail!
-//        let description = data.detail
-//        shareDetails = ["og:type":"culture_life:event","og:title":title,"og:description":des,"og:locale":"zh_TW"]
-//        if data.webUrl != ""{
-//            let url = data.webUrl
-//            shareDetails.setObject(url, forKey:"og:url")
-//        }
-//        else
-//        {
-//            if data.salesUrl != ""{
-//                let url = data.salesUrl
-//                shareDetails.setObject(url, forKey:"og:url")
-//            }
-//        }
-//        if data.imageUrl != ""{
-//            let imageUrl = NSURL(string: data.imageUrl)
-//            let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
-//            shareDetails.setObject(image, forKey:"og:image")
-//        }
-//        let object = FBSDKShareOpenGraphObject(properties: shareDetails as [NSObject : AnyObject])
-//        let action = FBSDKShareOpenGraphAction.init()
-//        action.actionType = "culture_life:review"
-//        action.setObject(object, forKey: "culture_life:event")
-//        let content = FBSDKShareOpenGraphContent.init()
-//        content.action = action
-//        content.previewPropertyName = "culture_life:event"
-//        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
-//    }
+    //    func shareButtonClick(sender: UIButton){
+    //        let shareDetails : NSMutableDictionary
+    //        let title1 = model[index].title!
+    //        let title = data.title
+    //        let des = model[index].detail!
+    //        let description = data.detail
+    //        shareDetails = ["og:type":"culture_life:event","og:title":title,"og:description":des,"og:locale":"zh_TW"]
+    //        if data.webUrl != ""{
+    //            let url = data.webUrl
+    //            shareDetails.setObject(url, forKey:"og:url")
+    //        }
+    //        else
+    //        {
+    //            if data.salesUrl != ""{
+    //                let url = data.salesUrl
+    //                shareDetails.setObject(url, forKey:"og:url")
+    //            }
+    //        }
+    //        if data.imageUrl != ""{
+    //            let imageUrl = NSURL(string: data.imageUrl)
+    //            let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
+    //            shareDetails.setObject(image, forKey:"og:image")
+    //        }
+    //        let object = FBSDKShareOpenGraphObject(properties: shareDetails as [NSObject : AnyObject])
+    //        let action = FBSDKShareOpenGraphAction.init()
+    //        action.actionType = "culture_life:review"
+    //        action.setObject(object, forKey: "culture_life:event")
+    //        let content = FBSDKShareOpenGraphContent.init()
+    //        content.action = action
+    //        content.previewPropertyName = "culture_life:event"
+    //        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+    //    }
     
-//    func setMap() {
-//        let coordinate = CLLocationCoordinate2DMake(Double(infos[0].latitude!), Double(infos[0].longitude!))
-//        
-//        if coordinate.longitude != 0.0 && coordinate.latitude != 0.0 {
-//            let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
-//            activityMap = GMSMapView.mapWithFrame(CGRectMake(10, nextY+10+15, view.frame.size.width-20, 160), camera: camera)
-//            //activityMap = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-//            activityMap.accessibilityElementsHidden = true
-//            activityMap.delegate = self
-//            activityMap.settings.scrollGestures = false
-//            activityMap.settings.zoomGestures = true
-//            activityMap.settings.compassButton = true
-//            //mapView.myLocationEnabled = true
-//            //mapView.settings.myLocationButton = true
-//            activityMap.setMinZoom(8, maxZoom: 20)
-//            detailScrollView.addSubview(activityMap)
-//            
-//            nextY = activityMap.frame.maxY
-//            
-//            showMarker(activityMap, coordinate: coordinate)
-//        }
-//    }
+    //    func setMap() {
+    //        let coordinate = CLLocationCoordinate2DMake(Double(infos[0].latitude!), Double(infos[0].longitude!))
+    //
+    //        if coordinate.longitude != 0.0 && coordinate.latitude != 0.0 {
+    //            let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
+    //            activityMap = GMSMapView.mapWithFrame(CGRectMake(10, nextY+10+15, view.frame.size.width-20, 160), camera: camera)
+    //            //activityMap = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+    //            activityMap.accessibilityElementsHidden = true
+    //            activityMap.delegate = self
+    //            activityMap.settings.scrollGestures = false
+    //            activityMap.settings.zoomGestures = true
+    //            activityMap.settings.compassButton = true
+    //            //mapView.myLocationEnabled = true
+    //            //mapView.settings.myLocationButton = true
+    //            activityMap.setMinZoom(8, maxZoom: 20)
+    //            detailScrollView.addSubview(activityMap)
+    //
+    //            nextY = activityMap.frame.maxY
+    //
+    //            showMarker(activityMap, coordinate: coordinate)
+    //        }
+    //    }
     
-//    func showMarker(mapview: GMSMapView, coordinate: CLLocationCoordinate2D) {
-//        let marker = GMSMarker()
-//        marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-//        //marker.title = "Hello"
-//        //marker.snippet = "I'm fine"
-//        //marker.appearAnimation = kGMSMarkerAnimationPop
-////        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
-//        marker.icon = UIImage(named: "marker")
-//        marker.map = mapview
-//    }
+    //    func showMarker(mapview: GMSMapView, coordinate: CLLocationCoordinate2D) {
+    //        let marker = GMSMarker()
+    //        marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
+    //        //marker.title = "Hello"
+    //        //marker.snippet = "I'm fine"
+    //        //marker.appearAnimation = kGMSMarkerAnimationPop
+    ////        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
+    //        marker.icon = UIImage(named: "marker")
+    //        marker.map = mapview
+    //    }
     
-//    func openWeb(sender: UITapGestureRecognizer){
-//        let label: UILabel = sender.view as! UILabel
-//        let path = label.text
-//        self.performSegueWithIdentifier("showWeb", sender: path!)
-//    }
+    //    func openWeb(sender: UITapGestureRecognizer){
+    //        let label: UILabel = sender.view as! UILabel
+    //        let path = label.text
+    //        self.performSegueWithIdentifier("showWeb", sender: path!)
+    //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWeb" {
@@ -234,7 +232,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
             let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
             shareDetails.setObject(image, forKey:"og:image" as NSCopying)
         }
-//        let object = FBSDKShareOpenGraphObject(properties: shareDetails)
+        //        let object = FBSDKShareOpenGraphObject(properties: shareDetails)
         let object = FBSDKShareOpenGraphObject(properties: shareDetails as NSDictionary as! [AnyHashable: Any])
         let action = FBSDKShareOpenGraphAction.init()
         action.actionType = "culture_life:review"
@@ -279,5 +277,5 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return optionInteractionController.transitionInProgress ? optionInteractionController : nil
     }
-
+    
 }

@@ -41,7 +41,7 @@ class MapView: UIView {
 
     func setMap() {
         let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-        let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
         
 //        activityMap = GMSMapView.mapWithFrame(CGRectMake(10, 10+15, view.frame.size.width-20, 160), camera: camera)
         activityMap = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -53,7 +53,7 @@ class MapView: UIView {
         activityMap.settings.myLocationButton = true
         activityMap.setMinZoom(8, maxZoom: 20)
         
-        showMarker(activityMap, coordinate: coordinate)
+//        showMarker(activityMap, coordinate: coordinate)
         
     }
     

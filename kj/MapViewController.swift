@@ -9,12 +9,12 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
-
+class MapViewController: UIViewController, CLLocationManagerDelegate {
+    
     @IBOutlet var mapView: GMSMapView!
     
     @IBOutlet var navigationBar: UINavigationBar!
-    var tempCoordinate: [Double] = []
+    var tempCoordinate = [Double]()
     let locationManager = CLLocationManager()
     var currentLocation = CLLocation()
     
@@ -33,7 +33,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: navigationBar.frame.height, width: self.view.frame.width, height: self.view.frame.height - navigationBar.frame.height), camera: camera)
         mapView.accessibilityElementsHidden = true
-        mapView.delegate = self
+//        mapView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -79,7 +79,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         if let location = locations.last{
             self.currentLocation = location
         }
-        
     }
     
     func showMarker(_ mapview: GMSMapView, coordinate: CLLocationCoordinate2D)
