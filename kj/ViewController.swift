@@ -22,7 +22,9 @@ extension DataTableViews {
                 if task.faulted {
                     FetchData.sharedInstance.RequestForData(self.category!).continueOnSuccessWith{ task in
                         self.data = task as! [MainData]
-                        self.reloadTableView()
+                        DispatchQueue.main.async(execute: {
+                            self.reloadTableView()
+                        })
                         RealmManager.sharedInstance.addDataTableViewData(self.data)
                         }.continueOnErrorWith{ error in
                             print("fetchData error : \(error), with category: \(self.category!)")
@@ -40,7 +42,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     var pageControl: UIPageControl!
     var nowPage:Int = 0
     var dataTableViewArray = [DataTableViews]()
-
+    
     @IBOutlet var titleScrollView: UIScrollView!
     @IBOutlet var contentScrollView: UIScrollView!
     @IBOutlet var menu: UIBarButtonItem!
@@ -52,10 +54,10 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
-
+        
         loadTitleScrollView()
         loadMenuSearch()
-
+        
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
     
@@ -85,11 +87,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     func loadTitleScrollView(){
         
         let titleScrollViewHeight = titleScrollView.constraints.first!.constant
- 
+        
         titleScrollView.tag = ScrollViewType.title.rawValue
         titleScrollView.contentSize = CGSize(width: titleScrollViewHeight*2.25*CGFloat(header.categoryCount), height: titleScrollViewHeight)
         titleScrollView.delegate = self
-
+        
         
         for index in 0 ..< header.categoryCount {
             
@@ -128,13 +130,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         let width  = self.view.frame.size.width
         let height = self.view.frame.size.height
         let pageSize = header.categoryCount
-
+        
         contentScrollView.tag = ScrollViewType.content.rawValue
         contentScrollView.delegate = self
         contentScrollView.contentSize.width = CGFloat(pageSize) * width
         contentScrollView.isDirectionalLockEnabled = true
         self.view.addSubview(contentScrollView)
-    
+        
         for index in 0 ..< pageSize {
             
             let dataTableView = DataTableViews(category: header.categoryNumber[index])
@@ -154,7 +156,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             dataTableViewArray.append(dataTableView)
             dataTableView.fetchData()
         }
-    
+        
         pageControl = UIPageControl()
         pageControl.numberOfPages = pageSize
         pageControl.currentPage = 0
@@ -179,8 +181,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         if segue.identifier == "showDetail" {
             let detailController: TransitionViewController = segue.destination as! TransitionViewController
             detailController.mainDataId = sender as! String
-//            detailController.category = ((sender as! NSArray).objectAtIndex(0)) as! Int
-//            detailController.detailCellRow = (sender![1].row)
+            //            detailController.category = ((sender as! NSArray).objectAtIndex(0)) as! Int
+            //            detailController.detailCellRow = (sender![1].row)
         }
     }
     
@@ -222,7 +224,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         }
         return nil
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -234,7 +236,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     }
     
     //MARK: ToTopButtonDelegate
-
+    
     func toTopButtonClick() {
         dataTableViewArray[nowPage].scrollToTop()
     }

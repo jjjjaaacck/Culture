@@ -102,8 +102,7 @@ class MenuBarViewController: UIViewController, FBSDKLoginButtonDelegate, UITable
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: NSError!)
     {
-        if ((error) != nil)
-        {
+        if error != nil {
             // Process error
         }
         else if result.isCancelled {

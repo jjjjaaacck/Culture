@@ -15,15 +15,6 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
-//        
-//        self.view.addSubview(tableView)
-//        
-//        tableView.snp.makeConstraints { (make) in
-//            make.top.equalTo(titleBar.snp.bottom)
-//            make.leading.equalTo(self.view)
-//            make.trailing.equalTo(self.view)
-//            make.bottom.equalTo(self.view)
-//        }
     
         let nib: UINib = UINib(nibName: "SessionTblViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "sessionCell")
@@ -41,24 +32,23 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "sessionCell", for: indexPath) as! SessionTableViewCell
         
-        if informations[indexPath.row].location != "" {
-            cell.locationLabel.text = informations[indexPath.row].location
+        cell.locationLabel.text = informations[indexPath.row].location != "" ? informations[indexPath.row].location : "無提供地點"
+        
+        if let startTime = informations[indexPath.row].startTime {
+            if let endTime = informations[indexPath.row].endTime {
+                cell.timeLabel.text = dateToString(date: startTime) + " ~ " + dateToString(date: endTime)
+            }
+            else {
+                cell.timeLabel.text = dateToString(date: startTime)
+            }
         }
         else {
-            cell.locationLabel.text = "無提供地點"
-        }
-        
-        if informations[indexPath.row].startTime == nil && informations[indexPath.row].endTime == nil {
-            cell.timeLabel.text = "無提供時間"
-        }
-        else if informations[indexPath.row].startTime != nil && informations[indexPath.row].endTime == nil {
-            cell.timeLabel.text = dateToString(date: informations[indexPath.row].startTime!)
-        }
-        else if informations[indexPath.row].startTime == nil && informations[indexPath.row].endTime != nil {
-            cell.timeLabel.text = dateToString(date: informations[indexPath.row].endTime!)
-        }
-        else{
-            cell.timeLabel.text = dateToString(date: informations[indexPath.row].startTime!) + " ~ " + dateToString(date: informations[indexPath.row].endTime!)
+            if let endTime = informations[indexPath.row].endTime {
+                cell.timeLabel.text = dateToString(date: endTime)
+            }
+            else {
+                cell.timeLabel.text = "無提供時間"
+            }
         }
         
         if informations[indexPath.row].latitude != 0.0 && informations[indexPath.row].longitude != 0.0 {

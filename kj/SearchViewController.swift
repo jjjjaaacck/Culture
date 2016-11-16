@@ -17,9 +17,17 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     var searchController: UISearchController!
     var category = Category()
-    var searchResult = [String]()
-    var coreDataController = CoreDataController()
+    var searchResult = [(title: String, id: String)]()
     var searchText = ""
+    var searchClassify = [
+        0: Array(1...19),
+        1: [1, 5, 17],
+        2: [2, 3, 8],
+        3: [6, 7, 19],
+        4: [13, 14],
+        5: [4, 11],
+        6: [15]
+    ]
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,7 +50,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableview.reloadData()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,8 +67,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as! SearchTblViewCell
         if searchController.isActive {
-            cell.searchLabel.text = searchResult[(indexPath as NSIndexPath).row]
-            if searchResult[(indexPath as NSIndexPath).row] != "查無資料" {
+            cell.searchLabel.text = searchResult[indexPath.row].title
+            if searchResult[indexPath.row].title != "查無資料" {
                 cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             }
             return cell
@@ -76,8 +84,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ taleView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if searchResult[(indexPath as NSIndexPath).row] != "查無資料" {
-            performSegue(withIdentifier: "showSearchDetail", sender: searchResult[(indexPath as NSIndexPath).row])
+        taleView.deselectRow(at: indexPath, animated: true)
+        if searchResult[indexPath.row].title != "查無資料" {
+            performSegue(withIdentifier: "showSearchDetail", sender: searchResult[indexPath.row].id)
         }
     }
     
@@ -85,19 +94,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         searchController.isActive = false
         backButton.isEnabled = true
         let transitionController = segue.destination as! TransitionViewController
-        transitionController.searchTitle = sender as! String
+        transitionController.mainDataId = sender as! String
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         searchResult.removeAll(keepingCapacity: false)
         if searchController.searchBar.text != "" {
-            let categoryIndex = searchController.searchBar.selectedScopeButtonIndex
-            
-//            searchResult = coreDataController.getTitleByClass(categoryIndex, condition: searchController.searchBar.text!)
-            
-            if searchResult.isEmpty {
-                searchResult.append("查無資料")
-            }
+            searchForData(searchController.searchBar.text!, categoryIndex: searchController.searchBar.selectedScopeButtonIndex)
         }
         searchText = searchController.searchBar.text!
         
@@ -107,11 +110,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         searchResult.removeAll(keepingCapacity: false)
         if searchBar.text != "" {
-//            searchResult = coreDataController.getTitleByClass(selectedScope, condition: searchBar.text!)
-            
-            if searchResult.isEmpty {
-                searchResult.append("查無資料")
-            }
+            searchForData(searchController.searchBar.text!, categoryIndex: searchController.searchBar.selectedScopeButtonIndex)
         }
         
         tableview.reloadData()
@@ -122,5 +121,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         backButton.isEnabled = false
+    }
+    
+    func searchForData(_ searchBarText: String, categoryIndex: Int) {
+        let filter = NSPredicate(format: "category IN %@ AND title CONTAINS '\(searchBarText)'", searchClassify[categoryIndex]!)
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{
+            task in
+            let data = task as! [MainData]
+            self.searchResult = data.map{ ($0.title, $0.id) }
+            }.continueWith{ task in
+                if task.faulted {
+                    self.searchResult.append(("查無資料", ""))
+                }
+        }
     }
 }
