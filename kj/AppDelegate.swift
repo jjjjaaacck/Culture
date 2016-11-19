@@ -20,7 +20,7 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let googleApi = "AIzaSyAgXi4mTg__-Vep3Ixke_t9XmMurTKW6yM"
+    let googleApi = "AIzaSyDsSZmRiXtlg9AXJCMYgcFcdzP1TjVlX9g"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

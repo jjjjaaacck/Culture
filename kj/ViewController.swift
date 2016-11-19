@@ -54,6 +54,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+
         
         loadTitleScrollView()
         loadMenuSearch()
@@ -71,7 +73,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     //MARK: Action
     
     func searchButtonClick() {
-        performSegue(withIdentifier: "showSearch", sender: self)
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        
+        self.view.window?.layer.add(transition,forKey:nil)
+        self.present(controller, animated: false, completion: nil)
     }
     
     func titleItemTap(_ sender:UITapGestureRecognizer){
@@ -90,6 +102,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         
         titleScrollView.tag = ScrollViewType.title.rawValue
         titleScrollView.contentSize = CGSize(width: titleScrollViewHeight*2.25*CGFloat(header.categoryCount), height: titleScrollViewHeight)
+        titleScrollView.bounces = false
+//        titleScrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         titleScrollView.delegate = self
         
         
@@ -120,7 +134,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     func loadMenuSearch(){
         menu.target = self.revealViewController()
         menu.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         searchButton.target = self
         searchButton.action = #selector(ViewController.searchButtonClick)
@@ -135,6 +148,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         contentScrollView.delegate = self
         contentScrollView.contentSize.width = CGFloat(pageSize) * width
         contentScrollView.isDirectionalLockEnabled = true
+        contentScrollView.bounces = false
+//        contentScrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addSubview(contentScrollView)
         
         for index in 0 ..< pageSize {
@@ -269,4 +284,26 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             setCurrentTitle(nowPage)
         }
     }
+//    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.tag == ScrollViewType.content.rawValue {
+//            if scrollView.contentOffset.x <= 0 {
+//                scrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//            }
+//            else {
+//                scrollView.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//            }
+//        }
+//    }
+//
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        if scrollView.tag == ScrollViewType.content.rawValue {
+//            if scrollView.contentOffset.x == 0 && scrollView.sc {
+//                scrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//            }
+//            else {
+//                scrollView.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//            }
+//        }
+//    }
 }

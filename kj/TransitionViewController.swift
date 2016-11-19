@@ -2,6 +2,12 @@ import UIKit
 import GoogleMaps
 import FBSDKShareKit
 
+enum ControllerIdentifier: String {
+    case session = "SessionTableViewController"
+    case infoWeb = "WebViewController"
+    case salesWeb = "WebViewController2"
+}
+
 class TransitionViewController: UIViewController, UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate, GMSMapViewDelegate, MainIntroViewDelegate {
     
     let optionInteractionController = InteractionController()
@@ -193,22 +199,55 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         }
     }
     
+    func presentController(identifier: ControllerIdentifier) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let transition = CATransition()
+        
+        transition.duration = 0.3
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        
+        self.view.window?.layer.add(transition,forKey:nil)
+        
+        switch identifier {
+        case .session:
+            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.rawValue) as! SessionTableViewController
+            controller.informations = self.data.informations.map{ $0 } as [Information]
+            self.present(controller, animated: false, completion: nil)
+        case .salesWeb:
+            let controller = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+            controller.url = self.data.salesUrl
+            self.present(controller, animated: false, completion: nil)
+
+        case .infoWeb:
+            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.rawValue) as! WebViewController
+            controller.url = self.data.webUrl
+            self.present(controller, animated: false, completion: nil)
+        }
+    }
+    
     //MARK: MainIntroViewDelegate
     
     func mainIntroViewSessionButtonClick() {
-        var sender = [Information]()
-        for information in self.data.informations {
-            sender.append(information)
-        }
-        self.performSegue(withIdentifier: "showSession", sender: sender )
+//        var sender = [Information]()
+//        for information in self.data.informations {
+//            sender.append(information)
+//        }
+//        self.performSegue(withIdentifier: "showSession", sender: sender )
+        presentController(identifier: ControllerIdentifier.session)
     }
     
     func mainIntroViewWebButtonClick() {
-        self.performSegue(withIdentifier: "showWeb", sender: self.data.webUrl)
+//        self.performSegue(withIdentifier: "showWeb", sender: self.data.webUrl)
+        
+        presentController(identifier: ControllerIdentifier.infoWeb)
     }
     
     func mainIntroViewSalesButtonClick() {
-        self.performSegue(withIdentifier: "showWeb", sender: self.data.salesUrl)
+//        self.performSegue(withIdentifier: "showWeb", sender: self.data.salesUrl)
+        
+        presentController(identifier: ControllerIdentifier.salesWeb)
     }
     
     func mainIntroViewShareButtonClick() {

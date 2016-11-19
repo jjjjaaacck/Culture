@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var tableview: UITableView!
     
     @IBAction func backButtonClick(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        dismissController()
     }
     var searchController: UISearchController!
     var category = Category()
@@ -48,6 +48,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableview.tableHeaderView = searchController.searchBar
         tableview.sectionIndexMinimumDisplayRowCount = 1
         tableview.reloadData()
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
+        swipe.direction = .right
+        self.view.addGestureRecognizer(swipe)
         // Do any additional setup after loading the view.
     }
     
@@ -55,6 +59,32 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func searchForData(_ searchBarText: String, categoryIndex: Int) {
+        let filter = NSPredicate(format: "category IN %@ AND title CONTAINS '\(searchBarText)'", searchClassify[categoryIndex]!)
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{
+            task in
+            let data = task as! [MainData]
+            self.searchResult = data.map{ ($0.title, $0.id) }
+            }.continueWith{ task in
+                if task.faulted {
+                    self.searchResult.append(("查無資料", ""))
+                }
+        }
+    }
+    
+    func dismissController() {
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        self.view.window?.layer.add(transition,forKey:nil)
+        
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    //MARK: tableView Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (searchController.isActive)
@@ -97,6 +127,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         transitionController.mainDataId = sender as! String
     }
     
+    //MARK: UISearchResultsUpdating
+    
     func updateSearchResults(for searchController: UISearchController) {
         searchResult.removeAll(keepingCapacity: false)
         if searchController.searchBar.text != "" {
@@ -106,6 +138,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableview.reloadData()
     }
+    
+    //MARK: searchBar Delegate
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         searchResult.removeAll(keepingCapacity: false)
@@ -121,18 +155,5 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         backButton.isEnabled = false
-    }
-    
-    func searchForData(_ searchBarText: String, categoryIndex: Int) {
-        let filter = NSPredicate(format: "category IN %@ AND title CONTAINS '\(searchBarText)'", searchClassify[categoryIndex]!)
-        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{
-            task in
-            let data = task as! [MainData]
-            self.searchResult = data.map{ ($0.title, $0.id) }
-            }.continueWith{ task in
-                if task.faulted {
-                    self.searchResult.append(("查無資料", ""))
-                }
-        }
     }
 }

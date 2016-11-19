@@ -12,14 +12,22 @@ import GoogleMaps
 class MapView: UIView {
     
     var activityMap = GMSMapView()
+    let locationManager = CLLocationManager()
     var latitude = 0.0
     var longitude = 0.0
 
+    func commonInit() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -53,7 +61,7 @@ class MapView: UIView {
         activityMap.settings.myLocationButton = true
         activityMap.setMinZoom(8, maxZoom: 20)
         
-//        showMarker(activityMap, coordinate: coordinate)
+        showMarker(activityMap, coordinate: coordinate)
         
     }
     
@@ -64,6 +72,7 @@ class MapView: UIView {
         //marker.snippet = "I'm fine"
         //marker.appearAnimation = kGMSMarkerAnimationPop
         //        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
+        marker.appearAnimation = kGMSMarkerAnimationPop
         marker.icon = UIImage(named: "marker")
         marker.map = mapview
     }
