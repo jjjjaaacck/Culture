@@ -73,6 +73,19 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
         let section = allLocations?[indexPath.section]
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showLocationSearchResult", sender: section![indexPath.row])
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        
+        self.view.window?.layer.add(transition,forKey:nil)
+        self.present(controller, animated: false, completion: nil)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

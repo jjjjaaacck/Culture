@@ -9,10 +9,10 @@
 import UIKit
 
 class LocationSearchResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet var titleBar: UINavigationBar!
     @IBAction func backButtonClick(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: {})
+        dismissController()
     }
     @IBOutlet var tableView: UITableView!
     let coreDataController = CoreDataController()
@@ -27,18 +27,18 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         
-//        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async {
-//            DispatchQueue.main.async(execute: {
-                self.load()
-                self.titleBar.topItem?.title = self.location
-                self.tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
-                let nib: UINib = UINib(nibName: "LocationSearchCell", bundle: nil)
-                self.tableView.register(nib, forCellReuseIdentifier: "LocationSearchCell")
-                
-                self.tableView.dataSource = self
-                self.tableView.delegate = self
-//            })
-//        }
+        self.load()
+        self.titleBar.topItem?.title = self.location
+        self.tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
+        let nib: UINib = UINib(nibName: "LocationSearchCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "LocationSearchCell")
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
+        swipe.direction = .right
+        self.view.addGestureRecognizer(swipe)
     }
     
     func load() {
@@ -64,20 +64,33 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
             self.data = task as! [MainData]
         }
         
-//        for info in infos {
-//            if (idCompare.range(of: info.modelId!) == nil) {
-//                var temp = coreDataController.getModelById(info.modelId!)
-//                model.append(temp[0])
-//                finalInfos.append(info)
-//                idCompare += info.modelId!
-//            }
-//        }
+        //        for info in infos {
+        //            if (idCompare.range(of: info.modelId!) == nil) {
+        //                var temp = coreDataController.getModelById(info.modelId!)
+        //                model.append(temp[0])
+        //                finalInfos.append(info)
+        //                idCompare += info.modelId!
+        //            }
+        //        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    func dismissController() {
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        self.view.window?.layer.add(transition,forKey:nil)
+        
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
@@ -152,5 +165,5 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
         return dateFormatter.string(from: date)
     }
-
+    
 }

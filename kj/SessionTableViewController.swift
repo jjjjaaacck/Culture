@@ -9,7 +9,7 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
    
     @IBAction func backClick(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: {})
+        dismissController()
     }
     
     override func viewDidLoad() {
@@ -21,6 +21,21 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
+        swipe.direction = .right
+        self.view.addGestureRecognizer(swipe)
+    }
+    
+    func dismissController() {
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        self.view.window?.layer.add(transition,forKey:nil)
+        
+        self.dismiss(animated: false, completion: nil)
     }
     
     //MARK : UITableViewDelegate

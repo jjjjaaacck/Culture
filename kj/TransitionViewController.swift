@@ -2,10 +2,19 @@ import UIKit
 import GoogleMaps
 import FBSDKShareKit
 
-enum ControllerIdentifier: String {
-    case session = "SessionTableViewController"
-    case infoWeb = "WebViewController"
-    case salesWeb = "WebViewController2"
+enum PresentControllerIdentifier: Int {
+    case session = 0
+    case infoWeb = 1
+    case salesWeb = 2
+    
+    var identifier: String {
+        switch self {
+        case .session:
+            return "SessionTableViewController"
+        default:
+            return "WebViewController"
+        }
+    }
 }
 
 class TransitionViewController: UIViewController, UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate, GMSMapViewDelegate, MainIntroViewDelegate {
@@ -102,7 +111,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
                 make.height.equalTo(0)
             }
         }
-        
         mainIntroView.delegate = self
         
     }
@@ -188,18 +196,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     //        self.performSegueWithIdentifier("showWeb", sender: path!)
     //    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showWeb" {
-            let webViewController: WebViewController = segue.destination as! WebViewController
-            webViewController.url = sender as! String
-        }
-        else if segue.identifier == "showSession" {
-            let sessionTblViewController: SessionTableViewController = segue.destination as! SessionTableViewController
-            sessionTblViewController.informations = sender as! [Information]
-        }
-    }
-    
-    func presentController(identifier: ControllerIdentifier) {
+    func presentController(identifier: PresentControllerIdentifier) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let transition = CATransition()
         
@@ -212,16 +209,16 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         
         switch identifier {
         case .session:
-            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.rawValue) as! SessionTableViewController
+            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.identifier) as! SessionTableViewController
             controller.informations = self.data.informations.map{ $0 } as [Information]
             self.present(controller, animated: false, completion: nil)
         case .salesWeb:
-            let controller = storyBoard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.identifier) as! WebViewController
             controller.url = self.data.salesUrl
             self.present(controller, animated: false, completion: nil)
 
         case .infoWeb:
-            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.rawValue) as! WebViewController
+            let controller = storyBoard.instantiateViewController(withIdentifier: identifier.identifier) as! WebViewController
             controller.url = self.data.webUrl
             self.present(controller, animated: false, completion: nil)
         }
@@ -230,24 +227,15 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     //MARK: MainIntroViewDelegate
     
     func mainIntroViewSessionButtonClick() {
-//        var sender = [Information]()
-//        for information in self.data.informations {
-//            sender.append(information)
-//        }
-//        self.performSegue(withIdentifier: "showSession", sender: sender )
-        presentController(identifier: ControllerIdentifier.session)
+        presentController(identifier: PresentControllerIdentifier.session)
     }
     
     func mainIntroViewWebButtonClick() {
-//        self.performSegue(withIdentifier: "showWeb", sender: self.data.webUrl)
-        
-        presentController(identifier: ControllerIdentifier.infoWeb)
+        presentController(identifier: PresentControllerIdentifier.infoWeb)
     }
     
     func mainIntroViewSalesButtonClick() {
-//        self.performSegue(withIdentifier: "showWeb", sender: self.data.salesUrl)
-        
-        presentController(identifier: ControllerIdentifier.salesWeb)
+        presentController(identifier: PresentControllerIdentifier.salesWeb)
     }
     
     func mainIntroViewShareButtonClick() {

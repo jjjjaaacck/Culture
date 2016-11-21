@@ -77,7 +77,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         let controller = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
         
         let transition = CATransition()
-        transition.duration = 0.3
+        transition.duration = 0.2
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
