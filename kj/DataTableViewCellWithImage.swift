@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TblViewCellWithImage: TblViewCell {
+class DataTableViewCellWithImage: DataTableViewCell {
     
     @IBOutlet var activityImage: UIImageView!
     override func awakeFromNib() {

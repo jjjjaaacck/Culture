@@ -21,9 +21,9 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     
     let optionInteractionController = InteractionController()
     //let optionPresentationController = OptionPresentationController()
-    var detailCellRow:Int = 0
-    var category : Int = 0
-    var id: String = ""
+    //    var detailCellRow:Int = 0
+    //    var category : Int = 0
+    //    var id: String = ""
     
     var searchTitle: String!
     var index : Int = 0
@@ -34,7 +34,8 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     var contentView = UIView()
     var mainIntroView = MainIntroView()
     var activityIntroView = ActivityIntroView()
-    var mapView = MapView()
+    //    var mapView = MapView()
+    var map = GMSMapView()
     
     var mainDataId = ""
     var data = MainData()
@@ -77,18 +78,21 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         activityIntroView = ActivityIntroView(width: self.view.frame.width - 40, data: data.detail)
         
         if isDataHasInformation() && isInformationHasLocation(){
-            mapView = MapView(latitude: data.informations[0].latitude, longitude: data.informations[0].longitude)
+            //            mapView = MapView(latitude: data.informations[0].latitude, longitude: data.informations[0].longitude)
+            setMap(activityMap: map)
         }
         
         detailScrollView.addSubview(contentView)
         contentView.addSubview(mainIntroView)
         contentView.addSubview(activityIntroView)
-        contentView.addSubview(mapView)
+        contentView.addSubview(map)
+        //        contentView.addSubview(mapView)
         
         contentView.snp.makeConstraints { (make) in
             make.edges.equalTo(detailScrollView).inset(UIEdgeInsetsMake(20, 20, 20, 20))
             make.width.equalTo(self.view.frame.width - 40)
-            make.bottom.equalTo(mapView)
+            //            make.bottom.equalTo(mapView)
+            make.bottom.equalTo(map)
         }
         
         mainIntroView.snp.makeConstraints { (make) in
@@ -101,7 +105,18 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
             make.top.equalTo(mainIntroView.snp.bottom).offset(20)
         }
         
-        mapView.snp.makeConstraints { (make) in
+        //        mapView.snp.makeConstraints { (make) in
+        //            make.leading.trailing.equalTo(0)
+        //            make.top.equalTo(activityIntroView.snp.bottom).offset(20)
+        //            if isInformationHasLocation() {
+        //                make.height.equalTo(160)
+        //            }
+        //            else {
+        //                make.height.equalTo(0)
+        //            }
+        //        }
+        
+        map.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(0)
             make.top.equalTo(activityIntroView.snp.bottom).offset(20)
             if isInformationHasLocation() {
@@ -156,45 +171,32 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     //        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
     //    }
     
-    //    func setMap() {
-    //        let coordinate = CLLocationCoordinate2DMake(Double(infos[0].latitude!), Double(infos[0].longitude!))
-    //
-    //        if coordinate.longitude != 0.0 && coordinate.latitude != 0.0 {
-    //            let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
-    //            activityMap = GMSMapView.mapWithFrame(CGRectMake(10, nextY+10+15, view.frame.size.width-20, 160), camera: camera)
-    //            //activityMap = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-    //            activityMap.accessibilityElementsHidden = true
-    //            activityMap.delegate = self
-    //            activityMap.settings.scrollGestures = false
-    //            activityMap.settings.zoomGestures = true
-    //            activityMap.settings.compassButton = true
-    //            //mapView.myLocationEnabled = true
-    //            //mapView.settings.myLocationButton = true
-    //            activityMap.setMinZoom(8, maxZoom: 20)
-    //            detailScrollView.addSubview(activityMap)
-    //
-    //            nextY = activityMap.frame.maxY
-    //
-    //            showMarker(activityMap, coordinate: coordinate)
-    //        }
-    //    }
+    func setMap(activityMap: GMSMapView) {
+        let coordinate = CLLocationCoordinate2DMake(data.informations[0].latitude, data.informations[0].longitude)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
+        activityMap.camera = camera
+        activityMap.accessibilityElementsHidden = true
+        activityMap.delegate = self
+        activityMap.settings.scrollGestures = false
+        activityMap.settings.zoomGestures = true
+        activityMap.settings.compassButton = true
+        //mapView.myLocationEnabled = true
+        //mapView.settings.myLocationButton = true
+        activityMap.setMinZoom(8, maxZoom: 20)
+        
+        showMarker(mapview: activityMap, coordinate: coordinate)
+    }
     
-    //    func showMarker(mapview: GMSMapView, coordinate: CLLocationCoordinate2D) {
-    //        let marker = GMSMarker()
-    //        marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-    //        //marker.title = "Hello"
-    //        //marker.snippet = "I'm fine"
-    //        //marker.appearAnimation = kGMSMarkerAnimationPop
-    ////        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
-    //        marker.icon = UIImage(named: "marker")
-    //        marker.map = mapview
-    //    }
-    
-    //    func openWeb(sender: UITapGestureRecognizer){
-    //        let label: UILabel = sender.view as! UILabel
-    //        let path = label.text
-    //        self.performSegueWithIdentifier("showWeb", sender: path!)
-    //    }
+    func showMarker(mapview: GMSMapView, coordinate: CLLocationCoordinate2D) {
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
+        //marker.title = "Hello"
+        //marker.snippet = "I'm fine"
+        //marker.appearAnimation = kGMSMarkerAnimationPop
+        //        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
+        marker.icon = UIImage(named: "marker")
+        marker.map = mapview
+    }
     
     func presentController(identifier: PresentControllerIdentifier) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -216,7 +218,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
             let controller = storyBoard.instantiateViewController(withIdentifier: identifier.identifier) as! WebViewController
             controller.url = self.data.salesUrl
             self.present(controller, animated: false, completion: nil)
-
+            
         case .infoWeb:
             let controller = storyBoard.instantiateViewController(withIdentifier: identifier.identifier) as! WebViewController
             controller.url = self.data.webUrl

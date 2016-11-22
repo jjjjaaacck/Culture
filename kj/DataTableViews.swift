@@ -14,9 +14,10 @@ import Kingfisher
 
 protocol DataTableViewsDelegate {
     func selectRow(_ mainDataId: String)
+    func bookmarkClick(currentBookMarkState: Bool) -> Task<AnyObject>
 }
 
-class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
+class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTableViewCellDelegate {
     
     fileprivate var tableView = UITableView()
     fileprivate let progressIcon = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -62,9 +63,9 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         self.addSubview(progressIcon)
         
         tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
-        let nib: UINib = UINib(nibName: "TblViewCellWithImage", bundle: nil)
+        let nib: UINib = UINib(nibName: "DataTableViewCellWithImage", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "imageCell")
-        let nib2: UINib = UINib(nibName: "TblViewCell", bundle: nil)
+        let nib2: UINib = UINib(nibName: "DataTableViewCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "cell")
         
         tableView.snp.makeConstraints { (make) -> Void in
@@ -90,13 +91,14 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         let singleData = data[(indexPath as NSIndexPath).row]
 
         if singleData.imageUrl != "" {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! TblViewCellWithImage
+            var cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! DataTableViewCellWithImage
             cell.activityImage.kf.setImage(with: URL(string: singleData.imageUrl))
-            cell = setTableViewCell(cell, data: singleData) as! TblViewCellWithImage
+            cell = setTableViewCell(cell, data: singleData) as! DataTableViewCellWithImage
+            
             return cell
         }
         else {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TblViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DataTableViewCell
             cell = setTableViewCell(cell, data: singleData)
             return cell
         }
@@ -115,7 +117,15 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         delegate?.selectRow(data[(indexPath as NSIndexPath).row].id)
     }
     
-    func setTableViewCell(_ cell: TblViewCell, data: MainData) -> TblViewCell {
+    //MARK: DataTableViewCellDelegate
+    
+    func dataTableViewCellRemoveBookmark(currentBookMarkState: Bool) -> Task<AnyObject> {
+        return (delegate?.bookmarkClick(currentBookMarkState: currentBookMarkState))!
+    }
+    
+    //MARK: method
+    
+    func setTableViewCell(_ cell: DataTableViewCell, data: MainData) -> DataTableViewCell {
         cell.mainDataId = data.id
         cell.activityName.text = data.title
         if data.informations.count == 0 {
@@ -131,6 +141,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate {
         cell.activityTime.text = (data.endDate != nil ) ? dateToString(date: data.startDate!) + " ~ " + dateToString(date: data.endDate!) : dateToString(date: data.startDate!)
         cell.setCategory(data.category)
         cell.setBookMarkImage(data.bookMark)
+        cell.delegate = self
         
         return cell
     }

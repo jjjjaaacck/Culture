@@ -56,7 +56,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         self.view.layoutIfNeeded()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 
-        
         loadTitleScrollView()
         loadMenuSearch()
         
@@ -157,6 +156,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             let dataTableView = DataTableViews(category: header.categoryNumber[index])
             
             dataTableView.delegate = self
+            
             contentScrollView.addSubview(dataTableView)
             
             dataTableView.snp.makeConstraints({ (make) -> Void in
@@ -250,6 +250,37 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         self.performSegue(withIdentifier: "showDetail", sender: mainDataId)
     }
     
+    func bookmarkClick(currentBookMarkState: Bool) -> Task<AnyObject> {
+        let task = TaskCompletionSource<AnyObject>()
+        if currentBookMarkState {
+            let alertController = UIAlertController(title: "移除書籤", message: "確定要移除書籤嗎", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (result : UIAlertAction) -> Void in
+                task.cancel()
+            }
+            let okAction = UIAlertAction(title: "確定", style: .default) { (result : UIAlertAction) -> Void in
+                task.set(result: true as AnyObject)
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+//            self.present(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
+            return task.task
+        }
+        else {
+            task.set(result: true as AnyObject)
+            return task.task
+        }
+        
+    }
+    
+    func a() -> Task<AnyObject> {
+        let task = TaskCompletionSource<AnyObject>()
+        
+        
+        
+        return task.task
+    }
+    
     //MARK: ToTopButtonDelegate
     
     func toTopButtonClick() {
@@ -284,6 +315,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             setCurrentTitle(nowPage)
         }
     }
+    
 //    
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        if scrollView.tag == ScrollViewType.content.rawValue {

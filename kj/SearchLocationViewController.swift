@@ -70,12 +70,12 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let section = allLocations?[indexPath.section]
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showLocationSearchResult", sender: section![indexPath.row])
         
+        let section = allLocations?[indexPath.section]
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        let controller = storyBoard.instantiateViewController(withIdentifier: "LocationSearchResultViewController") as! LocationSearchResultViewController
+        controller.location = section![indexPath.row]
         
         let transition = CATransition()
         transition.duration = 0.2
@@ -87,12 +87,12 @@ class SearchLocationViewController: UIViewController, UITableViewDelegate, UITab
         self.present(controller, animated: false, completion: nil)
         
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let locationResultViewController = segue.destination as! LocationSearchResultViewController
-        locationResultViewController.location = sender as! String
-    }
-    
+//    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let locationResultViewController = segue.destination as! LocationSearchResultViewController
+//        locationResultViewController.location = sender as! String
+//    }
+//    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return locationTitle[section]
     }

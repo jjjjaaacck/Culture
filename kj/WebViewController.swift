@@ -7,10 +7,10 @@ class WebViewController:  UIViewController, UIWebViewDelegate{
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var webView: UIWebView!
     @IBAction func previousPageClick(_ sender: UIBarButtonItem) {
-        self.webView.goBack()
+        goBack()
     }
     @IBAction func nextPageClick(_ sender: UIBarButtonItem) {
-        self.webView.goForward()
+        goForward()
     }
     
     @IBAction func backClick(_ sender: UIBarButtonItem) {
@@ -29,10 +29,21 @@ class WebViewController:  UIViewController, UIWebViewDelegate{
         activityIndicator.hidesWhenStopped = true
         previousButton.isEnabled = false
         nextButton.isEnabled = false
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
-        swipe.direction = .right
-        self.view.addGestureRecognizer(swipe)
+//        
+        let swipeToBack = UISwipeGestureRecognizer(target: self, action: #selector(WebViewController.goBack))
+        let swipeToForward = UISwipeGestureRecognizer(target: self, action: #selector(WebViewController.goForward))
+        swipeToBack.direction = .right
+        swipeToForward.direction = .left
+        self.view.addGestureRecognizer(swipeToBack)
+        self.view.addGestureRecognizer(swipeToForward)
+    }
+    
+    func goBack() {
+        self.webView.goBack()
+    }
+    
+    func goForward() {
+        self.webView.goForward()
     }
     
     func dismissController() {

@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLk-2L-Nxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1326" y="-2086"/>
+            <point key="canvasLocation" x="1868" y="-2086"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eni-qb-U3S">
@@ -333,32 +333,18 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pw5-1x-FeS">
-                                <rect key="frame" x="0.0" y="44" width="375" height="29"/>
-                                <segments>
-                                    <segment title="所有"/>
-                                    <segment title="本月"/>
-                                </segments>
-                                <color key="tintColor" red="0.54840910350177308" green="0.54840910350177308" blue="0.54840910350177308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="segmentedControlClick:" destination="oTl-rN-huz" eventType="valueChanged" id="FyY-Qw-Ehd"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yBH-Ki-Fch" firstAttribute="width" secondItem="33S-81-1nk" secondAttribute="width" id="1na-3i-Alp"/>
-                            <constraint firstItem="Pw5-1x-FeS" firstAttribute="top" secondItem="yBH-Ki-Fch" secondAttribute="bottom" id="DfH-Kk-YgZ"/>
                             <constraint firstItem="yBH-Ki-Fch" firstAttribute="leading" secondItem="33S-81-1nk" secondAttribute="leading" id="FAl-eA-xDB"/>
                             <constraint firstItem="yBH-Ki-Fch" firstAttribute="top" secondItem="33S-81-1nk" secondAttribute="top" id="dvm-Vu-H9l"/>
-                            <constraint firstItem="Pw5-1x-FeS" firstAttribute="leading" secondItem="yBH-Ki-Fch" secondAttribute="leading" id="fPE-O2-hvO"/>
-                            <constraint firstItem="Pw5-1x-FeS" firstAttribute="width" secondItem="33S-81-1nk" secondAttribute="width" id="nxl-ja-TZA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mvI-FU-syO"/>
                     <connections>
                         <outlet property="menuButton" destination="9BD-5r-vDR" id="ew3-ci-1sW"/>
-                        <outlet property="segmentedControl" destination="Pw5-1x-FeS" id="gfU-uI-FNr"/>
+                        <outlet property="navigationBar" destination="yBH-Ki-Fch" id="GUW-D6-fDd"/>
                         <segue destination="bmq-5O-kr7" kind="modal" identifier="showBookmarkDetail" id="eIj-En-Gc3"/>
                     </connections>
                 </viewController>
@@ -450,7 +436,6 @@
                     <connections>
                         <outlet property="menuButton" destination="3jp-gp-WC7" id="Ens-I7-Xnf"/>
                         <outlet property="tableView" destination="tBz-Wz-pcI" id="kBX-Xk-J1W"/>
-                        <segue destination="zdQ-bO-OEK" kind="modal" identifier="showLocationSearchResult" id="3sK-dM-ThG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydg-r1-h8j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -460,7 +445,7 @@
         <!--Location Search Result View Controller-->
         <scene sceneID="5nV-ne-hcZ">
             <objects>
-                <viewController id="zdQ-bO-OEK" customClass="LocationSearchResultViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationSearchResultViewController" id="zdQ-bO-OEK" customClass="LocationSearchResultViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2d5-kn-far"/>
                         <viewControllerLayoutGuide type="bottom" id="lFf-AN-lmh"/>
@@ -507,7 +492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dHN-Q3-lLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1896" y="-1154"/>
+            <point key="canvasLocation" x="1326" y="-1156"/>
         </scene>
         <!--Calendar View Controller-->
         <scene sceneID="nva-Tc-CrJ">
@@ -996,6 +981,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Gip-AD-8c3"/>
+        <segue reference="eIj-En-Gc3"/>
     </inferredMetricsTieBreakers>
 </document>

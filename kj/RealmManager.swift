@@ -41,6 +41,7 @@ class RealmManager {
         }
         else {
             task.set(error: NSError(domain: "Id might be wrong", code: 0, userInfo: nil))
+            print("Id might be wrong")
         }
         return task.task
     }
@@ -54,6 +55,7 @@ class RealmManager {
         }
         else {
             task.set(error: NSError(domain: "Not In MainData", code: 0, userInfo: nil))
+            print("Not In MainData")
         }
         return task.task
     }

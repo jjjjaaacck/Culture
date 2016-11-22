@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import BoltsSwift
 
-class TblViewCell: UITableViewCell {
+protocol DataTableViewCellDelegate {
+    func dataTableViewCellRemoveBookmark(currentBookMarkState: Bool) -> Task<AnyObject>
+}
 
+class DataTableViewCell: UITableViewCell {
+    
     @IBOutlet var activityName: UILabel!
     @IBOutlet var activityLocation: UILabel!
     @IBOutlet var activityTime: UILabel!
@@ -19,16 +24,17 @@ class TblViewCell: UITableViewCell {
     @IBOutlet weak var activityBookmark: UIButton!
     
     var mainDataId = ""
+    var delegate: DataTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         activityView.layer.cornerRadius = 10
         activityCategoryView.layer.cornerRadius = activityCategoryView.frame.size.width/2
         activityCategoryView.backgroundColor = activityCategory.backgroundColor
-        activityBookmark.addTarget(self, action: #selector(TblViewCell.bookmarkClick), for: .touchUpInside)
+        activityBookmark.addTarget(self, action: #selector(DataTableViewCell.bookmarkClick), for: .touchUpInside)
         createOverlay(CGRect(x: 0, y: 0, width: 100, height: 100), view : activityView)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -47,13 +53,13 @@ class TblViewCell: UITableViewCell {
         
         path.addArc(center: CGPoint(x: radius-activityView.frame.minX+activityCategoryView.frame.minX, y: radius-activityView.frame.minY+activityCategoryView.frame.minY+overlayView.frame.minY), radius: radius+7, startAngle: 0.0, endAngle: 2*3.14, clockwise: false)
         
-//        CGPathAddArc(path, UnsafePointer<>, radius-activityView.frame.minX+activityCategoryView.frame.minX, radius-activityView.frame.minY+activityCategoryView.frame.minY+overlayView.frame.minY, radius+7, 0.0, 2 * 3.14, false)
+        //        CGPathAddArc(path, UnsafePointer<>, radius-activityView.frame.minX+activityCategoryView.frame.minX, radius-activityView.frame.minY+activityCategoryView.frame.minY+overlayView.frame.minY, radius+7, 0.0, 2 * 3.14, false)
         
         maskLayer.path = path;
         
         overlayView.layer.mask = maskLayer
     }
-
+    
     func setCategory(_ categoryNumber: Int) {
         let image: UIImage
         
@@ -121,9 +127,15 @@ class TblViewCell: UITableViewCell {
     
     func bookmarkClick() {
         let filter = NSPredicate(format: "id = %@", mainDataId)
-        RealmManager.sharedInstance.updateBookmark(filter).continueWith { (task) -> AnyObject? in
-            self.setBookMarkImage(task.result as! Bool)
-            return nil
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ (task) -> AnyObject? in
+            let data = task[0] as! MainData
+            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data.bookMark)
+        }.continueOnSuccessWith{ task  in
+            RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
+                self.setBookMarkImage(task.result as! Bool)
+            }
         }
     }
+    
+    
 }
