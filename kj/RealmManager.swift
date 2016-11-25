@@ -50,6 +50,7 @@ class RealmManager {
     
     func tryFetchMainDataByFilter(_ filter: NSPredicate) -> Task<AnyObject> {
         let task = TaskCompletionSource<AnyObject>()
+        
         if realm.objects(MainData.self).filter(filter).first != nil {
             task.set(result: Array(realm.objects(MainData.self).filter(filter)) as AnyObject)
         }

@@ -56,18 +56,19 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         self.view.layoutIfNeeded()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 
+        loadPageTableView()
         loadTitleScrollView()
         loadMenuSearch()
+        loadToTopButton()
         
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        loadPageTableView()
-        loadToTopButton()
+        
+        
     }
-    
     
     //MARK: Action
     
@@ -76,7 +77,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         let controller = storyBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
         
         let transition = CATransition()
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
@@ -262,7 +263,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             }
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
-//            self.present(alertController, animated: true, completion: nil)
             self.present(alertController, animated: true, completion: nil)
             return task.task
         }
@@ -271,14 +271,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             return task.task
         }
         
-    }
-    
-    func a() -> Task<AnyObject> {
-        let task = TaskCompletionSource<AnyObject>()
-        
-        
-        
-        return task.task
     }
     
     //MARK: ToTopButtonDelegate

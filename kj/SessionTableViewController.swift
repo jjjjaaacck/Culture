@@ -29,7 +29,7 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
     
     func dismissController() {
         let transition = CATransition()
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromLeft
