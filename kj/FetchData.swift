@@ -32,7 +32,7 @@ class FetchData {
                     for result in results {
                         let tempMainData = MainData()
                         var tempInformation = [Information]()
-
+                        
                         tempMainData.id = result["UID"].string!
                         tempMainData.startDate = self.stringToDate(date: self.ifDataExsist(result["startDate"]), dateFormat: "yyyy/MM/dd")
                         tempMainData.endDate = self.stringToDate(date: self.ifDataExsist(result["endDate"]), dateFormat: "yyyy/MM/dd")
@@ -54,7 +54,7 @@ class FetchData {
                             endTime = (endTime != "") ? (endTime! as NSString).substring(to: 16) : ""
                             let latitude = self.ifDataExsist(informationIndex["latitude"])
                             let longitude = self.ifDataExsist(informationIndex["longitude"])
-
+                            
                             information.startTime = self.stringToDate(date: startTime!, dateFormat: "yyyy/MM/dd HH:mm")
                             information.endTime = self.stringToDate(date: endTime!, dateFormat: "yyyy/MM/dd HH:mm")
                             information.price = self.ifDataExsist(informationIndex["price"])

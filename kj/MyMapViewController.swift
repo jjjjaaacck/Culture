@@ -8,32 +8,88 @@
 import UIKit
 import GooglePlaces
 import GooglePlacePicker
+import SwiftyJSON
 
-class MyMapViewController: UIViewController,CLLocationManagerDelegate ,GMSMapViewDelegate{
-    
-    var placesClient: GMSPlacesClient?
-    var placePicker: GMSPlacePicker?
+extension FloatingPoint {
+    var degreesToRadians: Self { return self * .pi / 180 }
+    var radiansToDegrees: Self { return self * 180 / .pi }
+}
+
+struct locationBasicInformation {
+    var id: String
+    var location: CLLocationCoordinate2D
+    var distance: Double
+    var title: String
+    var address: String
+}
+
+class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapViewDelegate{
+
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
-    var currentLocation = CLLocationCoordinate2D()
+    var data = [MainData]()
+    var locationDistances = [locationBasicInformation]()
+    var markers = [GMSMarker]()
+    var rangeCircle = GMSCircle()
+    var currentLocation: CLLocationCoordinate2D = CLLocationCoordinate2D() {
+        didSet {
+            setAllLocationMarkers()
+        }
+    }
+    var radius: Double {
+        get {
+            return Double(slider.value * 20000 + Float(1000))
+        }
+        set {
+//            mapViewYo.clear()
+            redrawCircle()
+            resetNearLocation()
+            radiusLabel.text = "\(Int(radius)) 公尺"
+        }
+    }
     
-    @IBOutlet var mapViewYo: GMSMapView!
-    @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var slider: UISlider! {
+        didSet {
+            radiusLabel.text = "\(Int(radius)) 公尺"
+        }
+    }
+    
+    @IBOutlet weak var radiusLabel: UILabel!
+    
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        radius = Double(sender.value * 20000 + Float(1000))
+    }
+    
+    @IBAction func sliderTouchUpOutside(_ sender: UISlider) {
+        resetNearLocation()
+    }
+    
+    @IBAction func sliderTouchUpInside(_ sender: UISlider) {
+        resetNearLocation()
+    }
+    
+    @IBOutlet var mapViewYo: GMSMapView! {
+        didSet {
+            mapViewYo.delegate = self
+            mapViewYo.addObserver(self, forKeyPath: "myLocation", options: .new, context: nil)
+        }
+    }
+    
+    @IBOutlet weak var menuButton: UIBarButtonItem! {
+        didSet {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         
-        menuButton.target = self.revealViewController()
-        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
-        mapViewYo.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        mapViewYo.addObserver(self, forKeyPath: "myLocation", options: .new, context: nil)
-        
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,49 +101,78 @@ class MyMapViewController: UIViewController,CLLocationManagerDelegate ,GMSMapVie
         self.performSegue(withIdentifier: "nearByEvent", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nearByViewController = segue.destination as! NearByViewController
-        nearByViewController.currentLocation = self.currentLocation
+    func calculateDistance(origin: CLLocationCoordinate2D, destination: CLLocationCoordinate2D) -> Double{
+        let radOriginLat = origin.latitude.degreesToRadians
+        let radDestinationLat = destination.latitude.degreesToRadians
+        let a = radOriginLat - radDestinationLat
+        let b = origin.longitude.degreesToRadians - destination.longitude.degreesToRadians
+        
+        let distance = 2 * asin(sqrt(pow(sin(a * 0.5), 2) + cos(radOriginLat) * cos(radDestinationLat) * pow(sin(b * 0.5), 2))) * 6378137
+        
+        return distance
     }
-    //
-    //    func loadMap(_ coordinate : CLLocationCoordinate2D){
-    //        if let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 18){
-    //            //mapViewYo = GMSMapView.mapWithFrame(self.mapViewYo.frame, camera: camera)
-    //            //mapViewYo.accessibilityElementsHidden = true
-    //            //mapViewYo.delegate = self
-    //            //mapViewYo.settings.scrollGestures = true
-    //            //mapViewYo.settings.zoomGestures = false
-    //            //mapView.myLocationEnabled = true
-    //            //mapView.settings.myLocationButton = true
-    //            //mapViewYo.setMinZoom(8, maxZoom: 20)
-    //            mapViewYo.settings.compassButton = true
-    //            mapViewYo.animate(to: camera)
-    //
-    //        }
-    //    }
-    /*
-     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) {
-     let geocoder = GMSGeocoder()
-     geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
-     if let address = response?.firstResult() {
-     //let lines = address.lines as! [String]
-     //self.addressLabel.text = lines.joinWithSeparator("\n")
-     self.addressLabel.text = address.addressLine1()
-     UIView.animateWithDuration(0.5) {
-     self.addressLabel.layoutIfNeeded()
-     }
-     }
-     }
-     }
-     
-     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-     reverseGeocodeCoordinate(position.target)
-     }*/
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
-    {
+    func fetchData() {
+        let filter = NSPredicate(format: "ANY informations.latitude != 0 AND ANY informations.longitude != 0")
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith {
+            task in
+            self.data = task.result as! [MainData]
+        }
+    }
+    
+    func setAllLocationMarkers() {
+        for result in self.data {
+            let origin = CLLocationCoordinate2DMake(result.informations[0].latitude, result.informations[0].longitude)
+            let distance = self.calculateDistance(origin: origin, destination: self.currentLocation)
+            let address = !result.informations.isEmpty || result.informations[0].location != "" ? result.informations[0].location : ""
+            let information = (id: result.id, distance: distance)
+            let marker = GMSMarker(position: origin)
+//
+            marker.icon = UIImage(named: "marker")
+            marker.title = result.title
+            marker.snippet = address
+
+            marker.userData = information
+//
+            self.markers.append(marker)
+        }
+    }
+    
+    func redrawCircle() {
+        let circleCenter = CLLocationCoordinate2DMake(currentLocation.latitude, currentLocation.longitude)
+        rangeCircle.position = circleCenter
+        rangeCircle.radius = CLLocationDistance(radius)
+        rangeCircle.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.03)
+        rangeCircle.strokeColor = UIColor.red
+        rangeCircle.map = mapViewYo
+    }
+    
+    func resetNearLocation() {
+        for marker in markers {
+            let markerData = marker.userData as! (id: String, distance: Double)
+            if markerData.distance <= self.radius {
+                marker.appearAnimation = kGMSMarkerAnimationPop
+                marker.map = self.mapViewYo
+            }
+            else {
+                marker.map = nil
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMapDetail" {
+            let detailController: TransitionViewController = segue.destination as! TransitionViewController
+            detailController.mainDataId = sender as! String
+        }
+        else {
+            let nearByViewController = segue.destination as! NearByViewController
+            nearByViewController.currentLocation = self.currentLocation
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
-            
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
             locationManager.distanceFilter = 500;
             locationManager.startUpdatingLocation()
@@ -98,8 +183,7 @@ class MyMapViewController: UIViewController,CLLocationManagerDelegate ,GMSMapVie
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last
-        {
+        if let location = locations.last {
             self.mapViewYo.camera = GMSCameraPosition(target:location.coordinate, zoom:15,bearing:0, viewingAngle:0)
             locationManager.stopUpdatingLocation()
         }
@@ -119,9 +203,15 @@ class MyMapViewController: UIViewController,CLLocationManagerDelegate ,GMSMapVie
             
             didFindMyLocation = true
             
-            didFindMyLocation = true
-            
+            mapViewYo.clear()
+//            setAllLocationMarkers()
+            redrawCircle()
+            resetNearLocation()
         }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        self.performSegue(withIdentifier: "showMapDetail", sender: (marker.userData as! (id: String, distance: Double)).id)
     }
 }
 

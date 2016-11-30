@@ -10,35 +10,26 @@ import UIKit
 
 class LocationSearchResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var titleBar: UINavigationBar!
-    @IBAction func backButtonClick(_ sender: UIBarButtonItem) {
-        dismissController()
-    }
     @IBOutlet var tableView: UITableView!
-    let coreDataController = CoreDataController()
-    var idCompare: String = ""
+    
     var location = ""
     var data = [MainData]()
-    var model = [Model]()
-    var infos = [Info]()
-    var finalInfos = [Info]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         
         self.load()
-        self.titleBar.topItem?.title = self.location
-        self.tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.init(red: 0, green: 162/255, blue: 1, alpha: 1)
+        self.navigationItem.title = self.location
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+    
         let nib: UINib = UINib(nibName: "LocationSearchCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "LocationSearchCell")
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
-        swipe.direction = .right
-        self.view.addGestureRecognizer(swipe)
     }
     
     func load() {
@@ -63,15 +54,6 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
             self.data = task as! [MainData]
         }
-        
-        //        for info in infos {
-        //            if (idCompare.range(of: info.modelId!) == nil) {
-        //                var temp = coreDataController.getModelById(info.modelId!)
-        //                model.append(temp[0])
-        //                finalInfos.append(info)
-        //                idCompare += info.modelId!
-        //            }
-        //        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,17 +61,6 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         // Dispose of any resources that can be recreated.
     }
 
-    func dismissController() {
-        let transition = CATransition()
-        transition.duration = 0.2
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        self.view.window?.layer.add(transition,forKey:nil)
-        
-        self.dismiss(animated: false, completion: nil)
-    }
-    
     //MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -119,6 +90,8 @@ class LocationSearchResultViewController: UIViewController, UITableViewDataSourc
         let transitionViewController = segue.destination as! TransitionViewController
         transitionViewController.mainDataId = sender as! String
     }
+    
+    //MARK: method
     
     func setCategoryImage(_ categoryName:Int, category:UIImageView)->UIImageView{
         

@@ -128,8 +128,8 @@ class DataTableViewCell: UITableViewCell {
     func bookmarkClick() {
         let filter = NSPredicate(format: "id = %@", mainDataId)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ (task) -> AnyObject? in
-            let data = task[0] as! MainData
-            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data.bookMark)
+            let data = task.result as! [MainData]
+            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data[0].bookMark)
         }.continueOnSuccessWith{ task  in
             RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
                 self.setBookMarkImage(task.result as! Bool)
