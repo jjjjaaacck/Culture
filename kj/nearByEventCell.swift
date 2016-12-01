@@ -14,6 +14,7 @@ class nearByEventCell : UITableViewCell{
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var locIcon: UIImageView!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

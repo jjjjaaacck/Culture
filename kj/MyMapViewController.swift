@@ -9,6 +9,7 @@ import UIKit
 import GooglePlaces
 import GooglePlacePicker
 import SwiftyJSON
+import MapKit
 
 extension FloatingPoint {
     var degreesToRadians: Self { return self * .pi / 180 }
@@ -39,9 +40,9 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
     var radius: Double {
         get {
             return Double(slider.value * 20000 + Float(1000))
+            
         }
         set {
-//            mapViewYo.clear()
             redrawCircle()
             resetNearLocation()
             radiusLabel.text = "\(Int(radius)) 公尺"
@@ -58,6 +59,10 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
     
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         radius = Double(sender.value * 20000 + Float(1000))
+        let range = translateCoordinate(coordinate: currentLocation, latitudeMeter: radius * 2, longitudeMeter: radius * 2)
+        let bounds = GMSCoordinateBounds(coordinate: range.southWest, coordinate: range.northEast)
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 5.0)
+        mapViewYo.moveCamera(update)
     }
     
     @IBAction func sliderTouchUpOutside(_ sender: UISlider) {
@@ -112,6 +117,15 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
         return distance
     }
     
+    func translateCoordinate(coordinate: CLLocationCoordinate2D, latitudeMeter: Double, longitudeMeter: Double) -> (northEast: CLLocationCoordinate2D, southWest: CLLocationCoordinate2D) {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, CLLocationDistance(latitudeMeter), CLLocationDistance(longitudeMeter))
+        let span = region.span
+        let northEast = CLLocationCoordinate2D(latitude: coordinate.latitude + span.latitudeDelta / 2, longitude: coordinate.longitude + span.longitudeDelta / 2)
+        let southWest = CLLocationCoordinate2D(latitude: coordinate.latitude - span.latitudeDelta / 2, longitude: coordinate.longitude - span.longitudeDelta / 2)
+        
+        return (northEast, southWest)
+    }
+    
     func fetchData() {
         let filter = NSPredicate(format: "ANY informations.latitude != 0 AND ANY informations.longitude != 0")
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith {
@@ -127,13 +141,12 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
             let address = !result.informations.isEmpty || result.informations[0].location != "" ? result.informations[0].location : ""
             let information = (id: result.id, distance: distance)
             let marker = GMSMarker(position: origin)
-//
+            
             marker.icon = UIImage(named: "marker")
             marker.title = result.title
             marker.snippet = address
-
             marker.userData = information
-//
+            
             self.markers.append(marker)
         }
     }
@@ -204,7 +217,6 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
             didFindMyLocation = true
             
             mapViewYo.clear()
-//            setAllLocationMarkers()
             redrawCircle()
             resetNearLocation()
         }

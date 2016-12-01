@@ -38,6 +38,13 @@
                         <color key="textColor" red="0.19215686274509805" green="0.22745098039215686" blue="0.51372549019607838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dK-4c-OpJ">
+                        <rect key="frame" x="224" y="49" width="88" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Z93-2f-JqU" firstAttribute="leading" secondItem="qyb-h0-9X3" secondAttribute="leading" constant="15" id="7t4-Tb-pYC"/>
@@ -54,6 +61,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="distanceLabel" destination="1dK-4c-OpJ" id="6c2-RS-bP9"/>
                 <outlet property="eventLocation" destination="YUb-m1-GPO" id="1DO-Jq-fkr"/>
                 <outlet property="eventName" destination="Z93-2f-JqU" id="qnz-18-an7"/>
                 <outlet property="locIcon" destination="36y-cz-Olb" id="Tf0-RN-OU3"/>
