@@ -10,7 +10,7 @@ import UIKit
 import BoltsSwift
 
 protocol DataTableViewCellDelegate {
-    func dataTableViewCellRemoveBookmark(currentBookMarkState: Bool) -> Task<AnyObject>
+    func dataTableViewCellResetBookmark(currentBookMarkState: Bool, completion: @escaping (_ isReset: Bool) -> Void)
 }
 
 class DataTableViewCell: UITableViewCell {
@@ -122,40 +122,26 @@ class DataTableViewCell: UITableViewCell {
     
     func setBookMarkImage(_ state: Bool) {
         let image = state ? UIImage(named: "onBookmark") : UIImage(named: "offBookmark")
-//        let filter = NSPredicate(format: "id = %@", mainDataId)
         activityBookmark.setImage(image, for: .normal)
-    }
-    
-    func onRecieveBookmarkResult(notification: Notification) {
-        let filter = NSPredicate(format: "id = %@", mainDataId)
-        let result = notification.userInfo?["result"] as! Bool
-        
-        setBookMarkImage(result)
-        RealmManager.sharedInstance.updateBookmark(filter, state: result).continueOnSuccessWith { (task) ->
-            AnyObject? in
-            return nil
-        }
     }
     
     func bookmarkClick() {
         let filter = NSPredicate(format: "id = %@", mainDataId)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ (task) -> AnyObject? in
             let data = task as! [MainData]
-            let bookmark = ["bookmark" : data[0].bookMark, "id" : self.mainDataId] as [String : Any]
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(DataTableViewCell.onRecieveBookmarkResult(notification:)), name: NSNotification.Name(rawValue : "setBookmarkOnOrNot\(self.mainDataId)"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "bookmarkClick"), object: self, userInfo: bookmark)
-            
-            
+
+            self.delegate?.dataTableViewCellResetBookmark(currentBookMarkState: data[0].bookMark, completion: { (isReset) in
+                if isReset {
+                    RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
+                        self.setBookMarkImage(task.result as! Bool)
+                    }
+                }
+            })
             return nil
-//            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data[0].bookMark)
-//        }.continueOnSuccessWith{ task  in
-//            RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
-//                self.setBookMarkImage(task.result as! Bool)
-//            }
-//        }
         }
+    
     }
-    
-    
 }
+    
+    
+

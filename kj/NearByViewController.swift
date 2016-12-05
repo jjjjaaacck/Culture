@@ -13,12 +13,8 @@ import GoogleMaps
 class NearByViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var currentLocation = CLLocationCoordinate2D()
-    var coreDataController = CoreDataController()
-    
-//    var data = [MainData]()
     var data = [LocationBasicInformation]()
 
-    
     @IBOutlet var tableView: UITableView!
     @IBAction func back(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: {})
@@ -36,32 +32,12 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
         data.sort { (location1, location2) -> Bool in
             return location1.distance < location2.distance
         }
-//        // Do any additional setup after loading the view, typically from a nib.
-//        //print(currentLocation.latitude,currentLocation.longitude)
-//        let filter = NSPredicate(format: "ANY informations.latitude BETWEEN {%@, %@} AND ANY informations.longitude BETWEEN {%@, %@}", currentLocation.latitude - 0.01, currentLocation.latitude + 0.01, currentLocation.longitude - 0.01, currentLocation.longitude + 0.01)
-//        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
-//            self.data = task as! [MainData]
-//         }
-//        infos = coreDataController.getNearByCoordinates(currentLocation.latitude, clongtitude: currentLocation.longitude)
-    
-//        getData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    func getData() {
-//        for info in infos {
-//            if (idCompare.range(of: info.modelId!) == nil) {
-//                var temp = coreDataController.getModelById(info.modelId!)
-//                model.append(temp[0])
-//                finalInfos.append(info)
-//                idCompare += info.modelId!
-//            }
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
@@ -71,11 +47,9 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearByCell", for: indexPath) as! nearByEventCell
         
         cell.titleLabel.text = data[indexPath.row].title
-//        cell.eventName.text = self.model[(indexPath as NSIndexPath).row].title!
         cell.titleLabel.sizeToFit()
         cell.addressLabel.text = data[indexPath.row].address
         cell.distanceLabel.text = "距離 : \(Int(data[indexPath.row].distance)) 公尺"
-//        cell.eventLocation.text = self.finalInfos[(indexPath as NSIndexPath).row].location!
         
         return cell
     }

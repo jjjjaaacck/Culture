@@ -61,8 +61,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         loadMenuSearch()
         loadToTopButton()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onBookmarkClickHandler(notification:)), name: NSNotification.Name(rawValue: "bookmarkClick"), object: nil)
-        
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
     
@@ -105,7 +103,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         titleScrollView.tag = ScrollViewType.title.rawValue
         titleScrollView.contentSize = CGSize(width: titleScrollViewHeight*2.25*CGFloat(header.categoryCount), height: titleScrollViewHeight)
         titleScrollView.bounces = false
-//        titleScrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         titleScrollView.delegate = self
         
         
@@ -151,7 +148,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         contentScrollView.contentSize.width = CGFloat(pageSize) * width
         contentScrollView.isDirectionalLockEnabled = true
         contentScrollView.bounces = false
-//        contentScrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addSubview(contentScrollView)
         
         for index in 0 ..< pageSize {
@@ -199,8 +195,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         if segue.identifier == "showDetail" {
             let detailController: TransitionViewController = segue.destination as! TransitionViewController
             detailController.mainDataId = sender as! String
-            //            detailController.category = ((sender as! NSArray).objectAtIndex(0)) as! Int
-            //            detailController.detailCellRow = (sender![1].row)
         }
     }
     
@@ -233,37 +227,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     func setCurrentContent(_ currentPage: Int) {
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(nowPage) * contentScrollView.frame.width, y: 0), animated: true)
     }
-//    
-//    func getConstraintByIdentifier(_ view: UIView, identifier: String) -> NSLayoutConstraint!{
-//        for constraint in view.constraints {
-//            if constraint.identifier == identifier {
-//                return constraint
-//            }
-//        }
-//        return nil
-//    }
-    
-    func onBookmarkClickHandler(notification: NSNotification){
-        let id = notification.userInfo?["id"] as! String
-        
-        if notification.userInfo?["bookmark"] as! Bool {
-            let alertController = UIAlertController(title: "移除書籤", message: "確定要移除書籤嗎", preferredStyle: .actionSheet)
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-            let okAction = UIAlertAction(title: "確定", style: .default) { (result : UIAlertAction) -> Void in
-//                task.set(result: true as AnyObject)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBookmarkOnOrNot\(id)"), object: self, userInfo: ["result" : false])
-            }
-            alertController.addAction(cancelAction)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-//            return task.task
-        }
-        else {
-//            task.set(result: true as AnyObject)
-//            return task.task
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBookmarkOnOrNot\(id)"), object: self, userInfo: ["result" : true])
-        }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -275,26 +238,22 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         self.performSegue(withIdentifier: "showDetail", sender: mainDataId)
     }
     
-    func bookmarkClick(currentBookMarkState: Bool) -> Task<AnyObject> {
-        let task = TaskCompletionSource<AnyObject>()
+    func bookmarkClick(currentBookMarkState: Bool, completion: @escaping (Bool) -> Void) {
         if currentBookMarkState {
             let alertController = UIAlertController(title: "移除書籤", message: "確定要移除書籤嗎", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (result : UIAlertAction) -> Void in
-                task.cancel()
+                completion(false)
             }
             let okAction = UIAlertAction(title: "確定", style: .default) { (result : UIAlertAction) -> Void in
-                task.set(result: true as AnyObject)
+                completion(true)
             }
             alertController.addAction(cancelAction)
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
-            return task.task
         }
         else {
-            task.set(result: true as AnyObject)
-            return task.task
+            completion(true)
         }
-        
     }
     
     //MARK: ToTopButtonDelegate
@@ -331,27 +290,4 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             setCurrentTitle(nowPage)
         }
     }
-    
-//    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.tag == ScrollViewType.content.rawValue {
-//            if scrollView.contentOffset.x <= 0 {
-//                scrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//            }
-//            else {
-//                scrollView.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//            }
-//        }
-//    }
-//
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        if scrollView.tag == ScrollViewType.content.rawValue {
-//            if scrollView.contentOffset.x == 0 && scrollView.sc {
-//                scrollView.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//            }
-//            else {
-//                scrollView.removeGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//            }
-//        }
-//    }
 }

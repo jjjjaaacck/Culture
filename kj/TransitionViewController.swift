@@ -20,10 +20,6 @@ enum PresentControllerIdentifier: Int {
 class TransitionViewController: UIViewController, UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate, GMSMapViewDelegate, MainIntroViewDelegate {
     
     let optionInteractionController = InteractionController()
-    //let optionPresentationController = OptionPresentationController()
-    //    var detailCellRow:Int = 0
-    //    var category : Int = 0
-    //    var id: String = ""
     
     var searchTitle: String!
     var index : Int = 0
@@ -138,39 +134,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         return data.informations[0].latitude == 0.0 && data.informations[0].longitude == 0.0 ? false : true
     }
     
-    //    func shareButtonClick(sender: UIButton){
-    //        let shareDetails : NSMutableDictionary
-    //        let title1 = model[index].title!
-    //        let title = data.title
-    //        let des = model[index].detail!
-    //        let description = data.detail
-    //        shareDetails = ["og:type":"culture_life:event","og:title":title,"og:description":des,"og:locale":"zh_TW"]
-    //        if data.webUrl != ""{
-    //            let url = data.webUrl
-    //            shareDetails.setObject(url, forKey:"og:url")
-    //        }
-    //        else
-    //        {
-    //            if data.salesUrl != ""{
-    //                let url = data.salesUrl
-    //                shareDetails.setObject(url, forKey:"og:url")
-    //            }
-    //        }
-    //        if data.imageUrl != ""{
-    //            let imageUrl = NSURL(string: data.imageUrl)
-    //            let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
-    //            shareDetails.setObject(image, forKey:"og:image")
-    //        }
-    //        let object = FBSDKShareOpenGraphObject(properties: shareDetails as [NSObject : AnyObject])
-    //        let action = FBSDKShareOpenGraphAction.init()
-    //        action.actionType = "culture_life:review"
-    //        action.setObject(object, forKey: "culture_life:event")
-    //        let content = FBSDKShareOpenGraphContent.init()
-    //        content.action = action
-    //        content.previewPropertyName = "culture_life:event"
-    //        FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
-    //    }
-    
     func setMap(activityMap: GMSMapView) {
         let coordinate = CLLocationCoordinate2DMake(data.informations[0].latitude, data.informations[0].longitude)
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
@@ -180,8 +143,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         activityMap.settings.scrollGestures = false
         activityMap.settings.zoomGestures = true
         activityMap.settings.compassButton = true
-        //mapView.myLocationEnabled = true
-        //mapView.settings.myLocationButton = true
         activityMap.setMinZoom(8, maxZoom: 20)
         
         showMarker(mapview: activityMap, coordinate: coordinate)
@@ -190,10 +151,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     func showMarker(mapview: GMSMapView, coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-        //marker.title = "Hello"
-        //marker.snippet = "I'm fine"
-        //marker.appearAnimation = kGMSMarkerAnimationPop
-        //        marker.icon = resizeImage(UIImage(named: "map-marker.png")!,size:CGSizeMake(30.0, 30.0))
         marker.icon = UIImage(named: "marker")
         marker.map = mapview
     }
@@ -259,7 +216,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         if data.imageUrl != ""{
             let imageUrl = URL(string: data.imageUrl)
             let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
-            shareDetails.setObject(image, forKey:"og:image" as NSCopying)
+            shareDetails.setObject(image!, forKey:"og:image" as NSCopying)
         }
         //        let object = FBSDKShareOpenGraphObject(properties: shareDetails)
         let object = FBSDKShareOpenGraphObject(properties: shareDetails as NSDictionary as! [AnyHashable: Any])

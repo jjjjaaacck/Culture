@@ -30,12 +30,12 @@ class RealmManager {
     }
     
     //MARK: Update
-    
-    func updateBookmark(_ filter: NSPredicate, state: Bool) -> Task<AnyObject> {
+
+    func updateBookmark(_ filter: NSPredicate) -> Task<AnyObject> {
         let task = TaskCompletionSource<AnyObject>()
         if let thingToBeUpdated = realm.objects(MainData.self).filter(filter).first{
-            try! realm.write({ 
-                thingToBeUpdated.bookMark = state
+            try! realm.write({
+                thingToBeUpdated.bookMark = !thingToBeUpdated.bookMark
             })
             task.set(result: thingToBeUpdated.bookMark as AnyObject)
         }

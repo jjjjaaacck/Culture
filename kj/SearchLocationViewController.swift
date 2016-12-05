@@ -11,7 +11,6 @@ import UIKit
 class SearchLocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet var tableView: UITableView!
-//    @IBOutlet weak var menuButton: UIBarButtonItem!
     
     var allLocations = [
         0:[String](["台北", "新北", "基隆", "桃園", "新竹"]),

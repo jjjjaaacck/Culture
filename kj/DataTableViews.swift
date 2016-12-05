@@ -14,7 +14,7 @@ import Kingfisher
 
 protocol DataTableViewsDelegate {
     func selectRow(_ mainDataId: String)
-    func bookmarkClick(currentBookMarkState: Bool) -> Task<AnyObject>
+    func bookmarkClick(currentBookMarkState: Bool, completion: @escaping (_ isReset: Bool) -> Void)
 }
 
 class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTableViewCellDelegate {
@@ -119,8 +119,11 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     
     //MARK: DataTableViewCellDelegate
     
-    func dataTableViewCellRemoveBookmark(currentBookMarkState: Bool) -> Task<AnyObject> {
-        return (delegate?.bookmarkClick(currentBookMarkState: currentBookMarkState))!
+    
+    func dataTableViewCellResetBookmark(currentBookMarkState: Bool, completion: @escaping (Bool) -> Void) {
+        delegate?.bookmarkClick(currentBookMarkState: currentBookMarkState, completion: { (isReset) -> Void in
+            completion(isReset)
+        })
     }
     
     //MARK: method

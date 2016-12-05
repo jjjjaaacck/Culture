@@ -15,8 +15,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var data = [MainData]()
     
-    var coreDataController = CoreDataController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
