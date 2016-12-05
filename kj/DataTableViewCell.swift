@@ -122,18 +122,38 @@ class DataTableViewCell: UITableViewCell {
     
     func setBookMarkImage(_ state: Bool) {
         let image = state ? UIImage(named: "onBookmark") : UIImage(named: "offBookmark")
-        activityBookmark.setImage(image, for: UIControlState())
+//        let filter = NSPredicate(format: "id = %@", mainDataId)
+        activityBookmark.setImage(image, for: .normal)
+    }
+    
+    func onRecieveBookmarkResult(notification: Notification) {
+        let filter = NSPredicate(format: "id = %@", mainDataId)
+        let result = notification.userInfo?["result"] as! Bool
+        
+        setBookMarkImage(result)
+        RealmManager.sharedInstance.updateBookmark(filter, state: result).continueOnSuccessWith { (task) ->
+            AnyObject? in
+            return nil
+        }
     }
     
     func bookmarkClick() {
         let filter = NSPredicate(format: "id = %@", mainDataId)
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ (task) -> AnyObject? in
-            let data = task.result as! [MainData]
-            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data[0].bookMark)
-        }.continueOnSuccessWith{ task  in
-            RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
-                self.setBookMarkImage(task.result as! Bool)
-            }
+            let data = task as! [MainData]
+            let bookmark = ["bookmark" : data[0].bookMark, "id" : self.mainDataId] as [String : Any]
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(DataTableViewCell.onRecieveBookmarkResult(notification:)), name: NSNotification.Name(rawValue : "setBookmarkOnOrNot\(self.mainDataId)"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "bookmarkClick"), object: self, userInfo: bookmark)
+            
+            
+            return nil
+//            return self.delegate?.dataTableViewCellRemoveBookmark(currentBookMarkState: data[0].bookMark)
+//        }.continueOnSuccessWith{ task  in
+//            RealmManager.sharedInstance.updateBookmark(filter).continueWith { task in
+//                self.setBookMarkImage(task.result as! Bool)
+//            }
+//        }
         }
     }
     

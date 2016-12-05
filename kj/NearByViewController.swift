@@ -15,7 +15,8 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
     var currentLocation = CLLocationCoordinate2D()
     var coreDataController = CoreDataController()
     
-    var data = [MainData]()
+//    var data = [MainData]()
+    var data = [LocationBasicInformation]()
 
     
     @IBOutlet var tableView: UITableView!
@@ -31,12 +32,16 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
         tableView.register(nib, forCellReuseIdentifier: "NearByCell")
         tableView.dataSource = self
         tableView.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
-        //print(currentLocation.latitude,currentLocation.longitude)
-        let filter = NSPredicate(format: "ANY informations.latitude BETWEEN {%@, %@} AND ANY informations.longitude BETWEEN {%@, %@}", currentLocation.latitude - 0.01, currentLocation.latitude + 0.01, currentLocation.longitude - 0.01, currentLocation.longitude + 0.01)
-        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
-            self.data = task as! [MainData]
+        
+        data.sort { (location1, location2) -> Bool in
+            return location1.distance < location2.distance
         }
+//        // Do any additional setup after loading the view, typically from a nib.
+//        //print(currentLocation.latitude,currentLocation.longitude)
+//        let filter = NSPredicate(format: "ANY informations.latitude BETWEEN {%@, %@} AND ANY informations.longitude BETWEEN {%@, %@}", currentLocation.latitude - 0.01, currentLocation.latitude + 0.01, currentLocation.longitude - 0.01, currentLocation.longitude + 0.01)
+//        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
+//            self.data = task as! [MainData]
+//         }
 //        infos = coreDataController.getNearByCoordinates(currentLocation.latitude, clongtitude: currentLocation.longitude)
     
 //        getData()
@@ -65,26 +70,28 @@ class NearByViewController : UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearByCell", for: indexPath) as! nearByEventCell
         
-        cell.eventName.text = data[indexPath.row].title
+        cell.titleLabel.text = data[indexPath.row].title
 //        cell.eventName.text = self.model[(indexPath as NSIndexPath).row].title!
-        cell.eventName.sizeToFit()
-        cell.eventLocation.text = data[indexPath.row].informations[0].location
+        cell.titleLabel.sizeToFit()
+        cell.addressLabel.text = data[indexPath.row].address
+        cell.distanceLabel.text = "距離 : \(Int(data[indexPath.row].distance)) 公尺"
 //        cell.eventLocation.text = self.finalInfos[(indexPath as NSIndexPath).row].location!
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 111
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showNearByDetail", sender: data[indexPath.row].title)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "showNearByDetail", sender: data[indexPath.row].id)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let transitionViewController = segue.destination as! TransitionViewController
-        transitionViewController.searchTitle = sender as! String
+        transitionViewController.mainDataId = sender as! String
     }
     
     func getRadius(_ latitude : CLLocationDegrees, longitude : CLLocationDegrees)->CLLocationDistance{

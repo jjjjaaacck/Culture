@@ -16,20 +16,12 @@ extension FloatingPoint {
     var radiansToDegrees: Self { return self * 180 / .pi }
 }
 
-struct locationBasicInformation {
-    var id: String
-    var location: CLLocationCoordinate2D
-    var distance: Double
-    var title: String
-    var address: String
-}
-
 class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapViewDelegate{
 
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
     var data = [MainData]()
-    var locationDistances = [locationBasicInformation]()
+    var locationInformations = [LocationBasicInformation]()
     var markers = [GMSMarker]()
     var rangeCircle = GMSCircle()
     var currentLocation: CLLocationCoordinate2D = CLLocationCoordinate2D() {
@@ -142,6 +134,9 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
             let information = (id: result.id, distance: distance)
             let marker = GMSMarker(position: origin)
             
+            let locationInformation = LocationBasicInformation(id: result.id, location: origin, distance: distance, title: result.title, address: address)
+            self.locationInformations.append(locationInformation)
+            
             marker.icon = UIImage(named: "marker")
             marker.title = result.title
             marker.snippet = address
@@ -180,7 +175,7 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
         }
         else {
             let nearByViewController = segue.destination as! NearByViewController
-            nearByViewController.currentLocation = self.currentLocation
+            nearByViewController.data = self.locationInformations
         }
     }
     

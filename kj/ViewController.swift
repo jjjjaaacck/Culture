@@ -61,6 +61,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         loadMenuSearch()
         loadToTopButton()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onBookmarkClickHandler(notification:)), name: NSNotification.Name(rawValue: "bookmarkClick"), object: nil)
+        
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
     
@@ -231,14 +233,36 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     func setCurrentContent(_ currentPage: Int) {
         contentScrollView.setContentOffset(CGPoint(x: CGFloat(nowPage) * contentScrollView.frame.width, y: 0), animated: true)
     }
+//    
+//    func getConstraintByIdentifier(_ view: UIView, identifier: String) -> NSLayoutConstraint!{
+//        for constraint in view.constraints {
+//            if constraint.identifier == identifier {
+//                return constraint
+//            }
+//        }
+//        return nil
+//    }
     
-    func getConstraintByIdentifier(_ view: UIView, identifier: String) -> NSLayoutConstraint!{
-        for constraint in view.constraints {
-            if constraint.identifier == identifier {
-                return constraint
+    func onBookmarkClickHandler(notification: NSNotification){
+        let id = notification.userInfo?["id"] as! String
+        
+        if notification.userInfo?["bookmark"] as! Bool {
+            let alertController = UIAlertController(title: "移除書籤", message: "確定要移除書籤嗎", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "確定", style: .default) { (result : UIAlertAction) -> Void in
+//                task.set(result: true as AnyObject)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBookmarkOnOrNot\(id)"), object: self, userInfo: ["result" : false])
             }
+            alertController.addAction(cancelAction)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+//            return task.task
         }
-        return nil
+        else {
+//            task.set(result: true as AnyObject)
+//            return task.task
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBookmarkOnOrNot\(id)"), object: self, userInfo: ["result" : true])
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -34,6 +34,7 @@
 		5A2B74B51B7E2D1700D0C31E /* DataTableViewCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B74B41B7E2D1700D0C31E /* DataTableViewCellWithImage.swift */; };
 		5A38C59C1CF5487F007CDFDC /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A38C59B1CF5487F007CDFDC /* UIImageExtension.swift */; };
 		5A3DFC001BBFFE8300E1EF10 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3DFBFC1BBFFE8300E1EF10 /* Info.swift */; };
+		5A3F39891DF26968001D2FA2 /* LocationBasicInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F39881DF26968001D2FA2 /* LocationBasicInformation.swift */; };
 		5A418ACB1BD7C88600CDB3B3 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418ACA1BD7C88600CDB3B3 /* SearchLocationViewController.swift */; };
 		5A418ACF1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418ACE1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift */; };
 		5A418AD11BD7EFC300CDB3B3 /* LocationSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418AD01BD7EFC300CDB3B3 /* LocationSearchResultViewController.swift */; };
@@ -141,6 +142,7 @@
 		5A2B74B41B7E2D1700D0C31E /* DataTableViewCellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCellWithImage.swift; sourceTree = "<group>"; };
 		5A38C59B1CF5487F007CDFDC /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5A3DFBFC1BBFFE8300E1EF10 /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		5A3F39881DF26968001D2FA2 /* LocationBasicInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationBasicInformation.swift; sourceTree = "<group>"; };
 		5A418ACA1BD7C88600CDB3B3 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		5A418ACE1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchTblViewCell.swift; sourceTree = "<group>"; };
 		5A418AD01BD7EFC300CDB3B3 /* LocationSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResultViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				5A1065DA1BD0C705007321E8 /* MapViewController.swift */,
 				5A1065E21BD0EE0F007321E8 /* MenuBarViewController.swift */,
 				5A418AD61BD823F800CDB3B3 /* MyMapViewController.swift */,
+				5A3F39881DF26968001D2FA2 /* LocationBasicInformation.swift */,
 				5A418AD91BD823F800CDB3B3 /* NearByViewController.swift */,
 				5A88DE2C1B67691B00446B3B /* OptionPresentationController.swift */,
 				5A418ACA1BD7C88600CDB3B3 /* SearchLocationViewController.swift */,
@@ -626,6 +629,7 @@
 				5A1065C71BCD01DA007321E8 /* Category.swift in Sources */,
 				5A1065B91BC8B652007321E8 /* DataTableView.swift in Sources */,
 				5A0899561CD6005600D6EE85 /* RealmManager.swift in Sources */,
+				5A3F39891DF26968001D2FA2 /* LocationBasicInformation.swift in Sources */,
 				5A1065D71BCF7B4F007321E8 /* Bookmark.swift in Sources */,
 				5A1065C91BCD0F39007321E8 /* SearchTblViewCell.swift in Sources */,
 				5AA05B221BD27F7A0085CAE8 /* CalendarTableViewCell.swift in Sources */,
