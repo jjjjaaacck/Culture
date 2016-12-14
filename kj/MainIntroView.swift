@@ -133,44 +133,114 @@ class MainIntroView: UIView {
           //  make.height.equalTo(0)
         }
         
-        sessionButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(self)
-            make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-            make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-            make.bottom.equalTo(self)
-        }
+//        sessionButton.snp.makeConstraints { (make) in
+//            make.leading.equalTo(self)
+//            make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//            make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//            make.bottom.equalTo(self)
+//        }
         
-        if data.webUrl != "" {
+        if !data.webUrl.isEmpty && !data.salesUrl.isEmpty {
+            setButtonConstraint(button: sessionButton)
+            setButtonConstraint(button: webButton)
+            setButtonConstraint(button: salesButton)
+            sessionButton.snp.makeConstraints({ (make) in
+                make.leading.equalTo(self)
+            })
             webButton.snp.makeConstraints({ (make) in
                 make.centerX.equalTo(self)
-                make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-                make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-                make.bottom.equalTo(self)
             })
             setButton(webButton, type: .web)
             
-            if data.salesUrl != "" {
-                salesButton.snp.makeConstraints({ (make) in
-                    make.trailing.equalTo(self)
-                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-                    make.bottom.equalTo(self)
-                })
-                setButton(salesButton, type: .sales)
-            }
+            salesButton.snp.makeConstraints({ (make) in
+                make.trailing.equalTo(self)
+            })
+            setButton(salesButton, type: .sales)
+        }
+        else if !data.webUrl.isEmpty && data.salesUrl.isEmpty {
+            setButtonConstraint(button: sessionButton)
+            setButtonConstraint(button: webButton)
+            sessionButton.snp.makeConstraints({ (make) in
+                make.leading.equalTo(self.width/7)
+            })
+            webButton.snp.makeConstraints({ (make) in
+                make.trailing.equalTo(-self.width/7)
+            })
+            
+            setButton(webButton, type: .web)
+        }
+        else if data.webUrl.isEmpty && !data.salesUrl.isEmpty {
+            setButtonConstraint(button: sessionButton)
+            setButtonConstraint(button: salesButton)
+            sessionButton.snp.makeConstraints({ (make) in
+                make.leading.equalTo(self.width/7)
+            })
+            salesButton.snp.makeConstraints({ (make) in
+                make.trailing.equalTo(-self.width/7)
+            })
+            setButton(salesButton, type: .sales)
+        }
+        else {
+            setButtonConstraint(button: sessionButton)
+            sessionButton.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(self)
+            })
         }
         
-        else {
-            if data.salesUrl != "" {
-                salesButton.snp.makeConstraints({ (make) in
-                    make.centerX.equalTo(self)
-                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-                    make.bottom.equalTo(self)
-                })
-                setButton(salesButton, type: .sales)
-            }
-        }
+//        if !data.webUrl.isEmpty {
+////            webButton.snp.makeConstraints({ (make) in
+////                make.centerX.equalTo(self)
+////                make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+////                make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+////                make.bottom.equalTo(self)
+////            })
+////            setButton(webButton, type: .web)
+//            
+//            if !data.salesUrl.isEmpty {
+//                sessionButton.snp.makeConstraints { (make) in
+//                    make.leading.equalTo(self)
+//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//                    make.bottom.equalTo(self)
+//                }
+//                
+//                webButton.snp.makeConstraints({ (make) in
+//                    make.centerX.equalTo(self)
+//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//                    make.bottom.equalTo(self)
+//                })
+//                setButton(webButton, type: .web)
+//                
+//                salesButton.snp.makeConstraints({ (make) in
+//                    make.trailing.equalTo(self)
+//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//                    make.bottom.equalTo(self)
+//                })
+//                setButton(salesButton, type: .sales)
+//            }
+//            else {
+//                sessionButton.snp.makeConstraints { (make) in
+//                    make.leading.equalTo(self)
+//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//                    make.bottom.equalTo(self)
+//                }
+//            }
+//        }
+//        
+//        else {
+//            if !data.salesUrl.isEmpty {
+//                salesButton.snp.makeConstraints({ (make) in
+//                    make.centerX.equalTo(self)
+//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+//                    make.bottom.equalTo(self)
+//                })
+//                setButton(salesButton, type: .sales)
+//            }
+//        }
         
         shareButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self)
@@ -282,29 +352,53 @@ class MainIntroView: UIView {
         button.layer.borderColor = UIColor.flatTeal().cgColor
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont(name: "HelveticaNeue-Thin", size: 12)!
-        button.setBackgroundImage(UIImage.imageWithColor(UIColor.white), for: UIControlState())
+        button.setBackgroundImage(UIImage.imageWithColor(UIColor.white), for: .normal)
         button.setBackgroundImage(UIImage.imageWithColor(UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.5)), for: .highlighted)
         
         switch type {
+            
         case .session:
-            button.setImage(UIImage(named: "session"), for: UIControlState())
-            button.setTitle(ACTIVITY_SESSION, for: UIControlState())
+            button.setImage(UIImage(named: "session"), for: .normal)
+            button.setTitle(ACTIVITY_SESSION, for: .normal)
             button.addTarget(self, action: #selector(MainIntroView.sessionButtonClick), for: .touchUpInside)
         case .web:
-            button.setImage(UIImage(named: "web"), for: UIControlState())
-            button.setTitle(WEB, for: UIControlState())
+            button.setImage(UIImage(named: "web"), for: .normal)
+            button.setTitle(WEB, for: .normal)
             button.addTarget(self, action: #selector(MainIntroView.webButtonClick), for: .touchUpInside)
         case .sales:
-            button.setImage(UIImage(named: "sales"), for: UIControlState())
-            button.setTitle(SALES_WEB, for: UIControlState())
+            button.setImage(UIImage(named: "sales"), for: .normal)
+            button.setTitle(SALES_WEB, for: .normal)
             button.addTarget(self, action: #selector(MainIntroView.salesWebButtonClick), for: .touchUpInside)
         }
         
-        button.imageEdgeInsets = UIEdgeInsetsMake(12.5,22.5,32.5,22.5)
+        let buttonSize = CGSize(width: self.width / 3.5, height: self.width / 3.5)
+        
+        button.imageEdgeInsets =
+            UIEdgeInsetsMake(10,
+                             (buttonSize.width-buttonSize.height+buttonSize.height/3 + 10) / 2,
+                             buttonSize.height/3,
+                             (buttonSize.width-buttonSize.height+buttonSize.height/3 + 10) / 2)
         button.setTitleColor(UIColor.flatTeal(), for: UIControlState())
         button.titleLabel?.sizeToFit()
-        button.titleEdgeInsets = UIEdgeInsetsMake(button.imageView!.frame.maxY, -button.frame.width - button.titleLabel!.frame.width / 2 , 10.0, 0)
-        
+//        button.titleEdgeInsets =
+//            UIEdgeInsetsMake(0,
+//                             0,
+//                             0,
+//                             0)
+        button.titleEdgeInsets =
+            UIEdgeInsetsMake((button.imageView?.bounds.size.width)! + 10,
+                             -(buttonSize.width + (button.titleLabel?.bounds.size.width)!/2),
+                             0,
+                             0)
+    }
+    
+    func setButtonConstraint(button: UIButton) {
+        button.snp.makeConstraints { (make) in
+//            make.leading.equalTo(self)
+            make.top.equalTo(ticketLabel.snp.bottom).offset(20)
+            make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
+            make.bottom.equalTo(self)
+        }
     }
     
     func setLabel(_ label: UILabel, font: UIFont, color: UIColor, text: String) {

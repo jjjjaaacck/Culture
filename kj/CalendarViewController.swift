@@ -23,7 +23,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
-        datePicker.addTarget(self, action: #selector(CalendarViewController.dateChange), for: UIControlEvents.valueChanged)
+        datePicker.addTarget(self, action: #selector(CalendarViewController.getData), for: UIControlEvents.valueChanged)
         let nib: UINib = UINib(nibName: "CalendarCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "calendarCell")
         tableView.delegate = self
@@ -32,15 +32,11 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view.
     }
     
-    func dateChange() {
-        getData()
-    }
-    
     func getData() {
         
-        let filter = NSPredicate(format:"startDate <= %@ AND endDate >= %@", datePicker.date as CVarArg, datePicker.date as CVarArg)
-        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith{ task in
-            self.data = task as! [MainData]
+        let filter = NSPredicate(format:"startTime <= %@ AND endTime >= %@", datePicker.date as CVarArg, datePicker.date as CVarArg)
+        RealmManager.sharedInstance.tryFetchMainDataWithFilterInformation(filter).continueOnSuccessWith{ task in
+            self.data = Array(task as! Set<MainData>)
         }
         
         tableView.reloadData()
@@ -81,6 +77,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showCalendarDetail", sender: data[indexPath.row].id)
     }
     

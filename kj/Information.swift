@@ -17,6 +17,8 @@ class Information: Object {
     dynamic var location = ""
     dynamic var latitude = 0.0
     dynamic var longitude = 0.0
-    let mainData = LinkingObjects(fromType: MainData.self, property: "informations")
-    
+    private let mainDatas = LinkingObjects(fromType: MainData.self, property: "informations")
+    dynamic var mainData: MainData? {
+        return self.mainDatas.first
+    }
 }

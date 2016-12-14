@@ -131,17 +131,23 @@ class MyMapViewController: UIViewController, CLLocationManagerDelegate ,GMSMapVi
             let origin = CLLocationCoordinate2DMake(result.informations[0].latitude, result.informations[0].longitude)
             let distance = self.calculateDistance(origin: origin, destination: self.currentLocation)
             let address = !result.informations.isEmpty || result.informations[0].location != "" ? result.informations[0].location : ""
-            let information = (id: result.id, distance: distance)
-            let marker = GMSMarker(position: origin)
-            
             let locationInformation = LocationBasicInformation(id: result.id, location: origin, distance: distance, title: result.title, address: address)
+            
             self.locationInformations.append(locationInformation)
             
-            marker.icon = UIImage(named: "marker")
-            marker.title = result.title
-            marker.snippet = address
-            marker.userData = information
+        }
+        
+        locationInformations.sort { (location1, location2) -> Bool in
+            return location1.distance < location2.distance
+        }
+        
+        for locationInformation in locationInformations {
+            let marker = GMSMarker(position: locationInformation.location)
             
+            marker.icon = UIImage(named: "marker")
+            marker.title = locationInformation.title
+            marker.snippet = locationInformation.address
+            marker.userData = (id: locationInformation.id, distance: locationInformation.distance)
             self.markers.append(marker)
         }
     }

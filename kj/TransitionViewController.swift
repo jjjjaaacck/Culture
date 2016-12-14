@@ -21,17 +21,10 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
     
     let optionInteractionController = InteractionController()
     
-    var searchTitle: String!
-    var index : Int = 0
-    var nextY: CGFloat = 0
-    var model = [Model]()
-    var infos = [Info]()
-    
     var contentView = UIView()
     var mainIntroView = MainIntroView()
     var activityIntroView = ActivityIntroView()
-    //    var mapView = MapView()
-    var map = GMSMapView()
+    var mapView = GMSMapView()
     
     var mainDataId = ""
     var data = MainData()
@@ -74,21 +67,18 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         activityIntroView = ActivityIntroView(width: self.view.frame.width - 40, data: data.detail)
         
         if isDataHasInformation() && isInformationHasLocation(){
-            //            mapView = MapView(latitude: data.informations[0].latitude, longitude: data.informations[0].longitude)
-            setMap(activityMap: map)
+            setMap(activityMap: mapView)
         }
         
         detailScrollView.addSubview(contentView)
         contentView.addSubview(mainIntroView)
         contentView.addSubview(activityIntroView)
-        contentView.addSubview(map)
-        //        contentView.addSubview(mapView)
+        contentView.addSubview(mapView)
         
         contentView.snp.makeConstraints { (make) in
             make.edges.equalTo(detailScrollView).inset(UIEdgeInsetsMake(20, 20, 20, 20))
             make.width.equalTo(self.view.frame.width - 40)
-            //            make.bottom.equalTo(mapView)
-            make.bottom.equalTo(map)
+            make.bottom.equalTo(mapView)
         }
         
         mainIntroView.snp.makeConstraints { (make) in
@@ -101,22 +91,11 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
             make.top.equalTo(mainIntroView.snp.bottom).offset(20)
         }
         
-        //        mapView.snp.makeConstraints { (make) in
-        //            make.leading.trailing.equalTo(0)
-        //            make.top.equalTo(activityIntroView.snp.bottom).offset(20)
-        //            if isInformationHasLocation() {
-        //                make.height.equalTo(160)
-        //            }
-        //            else {
-        //                make.height.equalTo(0)
-        //            }
-        //        }
-        
-        map.snp.makeConstraints { (make) in
+        mapView.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(0)
             make.top.equalTo(activityIntroView.snp.bottom).offset(20)
-            if isInformationHasLocation() {
-                make.height.equalTo(160)
+            if isDataHasInformation() && isInformationHasLocation() {
+                make.height.equalTo(200)
             }
             else {
                 make.height.equalTo(0)
@@ -138,11 +117,9 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         let coordinate = CLLocationCoordinate2DMake(data.informations[0].latitude, data.informations[0].longitude)
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
         activityMap.camera = camera
-        activityMap.accessibilityElementsHidden = true
         activityMap.delegate = self
-        activityMap.settings.scrollGestures = false
-        activityMap.settings.zoomGestures = true
         activityMap.settings.compassButton = true
+        activityMap.settings.scrollGestures = false
         activityMap.setMinZoom(8, maxZoom: 20)
         
         showMarker(mapview: activityMap, coordinate: coordinate)
@@ -218,7 +195,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
             let image = FBSDKSharePhoto(imageURL: imageUrl, userGenerated: false)
             shareDetails.setObject(image!, forKey:"og:image" as NSCopying)
         }
-        //        let object = FBSDKShareOpenGraphObject(properties: shareDetails)
         let object = FBSDKShareOpenGraphObject(properties: shareDetails as NSDictionary as! [AnyHashable: Any])
         let action = FBSDKShareOpenGraphAction.init()
         action.actionType = "culture_life:review"

@@ -36,7 +36,7 @@
         <scene sceneID="Rq7-st-ILg">
             <objects>
                 <navigationController storyboardIdentifier="CalendarNavigationController" navigationBarHidden="YES" id="8Rj-Mo-Oc5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hdR-Ps-5xu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdR-Ps-5xu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -171,7 +171,7 @@
         <scene sceneID="fEA-gu-SMx">
             <objects>
                 <navigationController storyboardIdentifier="BookmarkNavigationController" navigationBarHidden="YES" id="Qhq-NM-Ygd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4fe-Pn-Q2W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4fe-Pn-Q2W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -239,7 +239,7 @@
         <scene sceneID="eni-qb-U3S">
             <objects>
                 <navigationController storyboardIdentifier="MapNavigationController" navigationBarHidden="YES" id="ayk-zk-hsM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JUk-ND-7D5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JUk-ND-7D5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -378,7 +378,7 @@
         <scene sceneID="dko-Ez-zqt">
             <objects>
                 <navigationController storyboardIdentifier="LocationNavigationController" id="KO4-Sm-p1P" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zKh-l1-VnQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKh-l1-VnQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -562,11 +562,11 @@
         <scene sceneID="mk4-E8-1yl">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="DKx-CO-ocV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Yw6-w6-qha">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Yw6-w6-qha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.84999999999999998"/>
-                        <color key="barTintColor" red="0.078431372550000003" green="0.59999999999999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.81010072970000002" green="0.81010072970000002" blue="0.81010072970000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="LaoSangamMN" family="Lao Sangam MN" pointSize="14"/>
                             <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
@@ -603,20 +603,19 @@
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6P-IE-kKQ" customClass="subtitle" customModule="kj" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="barTintColor" red="0.078431372550000003" green="0.59999999999999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.81010072970000002" green="0.81010072970000002" blue="0.81010072970000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="22"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="textShadowColor" red="0.062745098040000002" green="0.49019607840000001" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <offsetWrapper key="textShadowOffset" horizontal="1" vertical="1"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Culture Life" id="seE-yL-2fV">
                                         <barButtonItem key="leftBarButtonItem" image="menu" id="IPZ-7W-Drx">
-                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="fKz-GU-uML">
-                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -644,11 +643,12 @@
                         <outlet property="subTitle" destination="I6P-IE-kKQ" id="wZA-Yv-USA"/>
                         <outlet property="titleScrollView" destination="sXT-wu-UMA" id="nYx-wQ-DeM"/>
                         <segue destination="bmq-5O-kr7" kind="modal" identifier="showDetail" id="Gip-AD-8c3"/>
+                        <segue destination="zRs-BX-q5A" kind="push" id="kJc-jW-g6j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKa-zt-i1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="802" y="1224"/>
+            <point key="canvasLocation" x="802" y="1238"/>
         </scene>
         <!--Transition View Controller-->
         <scene sceneID="Qqx-o5-sWg">
@@ -770,11 +770,11 @@
                         <viewControllerLayoutGuide type="bottom" id="MnL-3w-PIn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="We3-0U-kdw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F78-2y-bl0">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="rgI-HC-EtI" customClass="SearchTblViewCell" customModule="kj" customModuleProvider="target">
@@ -804,40 +804,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEN-Y2-Htc" customClass="otherTitle" customModule="kj" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="搜尋" id="wjI-l1-aFb">
-                                        <barButtonItem key="leftBarButtonItem" image="back-20" id="S6k-s3-OC0">
-                                            <connections>
-                                                <action selector="backButtonClick:" destination="zRs-BX-q5A" id="Qr6-fS-fNe"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="F78-2y-bl0" firstAttribute="width" secondItem="We3-0U-kdw" secondAttribute="width" id="7Vh-3E-Wqe"/>
-                            <constraint firstItem="F78-2y-bl0" firstAttribute="bottom" secondItem="MnL-3w-PIn" secondAttribute="top" id="CI2-lx-crl"/>
-                            <constraint firstItem="OEN-Y2-Htc" firstAttribute="bottom" secondItem="F78-2y-bl0" secondAttribute="top" id="Fnf-sf-A2q"/>
-                            <constraint firstItem="OEN-Y2-Htc" firstAttribute="top" secondItem="We3-0U-kdw" secondAttribute="top" id="MC6-dq-DK2"/>
-                            <constraint firstItem="F78-2y-bl0" firstAttribute="leading" secondItem="We3-0U-kdw" secondAttribute="leading" id="ORf-ml-ev4"/>
-                            <constraint firstItem="OEN-Y2-Htc" firstAttribute="leading" secondItem="F78-2y-bl0" secondAttribute="leading" id="PH9-WV-zfh"/>
-                            <constraint firstItem="OEN-Y2-Htc" firstAttribute="width" secondItem="We3-0U-kdw" secondAttribute="width" id="Ujz-bA-Oxx"/>
-                            <constraint firstItem="F78-2y-bl0" firstAttribute="height" secondItem="We3-0U-kdw" secondAttribute="height" constant="-44" id="Z5J-2J-sb1"/>
+                            <constraint firstItem="F78-2y-bl0" firstAttribute="bottom" secondItem="MnL-3w-PIn" secondAttribute="top" id="10d-RE-B74"/>
+                            <constraint firstItem="F78-2y-bl0" firstAttribute="leading" secondItem="We3-0U-kdw" secondAttribute="leading" id="LVr-0Y-af9"/>
+                            <constraint firstItem="F78-2y-bl0" firstAttribute="top" secondItem="We3-0U-kdw" secondAttribute="top" id="Pp2-EK-XGe"/>
+                            <constraint firstAttribute="trailing" secondItem="F78-2y-bl0" secondAttribute="trailing" id="xvh-6V-4vU"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="StF-IV-S72"/>
                     <connections>
-                        <outlet property="backButton" destination="S6k-s3-OC0" id="wTm-q2-5m4"/>
                         <outlet property="tableview" destination="F78-2y-bl0" id="5dg-mh-gq8"/>
                         <segue destination="bmq-5O-kr7" kind="modal" identifier="showSearchDetail" id="X2I-eZ-Kpl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32v-R4-z3q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="802" y="2177"/>
+            <point key="canvasLocation" x="801.5" y="2176.5"/>
         </scene>
         <!--Session Table View Controller-->
         <scene sceneID="Uac-8g-i8R">

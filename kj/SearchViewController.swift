@@ -9,12 +9,9 @@
 import UIKit
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-    @IBOutlet var backButton: UIBarButtonItem!
     @IBOutlet var tableview: UITableView!
     
-    @IBAction func backButtonClick(_ sender: UIBarButtonItem) {
-        dismissController()
-    }
+    
     var searchController: UISearchController!
     var category = Category()
     var searchResult = [(title: String, id: String)]()
@@ -44,14 +41,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         searchController.searchResultsUpdater = self
         searchController.searchBar.scopeButtonTitles = category.category
         searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         tableview.tableHeaderView = searchController.searchBar
         tableview.sectionIndexMinimumDisplayRowCount = 1
         tableview.reloadData()
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
-        swipe.direction = .right
-        self.view.addGestureRecognizer(swipe)
+//        
+//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
+//        swipe.direction = .right
+//        self.view.addGestureRecognizer(swipe)
         // Do any additional setup after loading the view.
     }
     
@@ -71,17 +69,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                     self.searchResult.append(("查無資料", ""))
                 }
         }
-    }
-    
-    func dismissController() {
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        self.view.window?.layer.add(transition,forKey:nil)
-        
-        self.dismiss(animated: false, completion: nil)
     }
     
     //MARK: tableView Delegate
@@ -113,16 +100,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         return 100
     }
     
-    func tableView(_ taleView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        taleView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if searchResult[indexPath.row].title != "查無資料" {
             performSegue(withIdentifier: "showSearchDetail", sender: searchResult[indexPath.row].id)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        searchController.isActive = false
-        backButton.isEnabled = true
         let transitionController = segue.destination as! TransitionViewController
         transitionController.mainDataId = sender as! String
     }
@@ -150,10 +135,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableview.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        backButton.isEnabled = true
+        self.navigationItem.setHidesBackButton(false, animated: false)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        backButton.isEnabled = false
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
 }

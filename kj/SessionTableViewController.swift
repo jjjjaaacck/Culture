@@ -22,7 +22,7 @@ class SessionTableViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SessionTableViewController.dismissController))
         swipe.direction = .right
         self.view.addGestureRecognizer(swipe)
     }

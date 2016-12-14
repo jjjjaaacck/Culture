@@ -21,7 +21,7 @@ class InteractionController: UIPercentDrivenInteractiveTransition {
     }
     
     fileprivate func setupGestureRecognizer(_ view: UIView) {
-        panGestureRecognizer=UIPanGestureRecognizer(target: self, action: #selector(InteractionController.handlePanGesture(_:)))
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(InteractionController.handlePanGesture(_:)))
         view.addGestureRecognizer(panGestureRecognizer)
     }
     
@@ -36,7 +36,7 @@ class InteractionController: UIPercentDrivenInteractiveTransition {
             
         case .changed:
             
-            let const = CGFloat(fminf(fmaxf(Float(viewTranslation.y / -800.0), 0.0), 1.0))
+            let const = CGFloat(fminf(fmaxf(Float(viewTranslation.y / -1000.0), 0.0), 1.0))
             shouldCompleteTransition = const > 0.13
             update(const)
             
@@ -51,7 +51,6 @@ class InteractionController: UIPercentDrivenInteractiveTransition {
             }
             
         default: break
-            
         }
     }
 }
