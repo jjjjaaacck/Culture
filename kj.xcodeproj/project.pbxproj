@@ -45,6 +45,7 @@
 		5A418ADD1BD823F800CDB3B3 /* NearByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418AD91BD823F800CDB3B3 /* NearByViewController.swift */; };
 		5A49E5B31CDDA32D00A63886 /* MainIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49E5B21CDDA32D00A63886 /* MainIntroView.swift */; };
 		5A6133B01DD0587000FFE9A5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A6133AF1DD0587000FFE9A5 /* .gitignore */; };
+		5A7200DC1E063BE300BEB5AF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7200DB1E063BE300BEB5AF /* LoadingView.swift */; };
 		5A88DE2D1B67691B00446B3B /* OptionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A88DE2C1B67691B00446B3B /* OptionPresentationController.swift */; };
 		5A88DE2F1B67714F00446B3B /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */; };
 		5A8E8E961B7E173F00BA7802 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8E8E941B7E173F00BA7802 /* DataTableViewCell.swift */; };
@@ -150,6 +151,7 @@
 		5A418AD91BD823F800CDB3B3 /* NearByViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByViewController.swift; sourceTree = "<group>"; };
 		5A49E5B21CDDA32D00A63886 /* MainIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainIntroView.swift; sourceTree = "<group>"; };
 		5A6133AF1DD0587000FFE9A5 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5A7200DB1E063BE300BEB5AF /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5A88DE2C1B67691B00446B3B /* OptionPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionPresentationController.swift; sourceTree = "<group>"; };
 		5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		5A8E8E941B7E173F00BA7802 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				5A1065C21BCCAEEF007321E8 /* SessionTableViewController.swift */,
 				5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */,
 				5ADB7BA71BB2495600AD5ABE /* ViewController.swift */,
+				5A7200DB1E063BE300BEB5AF /* LoadingView.swift */,
 				5ADB7B9B1BAD057300AD5ABE /* WebViewController.swift */,
 			);
 			name = Controller;
@@ -612,6 +615,7 @@
 				5A418AD11BD7EFC300CDB3B3 /* LocationSearchResultViewController.swift in Sources */,
 				5A9D641D1B69FF040028029B /* InteractionController.swift in Sources */,
 				5AFD93EE1BD36F4500109085 /* BookmarkViewController.swift in Sources */,
+				5A7200DC1E063BE300BEB5AF /* LoadingView.swift in Sources */,
 				5AEB7E5F1BC66E0A0005064D /* BookmarkButton.swift in Sources */,
 				5AEF90081B28696A00C8E8CD /* AppDelegate.swift in Sources */,
 				5AA05B1E1BD210780085CAE8 /* subtitle.swift in Sources */,

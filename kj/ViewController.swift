@@ -11,26 +11,37 @@ enum ScrollViewType: Int {
 }
 
 extension DataTableViews {
-    func fetchData() {
+    func fetchData() -> Task<AnyObject> {
         let filter = NSPredicate(format: "category == \(self.category!)")
-        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueOnSuccessWith { task in
-            self.data = task as! [MainData]
-            DispatchQueue.main.async(execute: {
-                self.reloadTableView()
-            })
-            }.continueWith{ task in
-                if task.faulted {
-                    FetchData.sharedInstance.RequestForData(self.category!).continueOnSuccessWith{ task in
-                        self.data = task as! [MainData]
-                        DispatchQueue.main.async(execute: {
-                            self.reloadTableView()
-                        })
-                        RealmManager.sharedInstance.addDataTableViewData(self.data)
-                        }.continueOnErrorWith{ error in
-                            print("fetchData error : \(error), with category: \(self.category!)")
+        let returnTask = TaskCompletionSource<AnyObject>()
+        RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { task in
+            if task.faulted {
+                FetchData.sharedInstance.RequestForData(self.category!).continueWith { task in
+                    if task.faulted {
+                        print("fetchData error : \(task.error), with category: \(self.category!)")
+                        returnTask.set(error: task.error!)
                     }
+                    else {
+                        self.data = task.result as! [MainData]
+                        RealmManager.sharedInstance.addDataTableViewData(task.result as! [MainData]).continueOnSuccessWith { task in
+                            DispatchQueue.main.async {
+                                self.reloadTableView()
+                            }
+                            returnTask.set(result: true as AnyObject)
+                        }
+                    }
+                    
                 }
+            }
+            else {
+                self.data = task.result as! [MainData]
+                DispatchQueue.main.async(execute: {
+                    self.reloadTableView()
+                })
+                returnTask.set(result: true as AnyObject)
+            }
         }
+        return returnTask.task
     }
 }
 
@@ -42,6 +53,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     var pageControl: UIPageControl!
     var nowPage:Int = 0
     var dataTableViewArray = [DataTableViews]()
+    var loadingView = LoadingView()
     
     @IBOutlet var titleScrollView: UIScrollView!
     @IBOutlet var contentScrollView: UIScrollView!
@@ -55,18 +67,18 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         super.viewDidLoad()
         self.view.layoutIfNeeded()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-
-        loadPageTableView()
+        
         loadTitleScrollView()
         loadMenuSearch()
         loadToTopButton()
+        loadPageTableView()
+//        loadLoadingView()
         
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
         
     }
     
@@ -96,6 +108,16 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     
     //MARK: Method
     
+    func loadLoadingView() {
+        self.view.addSubview(loadingView)
+        
+        loadingView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        
+        loadingView.tag = 1000
+    }
+    
     func loadTitleScrollView(){
         
         let titleScrollViewHeight = titleScrollView.constraints.first!.constant
@@ -104,7 +126,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         titleScrollView.contentSize = CGSize(width: titleScrollViewHeight*2.25*CGFloat(header.categoryCount), height: titleScrollViewHeight)
         titleScrollView.bounces = false
         titleScrollView.delegate = self
-        
         
         for index in 0 ..< header.categoryCount {
             
@@ -168,13 +189,32 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             dataTableView.addRefreshControl()
             
             dataTableViewArray.append(dataTableView)
-            dataTableView.fetchData()
+            //            dataTableView.fetchData()
+        }
+        
+        lof().continueOnSuccessWith { task in
+//            self.loadingView.removeFromSuperview()
+            
+//            if let view = self.view.viewWithTag(1000) {
+//                view.removeFromSuperview()
+//            }
+            //            self.loadingView.
         }
         
         pageControl = UIPageControl()
         pageControl.numberOfPages = pageSize
         pageControl.currentPage = 0
         pageControl.isUserInteractionEnabled = false
+    }
+    
+    func lof() -> Task<()>{
+        var tasks: [Task<AnyObject>] = []
+        
+        for dataTableView in dataTableViewArray {
+            tasks.append(dataTableView.fetchData())
+        }
+        
+        return Task.whenAll(tasks)
     }
     
     func loadToTopButton() {

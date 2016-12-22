@@ -18,11 +18,13 @@ class FetchData {
     }
     
     func RequestForData(_ category: Int) -> Task<AnyObject> {
+        let utilityQueue = DispatchQueue(label: "com.culture.utilityQueue", qos: .utility, attributes: .concurrent)
         let task = TaskCompletionSource<AnyObject>()
+        
         Alamofire.request(
             "http://cloud.culture.tw/frontsite/trans/SearchShowAction.do", method: .get,
             parameters: ["method":"doFindTypeJ", "category":category])
-            .responseJSON { response in
+            .responseJSON(queue: utilityQueue) { response in
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data)

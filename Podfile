@@ -8,8 +8,8 @@ target 'kj' do
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
-    pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'master', submodules: true
-    pod 'SnapKit', '~> 3.0'
+    pod 'RealmSwift'
+    pod 'SnapKit'
     pod 'Bolts-Swift'
     pod 'Kingfisher'
     pod 'R.swift'

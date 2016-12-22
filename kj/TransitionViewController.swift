@@ -50,7 +50,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         self.view.layoutIfNeeded()
         optionInteractionController.attachToViewController(self)
         fetchData()
-        setDetailScrollView()
+//        setDetailScrollView()
     }
     
     func fetchData() {
@@ -58,6 +58,7 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { (task) -> AnyObject? in
             let data = task.result as! NSArray
             self.data = data[0] as! MainData
+            self.setDetailScrollView()
             return nil
         }
     }
