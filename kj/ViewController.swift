@@ -70,8 +70,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         
         loadTitleScrollView()
         loadMenuSearch()
-        loadToTopButton()
         loadPageTableView()
+        loadToTopButton()
 //        loadLoadingView()
         
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
@@ -161,7 +161,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     
     func loadPageTableView() {
         let width  = self.view.frame.size.width
-        let height = self.view.frame.size.height
         let pageSize = header.categoryCount
         
         contentScrollView.tag = ScrollViewType.content.rawValue
@@ -182,8 +181,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             dataTableView.snp.makeConstraints({ (make) -> Void in
                 make.leading.equalTo(CGFloat(index) * width)
                 make.width.equalTo(width)
-                make.height.equalTo(height - titleScrollView.frame.maxY)
                 make.top.equalTo(contentScrollView)
+                make.bottom.equalTo(self.view)
             })
             
             dataTableView.addRefreshControl()
