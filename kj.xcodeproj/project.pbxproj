@@ -15,14 +15,12 @@
 		5A0674FB1B8B63FC00A96C5E /* DetailScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0674FA1B8B63FC00A96C5E /* DetailScrollView.swift */; };
 		5A0899561CD6005600D6EE85 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0899551CD6005600D6EE85 /* RealmManager.swift */; };
 		5A0899581CD9D91800D6EE85 /* ToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0899571CD9D91700D6EE85 /* ToTopButton.swift */; };
-		5A1065B71BC7F552007321E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065B61BC7F552007321E8 /* Model.swift */; };
 		5A1065BF1BCA98A3007321E8 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065BE1BCA98A3007321E8 /* SessionTableViewCell.swift */; };
 		5A1065C11BCAE4FA007321E8 /* SessionTblViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1065C01BCAE4FA007321E8 /* SessionTblViewCell.xib */; };
 		5A1065C31BCCAEEF007321E8 /* SessionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065C21BCCAEEF007321E8 /* SessionTableViewController.swift */; };
 		5A1065C51BCCF585007321E8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065C41BCCF584007321E8 /* SearchViewController.swift */; };
 		5A1065C71BCD01DA007321E8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065C61BCD01DA007321E8 /* Category.swift */; };
 		5A1065C91BCD0F39007321E8 /* SearchTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065C81BCD0F39007321E8 /* SearchTblViewCell.swift */; };
-		5A1065D71BCF7B4F007321E8 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065D51BCF7B4F007321E8 /* Bookmark.swift */; };
 		5A1065D91BD0B6E9007321E8 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065D81BD0B6E9007321E8 /* CalendarViewController.swift */; };
 		5A1065DB1BD0C705007321E8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065DA1BD0C705007321E8 /* MapViewController.swift */; };
 		5A1065DF1BD0EC23007321E8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1065DC1BD0EC23007321E8 /* FBSDKCoreKit.framework */; };
@@ -32,7 +30,6 @@
 		5A1065E51BD0EE30007321E8 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1065E41BD0EE30007321E8 /* OptionTableViewCell.swift */; };
 		5A2B74B51B7E2D1700D0C31E /* DataTableViewCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B74B41B7E2D1700D0C31E /* DataTableViewCellWithImage.swift */; };
 		5A38C59C1CF5487F007CDFDC /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A38C59B1CF5487F007CDFDC /* UIImageExtension.swift */; };
-		5A3DFC001BBFFE8300E1EF10 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3DFBFC1BBFFE8300E1EF10 /* Info.swift */; };
 		5A3F39891DF26968001D2FA2 /* LocationBasicInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F39881DF26968001D2FA2 /* LocationBasicInformation.swift */; };
 		5A418ACB1BD7C88600CDB3B3 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418ACA1BD7C88600CDB3B3 /* SearchLocationViewController.swift */; };
 		5A418ACF1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418ACE1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift */; };
@@ -45,7 +42,6 @@
 		5A418ADD1BD823F800CDB3B3 /* NearByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A418AD91BD823F800CDB3B3 /* NearByViewController.swift */; };
 		5A49E5B31CDDA32D00A63886 /* MainIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49E5B21CDDA32D00A63886 /* MainIntroView.swift */; };
 		5A6133B01DD0587000FFE9A5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A6133AF1DD0587000FFE9A5 /* .gitignore */; };
-		5A7200DC1E063BE300BEB5AF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7200DB1E063BE300BEB5AF /* LoadingView.swift */; };
 		5A88DE2D1B67691B00446B3B /* OptionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A88DE2C1B67691B00446B3B /* OptionPresentationController.swift */; };
 		5A88DE2F1B67714F00446B3B /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */; };
 		5A8E8E961B7E173F00BA7802 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8E8E941B7E173F00BA7802 /* DataTableViewCell.swift */; };
@@ -121,14 +117,12 @@
 		5A0674FA1B8B63FC00A96C5E /* DetailScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScrollView.swift; sourceTree = "<group>"; };
 		5A0899551CD6005600D6EE85 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		5A0899571CD9D91700D6EE85 /* ToTopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToTopButton.swift; sourceTree = "<group>"; };
-		5A1065B61BC7F552007321E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		5A1065BE1BCA98A3007321E8 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		5A1065C01BCAE4FA007321E8 /* SessionTblViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionTblViewCell.xib; sourceTree = "<group>"; };
 		5A1065C21BCCAEEF007321E8 /* SessionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewController.swift; sourceTree = "<group>"; };
 		5A1065C41BCCF584007321E8 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5A1065C61BCD01DA007321E8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5A1065C81BCD0F39007321E8 /* SearchTblViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTblViewCell.swift; sourceTree = "<group>"; };
-		5A1065D51BCF7B4F007321E8 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		5A1065D81BD0B6E9007321E8 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		5A1065DA1BD0C705007321E8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5A1065DC1BD0EC23007321E8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -138,7 +132,6 @@
 		5A1065E41BD0EE30007321E8 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		5A2B74B41B7E2D1700D0C31E /* DataTableViewCellWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCellWithImage.swift; sourceTree = "<group>"; };
 		5A38C59B1CF5487F007CDFDC /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
-		5A3DFBFC1BBFFE8300E1EF10 /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		5A3F39881DF26968001D2FA2 /* LocationBasicInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationBasicInformation.swift; sourceTree = "<group>"; };
 		5A418ACA1BD7C88600CDB3B3 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		5A418ACE1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapSearchTblViewCell.swift; sourceTree = "<group>"; };
@@ -151,7 +144,6 @@
 		5A418AD91BD823F800CDB3B3 /* NearByViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByViewController.swift; sourceTree = "<group>"; };
 		5A49E5B21CDDA32D00A63886 /* MainIntroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainIntroView.swift; sourceTree = "<group>"; };
 		5A6133AF1DD0587000FFE9A5 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		5A7200DB1E063BE300BEB5AF /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5A88DE2C1B67691B00446B3B /* OptionPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionPresentationController.swift; sourceTree = "<group>"; };
 		5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
 		5A8E8E941B7E173F00BA7802 /* DataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
@@ -262,7 +254,6 @@
 				5A1065C21BCCAEEF007321E8 /* SessionTableViewController.swift */,
 				5A88DE2E1B67714F00446B3B /* TransitionViewController.swift */,
 				5ADB7BA71BB2495600AD5ABE /* ViewController.swift */,
-				5A7200DB1E063BE300BEB5AF /* LoadingView.swift */,
 				5ADB7B9B1BAD057300AD5ABE /* WebViewController.swift */,
 			);
 			name = Controller;
@@ -308,9 +299,6 @@
 		5AEF8FF91B28696A00C8E8CD = {
 			isa = PBXGroup;
 			children = (
-				5A1065D51BCF7B4F007321E8 /* Bookmark.swift */,
-				5A1065B61BC7F552007321E8 /* Model.swift */,
-				5A3DFBFC1BBFFE8300E1EF10 /* Info.swift */,
 				5A030A771B7885480063D05B /* Podfile */,
 				5A6133AF1DD0587000FFE9A5 /* .gitignore */,
 				5AEF90041B28696A00C8E8CD /* kj */,
@@ -589,7 +577,6 @@
 				5A2B74B51B7E2D1700D0C31E /* DataTableViewCellWithImage.swift in Sources */,
 				5ADB7BA21BADB1BD00AD5ABE /* Model.xcdatamodeld in Sources */,
 				5A8E8E961B7E173F00BA7802 /* DataTableViewCell.swift in Sources */,
-				5A1065B71BC7F552007321E8 /* Model.swift in Sources */,
 				5A1065C51BCCF585007321E8 /* SearchViewController.swift in Sources */,
 				5ADDA3701C523A6200C35642 /* FetchData.swift in Sources */,
 				5A0674FB1B8B63FC00A96C5E /* DetailScrollView.swift in Sources */,
@@ -604,7 +591,6 @@
 				5A418ACB1BD7C88600CDB3B3 /* SearchLocationViewController.swift in Sources */,
 				5A1065E31BD0EE0F007321E8 /* MenuBarViewController.swift in Sources */,
 				5A88DE2F1B67714F00446B3B /* TransitionViewController.swift in Sources */,
-				5A3DFC001BBFFE8300E1EF10 /* Info.swift in Sources */,
 				5A1065E51BD0EE30007321E8 /* OptionTableViewCell.swift in Sources */,
 				5A418ADD1BD823F800CDB3B3 /* NearByViewController.swift in Sources */,
 				5A418ADA1BD823F800CDB3B3 /* MyMapViewController.swift in Sources */,
@@ -615,14 +601,12 @@
 				5A418AD11BD7EFC300CDB3B3 /* LocationSearchResultViewController.swift in Sources */,
 				5A9D641D1B69FF040028029B /* InteractionController.swift in Sources */,
 				5AFD93EE1BD36F4500109085 /* BookmarkViewController.swift in Sources */,
-				5A7200DC1E063BE300BEB5AF /* LoadingView.swift in Sources */,
 				5AEB7E5F1BC66E0A0005064D /* BookmarkButton.swift in Sources */,
 				5AEF90081B28696A00C8E8CD /* AppDelegate.swift in Sources */,
 				5AA05B1E1BD210780085CAE8 /* subtitle.swift in Sources */,
 				5A1065C71BCD01DA007321E8 /* Category.swift in Sources */,
 				5A0899561CD6005600D6EE85 /* RealmManager.swift in Sources */,
 				5A3F39891DF26968001D2FA2 /* LocationBasicInformation.swift in Sources */,
-				5A1065D71BCF7B4F007321E8 /* Bookmark.swift in Sources */,
 				5A1065C91BCD0F39007321E8 /* SearchTblViewCell.swift in Sources */,
 				5AA05B221BD27F7A0085CAE8 /* CalendarTableViewCell.swift in Sources */,
 				5ADB7B9C1BAD057300AD5ABE /* WebViewController.swift in Sources */,

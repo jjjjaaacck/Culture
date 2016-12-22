@@ -11,15 +11,13 @@ enum ScrollViewType: Int {
 }
 
 extension DataTableViews {
-    func fetchData() -> Task<AnyObject> {
+    func fetchData()  {
         let filter = NSPredicate(format: "category == \(self.category!)")
-        let returnTask = TaskCompletionSource<AnyObject>()
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { task in
             if task.faulted {
                 FetchData.sharedInstance.RequestForData(self.category!).continueWith { task in
                     if task.faulted {
                         print("fetchData error : \(task.error), with category: \(self.category!)")
-                        returnTask.set(error: task.error!)
                     }
                     else {
                         self.data = task.result as! [MainData]
@@ -27,7 +25,6 @@ extension DataTableViews {
                             DispatchQueue.main.async {
                                 self.reloadTableView()
                             }
-                            returnTask.set(result: true as AnyObject)
                         }
                     }
                     
@@ -38,10 +35,8 @@ extension DataTableViews {
                 DispatchQueue.main.async(execute: {
                     self.reloadTableView()
                 })
-                returnTask.set(result: true as AnyObject)
             }
         }
-        return returnTask.task
     }
 }
 
@@ -53,7 +48,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     var pageControl: UIPageControl!
     var nowPage:Int = 0
     var dataTableViewArray = [DataTableViews]()
-    var loadingView = LoadingView()
     
     @IBOutlet var titleScrollView: UIScrollView!
     @IBOutlet var contentScrollView: UIScrollView!
@@ -72,7 +66,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         loadMenuSearch()
         loadPageTableView()
         loadToTopButton()
-//        loadLoadingView()
         
         self.view.backgroundColor = UIColor(red: 0.91, green: 0.91, blue: 0.91, alpha: 1)
     }
@@ -107,16 +100,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
     }
     
     //MARK: Method
-    
-    func loadLoadingView() {
-        self.view.addSubview(loadingView)
-        
-        loadingView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        
-        loadingView.tag = 1000
-    }
     
     func loadTitleScrollView(){
         
@@ -188,32 +171,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
             dataTableView.addRefreshControl()
             
             dataTableViewArray.append(dataTableView)
-            //            dataTableView.fetchData()
-        }
-        
-        lof().continueOnSuccessWith { task in
-//            self.loadingView.removeFromSuperview()
-            
-//            if let view = self.view.viewWithTag(1000) {
-//                view.removeFromSuperview()
-//            }
-            //            self.loadingView.
+            dataTableView.fetchData()
         }
         
         pageControl = UIPageControl()
         pageControl.numberOfPages = pageSize
         pageControl.currentPage = 0
         pageControl.isUserInteractionEnabled = false
-    }
-    
-    func lof() -> Task<()>{
-        var tasks: [Task<AnyObject>] = []
-        
-        for dataTableView in dataTableViewArray {
-            tasks.append(dataTableView.fetchData())
-        }
-        
-        return Task.whenAll(tasks)
     }
     
     func loadToTopButton() {
