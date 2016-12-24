@@ -12,10 +12,13 @@ enum ScrollViewType: Int {
 
 extension DataTableViews {
     func fetchData()  {
+//        FetchData.sharedInstance.delegate = self
         let filter = NSPredicate(format: "category == \(self.category!)")
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { task in
             if task.faulted {
-                FetchData.sharedInstance.RequestForData(self.category!).continueWith { task in
+                FetchData.sharedInstance.RequestForData(self.category!, sendCurrentProgress: { progress in
+                    self.setProgress(progress: progress)
+                }).continueWith { task in
                     if task.faulted {
                         print("fetchData error : \(task.error), with category: \(self.category!)")
                     }
@@ -27,7 +30,6 @@ extension DataTableViews {
                             }
                         }
                     }
-                    
                 }
             }
             else {
@@ -37,6 +39,10 @@ extension DataTableViews {
                 })
             }
         }
+    }
+    
+    func requestProgress(progress: Double) {
+        setProgress(progress: progress)
     }
 }
 

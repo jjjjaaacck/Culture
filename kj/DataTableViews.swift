@@ -22,7 +22,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     fileprivate var tableView = UITableView()
     fileprivate let progressIcon = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     fileprivate let refreshControl = UIRefreshControl()
-    fileprivate var currentOffset: CGFloat = 0.0
+    fileprivate let progressView = UIProgressView(progressViewStyle: .default)
     
     var category: Int?
     var data = [MainData]()
@@ -61,6 +61,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         
         self.addSubview(tableView)
         self.addSubview(progressIcon)
+        self.addSubview(progressView)
         
         tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
         let nib: UINib = UINib(nibName: "DataTableViewCellWithImage", bundle: nil)
@@ -74,6 +75,13 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         
         progressIcon.snp.makeConstraints { (make) -> Void in
             make.center.equalTo(self)
+        }
+        
+        progressView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self)
+            make.top.equalTo(progressIcon.snp.bottom)
+            make.width.equalTo(100)
+            make.height.equalTo(2)
         }
     }
     
@@ -153,11 +161,19 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         
         self.tableView.reloadData()
         self.progressIcon.stopAnimating()
+        self.progressView.isHidden = true
         self.tableView.isHidden = false
         
         UIView.animate(withDuration: 0.4, animations: { () -> Void in
             self.tableView.alpha = 1
         })
+    }
+    
+    func setProgress(progress: Double) {
+        DispatchQueue.main.async {
+            self.progressView.setProgress(Float(progress), animated: true)
+            print("category: \(self.category!), progress: \(progress)")
+        }
     }
     
     func addRefreshControl() {
@@ -166,7 +182,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     }
     
     func refreshTableViewData(_ sender: UIRefreshControl) {
-        FetchData.sharedInstance.RequestForData(self.category!).continueWith { (task: Task<AnyObject>) -> AnyObject? in
+        FetchData.sharedInstance.RequestForData(self.category!, sendCurrentProgress: { progress in}).continueWith { (task: Task<AnyObject>) -> AnyObject? in
             self.data = task.result as! [MainData]
             
             RealmManager.sharedInstance.addDataTableViewData(self.data)

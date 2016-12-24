@@ -11,19 +11,29 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 
+//protocol FetchDataDelegate {
+//    func requestProgress(progress: Double)
+//}
+
 class FetchData {
     static var sharedInstance = FetchData()
+//    var delegate: FetchDataDelegate?
     
     init() {
     }
     
-    func RequestForData(_ category: Int) -> Task<AnyObject> {
+    func RequestForData(_ category: Int, sendCurrentProgress: @escaping (Double) -> ()) -> Task<AnyObject> {
         let utilityQueue = DispatchQueue(label: "com.culture.utilityQueue", qos: .utility, attributes: .concurrent)
         let task = TaskCompletionSource<AnyObject>()
         
         Alamofire.request(
             "http://cloud.culture.tw/frontsite/trans/SearchShowAction.do", method: .get,
             parameters: ["method":"doFindTypeJ", "category":category])
+            .downloadProgress(queue: utilityQueue, closure: { progress in
+                print("Category: \(category), Download progress: \(progress.fractionCompleted)")
+//                self.delegate?.requestProgress(progress: progress.fractionCompleted)
+                sendCurrentProgress(progress.fractionCompleted)
+            })
             .responseJSON(queue: utilityQueue) { response in
                 switch response.result {
                 case .success(let data):
