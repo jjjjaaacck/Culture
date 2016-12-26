@@ -69,19 +69,21 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         let nib2: UINib = UINib(nibName: "DataTableViewCell", bundle: nil)
         tableView.register(nib2, forCellReuseIdentifier: "cell")
         
+        progressIcon.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
         tableView.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(self)
         }
         
-        progressIcon.snp.makeConstraints { (make) -> Void in
+        progressView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
+            make.width.equalTo(200)
+            make.height.equalTo(5)
         }
         
-        progressView.snp.makeConstraints { (make) in
+        progressIcon.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self)
-            make.top.equalTo(progressIcon.snp.bottom)
-            make.width.equalTo(100)
-            make.height.equalTo(2)
+            make.bottom.equalTo(progressView.snp.top).offset(-50)
         }
     }
     
