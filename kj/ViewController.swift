@@ -21,6 +21,7 @@ extension DataTableViews {
                 }).continueWith { task in
                     if task.faulted {
                         print("fetchData error : \(task.error), with category: \(self.category!)")
+                        self.showErrorLabel()
                     }
                     else {
                         self.data = task.result as! [MainData]
@@ -93,8 +94,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UIViewControllerTr
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight
         
-        self.view.window?.layer.add(transition,forKey:nil)
-        self.present(controller, animated: false, completion: nil)
+       // self.view.window?.layer.add(transition,forKey:nil)
+       // self.present(controller, animated: false, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func titleItemTap(_ sender:UITapGestureRecognizer){

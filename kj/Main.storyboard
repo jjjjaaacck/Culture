@@ -503,10 +503,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="366" id="NBx-ey-7Nh"/>
                                 </constraints>
-                                <progressView key="tableFooterView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="kNm-2N-S7p">
-                                    <rect key="frame" x="0.0" y="0.0" width="362" height="2"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </progressView>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7la-2l-0R6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -954,6 +950,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Gip-AD-8c3"/>
+        <segue reference="X2I-eZ-Kpl"/>
     </inferredMetricsTieBreakers>
 </document>

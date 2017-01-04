@@ -17,7 +17,7 @@ class RealmManager {
 //    let utilityQueue = DispatchQueue(label: "com.culture.utilityQueue", qos: .utility, attributes: .concurrent)
 //    let queue = DispatchQueue.global(qos: .utility)
     
-    let queue = DispatchQueue.main
+    let mainQueue = DispatchQueue.main
     
     init() {
         realm = try! Realm()
@@ -27,7 +27,7 @@ class RealmManager {
     
     func addDataTableViewData(_ data: [MainData]) -> Task<AnyObject> {
         let task = TaskCompletionSource<AnyObject>()
-        queue.async {
+        mainQueue.async {
             autoreleasepool {
                 let realm = try! Realm()
                 
@@ -53,7 +53,7 @@ class RealmManager {
     
     func updateBookmark(_ filter: NSPredicate) -> Task<AnyObject> {
         let task = TaskCompletionSource<AnyObject>()
-        queue.async {
+        mainQueue.async {
             autoreleasepool {
                 let realm = try! Realm()
                 if let thingToBeUpdated = realm.objects(MainData.self).filter(filter).first{
@@ -76,7 +76,7 @@ class RealmManager {
     
     func tryFetchMainDataByFilter(_ filter: NSPredicate) -> Task<AnyObject> {
         let task = TaskCompletionSource<AnyObject>()
-        queue.async {
+        mainQueue.async {
             autoreleasepool {
                 let realm = try! Realm()
                 if realm.objects(MainData.self).filter(filter).first != nil {
@@ -86,7 +86,7 @@ class RealmManager {
                     task.set(error: NSError(domain: "Not In MainData", code: 0, userInfo: nil))
                     print("Not In MainData")
                 }
-                print("fetch : \(Thread.isMainThread)")
+                //print("fetch : \(Thread.isMainThread)")
             }
         }
         

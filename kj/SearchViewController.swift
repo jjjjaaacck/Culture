@@ -14,7 +14,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     var searchController: UISearchController!
     var category = Category()
-    var searchResult = [(title: String, id: String)]()
+    var searchResult = [(title: String, id: String)]() {
+        didSet {
+            self.tableview.reloadData()
+        }
+    }
     var searchText = ""
     var searchClassify = [
         0: Array(1...19),
@@ -119,9 +123,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if searchController.searchBar.text != "" {
             searchForData(searchController.searchBar.text!, categoryIndex: searchController.searchBar.selectedScopeButtonIndex)
         }
-        searchText = searchController.searchBar.text!
-        
-        tableview.reloadData()
     }
     
     //MARK: searchBar Delegate
@@ -131,8 +132,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         if searchBar.text != "" {
             searchForData(searchController.searchBar.text!, categoryIndex: searchController.searchBar.selectedScopeButtonIndex)
         }
-        
-        tableview.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.navigationItem.setHidesBackButton(false, animated: false)

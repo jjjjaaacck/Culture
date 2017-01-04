@@ -23,6 +23,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     fileprivate let progressIcon = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     fileprivate let refreshControl = UIRefreshControl()
     fileprivate let progressView = UIProgressView(progressViewStyle: .default)
+    fileprivate let errorLabel = UILabel()
     
     var category: Int?
     var data = [MainData]()
@@ -62,6 +63,7 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         self.addSubview(tableView)
         self.addSubview(progressIcon)
         self.addSubview(progressView)
+        self.addSubview(errorLabel)
         
         tableView.backgroundColor =  UIColor(red:0.91, green:0.91, blue:0.91, alpha:1)
         let nib: UINib = UINib(nibName: "DataTableViewCellWithImage", bundle: nil)
@@ -70,6 +72,10 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         tableView.register(nib2, forCellReuseIdentifier: "cell")
         
         progressIcon.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        errorLabel.text = "下拉重新整理"
+        errorLabel.sizeToFit()
+        errorLabel.isHidden = true
         
         tableView.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(self)
@@ -84,6 +90,10 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         progressIcon.snp.makeConstraints { (make) -> Void in
             make.centerX.equalTo(self)
             make.bottom.equalTo(progressView.snp.top).offset(-50)
+        }
+        
+        errorLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(self)
         }
     }
     
@@ -129,7 +139,6 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     
     //MARK: DataTableViewCellDelegate
     
-    
     func dataTableViewCellResetBookmark(currentBookMarkState: Bool, completion: @escaping (Bool) -> Void) {
         delegate?.bookmarkClick(currentBookMarkState: currentBookMarkState, completion: { (isReset) -> Void in
             completion(isReset)
@@ -159,16 +168,24 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
         return cell
     }
     
-    func reloadTableView() {
-        
-        self.tableView.reloadData()
+    func stopLoading() {
         self.progressIcon.stopAnimating()
         self.progressView.isHidden = true
         self.tableView.isHidden = false
-        
         UIView.animate(withDuration: 0.4, animations: { () -> Void in
             self.tableView.alpha = 1
         })
+    }
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
+        self.stopLoading()
+        errorLabel.isHidden = true
+    }
+    
+    func showErrorLabel() {
+        self.stopLoading()
+        errorLabel.isHidden = false
     }
     
     func setProgress(progress: Double) {
@@ -185,13 +202,22 @@ class DataTableViews: UIView, UITableViewDataSource, UITableViewDelegate, DataTa
     
     func refreshTableViewData(_ sender: UIRefreshControl) {
         FetchData.sharedInstance.RequestForData(self.category!, sendCurrentProgress: { progress in}).continueWith { (task: Task<AnyObject>) -> AnyObject? in
+            if task.faulted {
+                print(task.error!)
+                DispatchQueue.main.sync {
+                    self.refreshControl.endRefreshing()
+                }
+                return nil
+            }
+            
             self.data = task.result as! [MainData]
             
-            RealmManager.sharedInstance.addDataTableViewData(self.data)
-            
-            self.tableView.reloadData()
-            
-            self.refreshControl.endRefreshing()
+            RealmManager.sharedInstance.addDataTableViewData(self.data).continueOnSuccessWith { task in
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            }
             
             return nil
         }
