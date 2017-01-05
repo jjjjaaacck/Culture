@@ -25,6 +25,7 @@ class FetchData {
     func RequestForData(_ category: Int, sendCurrentProgress: @escaping (Double) -> ()) -> Task<AnyObject> {
         let utilityQueue = DispatchQueue(label: "com.culture.utilityQueue", qos: .utility, attributes: .concurrent)
         let task = TaskCompletionSource<AnyObject>()
+        let bookMarkId = RealmManager.sharedInstance.tryFetchAllBookmarkId()
         
         Alamofire.request(
             "http://cloud.culture.tw/frontsite/trans/SearchShowAction.do", method: .get,
@@ -55,6 +56,10 @@ class FetchData {
                         tempMainData.webUrl = self.ifDataExsist(result["sourceWebPromote"])
                         tempMainData.salesUrl = self.ifDataExsist(result["webSales"])
                         tempMainData.masterUnit = self.ifDataExsist(result["masterUnit"][0])
+                        
+                        if bookMarkId.contains(tempMainData.id) {
+                            tempMainData.bookMark = true
+                        }
                         
                         for index in 0..<result["showInfo"].count {
                             let information = Information()

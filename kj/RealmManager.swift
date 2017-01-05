@@ -14,8 +14,6 @@ class RealmManager {
     
     static let sharedInstance = RealmManager()
     var realm: Realm
-//    let utilityQueue = DispatchQueue(label: "com.culture.utilityQueue", qos: .utility, attributes: .concurrent)
-//    let queue = DispatchQueue.global(qos: .utility)
     
     let mainQueue = DispatchQueue.main
     
@@ -42,11 +40,6 @@ class RealmManager {
         }
         
         return task.task
-//        try! realm.write({
-//            for singleData in data {
-//                realm.add(singleData, update: true)
-//            }
-//        })
     }
     
     //MARK: Update
@@ -86,7 +79,6 @@ class RealmManager {
                     task.set(error: NSError(domain: "Not In MainData", code: 0, userInfo: nil))
                     print("Not In MainData")
                 }
-                //print("fetch : \(Thread.isMainThread)")
             }
         }
         
@@ -112,5 +104,18 @@ class RealmManager {
         return task.task
     }
     
-    
+    func tryFetchAllBookmarkId() -> [String] {
+        let filter = NSPredicate(format: "bookMark == true")
+        var result = [String]()
+//        mainQueue.async {
+//            autoreleasepool {
+                let realm = try! Realm()
+                if realm.objects(MainData.self).filter(filter).first != nil {
+                    result = Array(realm.objects(MainData.self).filter(filter)).map{($0.id)}
+                }
+                
+                return result
+//            }
+//        }
+    }
 }
