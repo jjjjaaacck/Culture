@@ -13,11 +13,14 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    var alertLabel = UILabel()
     var data = [MainData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
+        
+        self.view.addSubview(alertLabel)
         
         menuButton.target = self.revealViewController()
         menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -26,8 +29,17 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         datePicker.addTarget(self, action: #selector(CalendarViewController.getData), for: UIControlEvents.valueChanged)
         let nib: UINib = UINib(nibName: "CalendarCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "calendarCell")
+        tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        alertLabel.text = "這個時間沒有活動喔"
+        alertLabel.isHidden = true
+        alertLabel.sizeToFit()
+        alertLabel.snp.makeConstraints { (make) in
+            make.center.equalTo(tableView)
+        }
+        
         getData()
         // Do any additional setup after loading the view.
     }
@@ -37,6 +49,10 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         let filter = NSPredicate(format:"startTime <= %@ AND endTime >= %@", datePicker.date as CVarArg, datePicker.date as CVarArg)
         RealmManager.sharedInstance.tryFetchMainDataWithFilterInformation(filter).continueOnSuccessWith{ task in
             self.data = Array(task as! Set<MainData>)
+            self.alertLabel.isHidden = true
+            }.continueOnErrorWith { task in
+                self.data.removeAll()
+                self.alertLabel.isHidden = false
         }
         
         tableView.reloadData()
@@ -53,7 +69,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if !data.isEmpty {
             cell.title.text = data[indexPath.row].title
-            cell.address.text = data[indexPath.row].informations[0].location
+            cell.address.text = data[indexPath.row].informations[0].location == "" ? "沒有提供地點喔～" : data[indexPath.row].informations[0].location
             setCategoryImage(Int(data[indexPath.row].category), category: cell.category)
             
             cell.time.text = (data[indexPath.row].endDate != nil ) ?

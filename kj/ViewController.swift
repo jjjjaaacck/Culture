@@ -12,7 +12,6 @@ enum ScrollViewType: Int {
 
 extension DataTableViews {
     func fetchData()  {
-//        FetchData.sharedInstance.delegate = self
         let filter = NSPredicate(format: "category == \(self.category!)")
         RealmManager.sharedInstance.tryFetchMainDataByFilter(filter).continueWith { task in
             if task.faulted {

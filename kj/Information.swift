@@ -11,6 +11,7 @@ import RealmSwift
 
 class Information: Object {
     
+    dynamic var id = ""
     dynamic var startTime: Date? = nil
     dynamic var endTime: Date? = nil
     dynamic var price = ""
@@ -20,5 +21,9 @@ class Information: Object {
     private let mainDatas = LinkingObjects(fromType: MainData.self, property: "informations")
     dynamic var mainData: MainData? {
         return self.mainDatas.first
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }

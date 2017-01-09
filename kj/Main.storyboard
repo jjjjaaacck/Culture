@@ -36,7 +36,7 @@
         <scene sceneID="Rq7-st-ILg">
             <objects>
                 <navigationController storyboardIdentifier="CalendarNavigationController" navigationBarHidden="YES" id="8Rj-Mo-Oc5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hdR-Ps-5xu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdR-Ps-5xu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -96,7 +96,7 @@
                                         <rect key="frame" x="0.0" y="28" width="250" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mme-UL-74u" id="rht-EM-upM">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="59"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-58-k3M">
@@ -171,7 +171,7 @@
         <scene sceneID="fEA-gu-SMx">
             <objects>
                 <navigationController storyboardIdentifier="BookmarkNavigationController" navigationBarHidden="YES" id="Qhq-NM-Ygd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4fe-Pn-Q2W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4fe-Pn-Q2W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -239,7 +239,7 @@
         <scene sceneID="eni-qb-U3S">
             <objects>
                 <navigationController storyboardIdentifier="MapNavigationController" navigationBarHidden="YES" id="ayk-zk-hsM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JUk-ND-7D5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JUk-ND-7D5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -378,7 +378,7 @@
         <scene sceneID="dko-Ez-zqt">
             <objects>
                 <navigationController storyboardIdentifier="LocationNavigationController" id="KO4-Sm-p1P" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zKh-l1-VnQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKh-l1-VnQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -410,7 +410,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6X-Ju-tXr" id="cII-vG-pf0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGT-0P-EK0">
@@ -524,12 +524,6 @@
                                 <date key="date" timeIntervalSinceReferenceDate="466652605.71161801">
                                     <!--2015-10-16 01:43:25 +0000-->
                                 </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="441802800">
-                                    <!--2015-01-01 11:00:00 +0000-->
-                                </date>
-                                <date key="maximumDate" timeIntervalSinceReferenceDate="504874800">
-                                    <!--2016-12-31 11:00:00 +0000-->
-                                </date>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -562,7 +556,7 @@
         <scene sceneID="mk4-E8-1yl">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="DKx-CO-ocV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Yw6-w6-qha">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Yw6-w6-qha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.84999999999999998"/>
@@ -781,7 +775,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rgI-HC-EtI" id="zBj-LO-c4l">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJs-BS-Ap1">
@@ -950,6 +944,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="X2I-eZ-Kpl"/>
+        <segue reference="GIF-fs-Zu7"/>
     </inferredMetricsTieBreakers>
 </document>
