@@ -51,7 +51,7 @@
         <!--Menu Bar View Controller-->
         <scene sceneID="EjJ-eH-z6q">
             <objects>
-                <viewController storyboardIdentifier="MenuBarViewController" id="pyl-pX-8Cm" customClass="MenuBarViewController" customModule="kj" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuBarViewController" id="pyl-pX-8Cm" customClass="MenuBarViewController" customModule="culturelife" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pFt-CR-CZB"/>
                         <viewControllerLayoutGuide type="bottom" id="tYW-px-JFy"/>
@@ -63,7 +63,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-Fh-zLg">
                                 <rect key="frame" x="86" y="195" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" red="0.0004598050839946799" green="0.63655736549946673" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2g-Ba-lTx">
@@ -150,14 +150,13 @@
                             <constraint firstItem="0n8-dj-fr3" firstAttribute="leading" secondItem="4h9-Cl-V3v" secondAttribute="leading" id="N2e-EP-gij"/>
                             <constraint firstItem="2wo-3W-LMJ" firstAttribute="centerX" secondItem="T2g-Ba-lTx" secondAttribute="centerX" id="baG-UV-ftl"/>
                             <constraint firstItem="0n8-dj-fr3" firstAttribute="top" secondItem="qfx-Fh-zLg" secondAttribute="bottom" constant="15" id="eHG-ju-nTj"/>
-                            <constraint firstAttribute="trailing" secondItem="0n8-dj-fr3" secondAttribute="trailing" constant="70" id="eyB-k6-4Yz"/>
                             <constraint firstItem="qfx-Fh-zLg" firstAttribute="centerX" secondItem="T2g-Ba-lTx" secondAttribute="centerX" id="sVk-HH-BqK"/>
                             <constraint firstItem="qfx-Fh-zLg" firstAttribute="top" secondItem="T2g-Ba-lTx" secondAttribute="bottom" constant="15" id="uxC-J6-Vd8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="INS-3z-zNY"/>
                     <connections>
-                        <outlet property="leftBarTableView" destination="0n8-dj-fr3" id="tff-fF-Kh8"/>
+                        <outlet property="leftBarTableView" destination="0n8-dj-fr3" id="kGp-9V-Syk"/>
                         <outlet property="picView" destination="T2g-Ba-lTx" id="1Wf-Jp-Cpz"/>
                         <outlet property="profile_pic" destination="2wo-3W-LMJ" id="Ory-nh-TiY"/>
                         <outlet property="userName" destination="qfx-Fh-zLg" id="10r-nf-vkA"/>
@@ -239,7 +238,7 @@
         <scene sceneID="eni-qb-U3S">
             <objects>
                 <navigationController storyboardIdentifier="MapNavigationController" navigationBarHidden="YES" id="ayk-zk-hsM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JUk-ND-7D5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JUk-ND-7D5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -556,7 +555,7 @@
         <scene sceneID="mk4-E8-1yl">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="DKx-CO-ocV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Yw6-w6-qha">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Yw6-w6-qha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.84999999999999998"/>
