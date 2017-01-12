@@ -27,13 +27,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.view.layoutIfNeeded()
         
         let coordinate = CLLocationCoordinate2DMake(tempCoordinate[0], tempCoordinate[1])
-        //print(coordinate.latitude)
-        //print(coordinate.longitude)
-        
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 15)
+        
         mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: navigationBar.frame.height, width: self.view.frame.width, height: self.view.frame.height - navigationBar.frame.height), camera: camera)
         mapView.accessibilityElementsHidden = true
-//        mapView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -47,8 +44,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         showMarker(mapView, coordinate: coordinate)
         self.view.addSubview(mapView)
         mapView.animate(with: GMSCameraUpdate.setTarget(coordinate))
-        //self.view.frame = mapView.frame
-        //self.view = mapView
     }
     
     
@@ -57,7 +52,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let bounds = GMSCoordinateBounds(coordinate: self.currentLocation.coordinate, coordinate: markerC)
         let update = GMSCameraUpdate.fit(bounds)
         mapView.animate(with: update)
-        //print(getRadius())
         
         return true
     }
@@ -85,7 +79,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-        //marker.appearAnimation = kGMSMarkerAnimationPop
         marker.icon = UIImage(named: "marker")
         marker.map = mapview
     }
@@ -102,6 +95,5 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

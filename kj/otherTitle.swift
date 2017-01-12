@@ -10,13 +10,6 @@ import UIKit
 
 class otherTitle: UINavigationBar {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "Helvetica Neue", size: 20)!]

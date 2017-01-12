@@ -61,7 +61,7 @@ class RealmManager {
                 }
             }
         }
-    
+        
         return task.task
     }
     
@@ -107,15 +107,11 @@ class RealmManager {
     func tryFetchAllBookmarkId() -> [String] {
         let filter = NSPredicate(format: "bookMark == true")
         var result = [String]()
-//        mainQueue.async {
-//            autoreleasepool {
-                let realm = try! Realm()
-                if realm.objects(MainData.self).filter(filter).first != nil {
-                    result = Array(realm.objects(MainData.self).filter(filter)).map{($0.id)}
-                }
-                
-                return result
-//            }
-//        }
+        let realm = try! Realm()
+        if realm.objects(MainData.self).filter(filter).first != nil {
+            result = Array(realm.objects(MainData.self).filter(filter)).map{($0.id)}
+        }
+        
+        return result
     }
 }

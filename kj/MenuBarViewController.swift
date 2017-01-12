@@ -12,14 +12,7 @@ import FBSDKShareKit
 import FBSDKLoginKit
 
 class MenuBarViewController: UIViewController, FBSDKLoginButtonDelegate, UITableViewDataSource, UITableViewDelegate {
-    /*!
-     @abstract Sent to the delegate when the button was used to login.
-     @param loginButton the sender
-     @param result The results of the login
-     @param error The error (if any) from the login
-     */
     public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
     }
 
     
@@ -30,6 +23,7 @@ class MenuBarViewController: UIViewController, FBSDKLoginButtonDelegate, UITable
     @IBOutlet weak var userName: UILabel!
     
     @IBOutlet weak var leftBarTableView: UITableView!
+    
     let loginButton = FBSDKLoginButton()
     
     var option = [["title":"主頁","image":"menuHome.png"],
@@ -68,7 +62,6 @@ class MenuBarViewController: UIViewController, FBSDKLoginButtonDelegate, UITable
         {
             FBSDKProfile.enableUpdates(onAccessTokenChange: true)
             getFBUserData()
-            //let login = FBSDKLoginManager()
         }
     }
     
@@ -79,9 +72,7 @@ class MenuBarViewController: UIViewController, FBSDKLoginButtonDelegate, UITable
     
     func getFBUserData(){
         FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-                //self.userdata = result
-                //print(self.userdata!.objectForKey("name") as? String)
+            if error == nil {
                 self.userName.isHidden = false
                 guard let resultNew = result as? [String:Any] else {
                     return

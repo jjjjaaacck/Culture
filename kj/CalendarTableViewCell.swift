@@ -28,7 +28,6 @@ class CalendarTableViewCell: UITableViewCell {
         view3.layer.cornerRadius = view3.frame.width / 2
         background.layer.cornerRadius = 10
         background.layer.opacity = 0.8
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

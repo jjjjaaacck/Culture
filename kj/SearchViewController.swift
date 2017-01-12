@@ -50,17 +50,10 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableview.tableHeaderView = searchController.searchBar
         tableview.sectionIndexMinimumDisplayRowCount = 1
         tableview.reloadData()
-//        
-//        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SearchViewController.dismissController))
-//        swipe.direction = .right
-//        self.view.addGestureRecognizer(swipe)
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        super.didReceiveMemoryWarning()    }
     
     func searchForData(_ searchBarText: String, categoryIndex: Int) {
         let filter = NSPredicate(format: "category IN %@ AND title CONTAINS '\(searchBarText)'", searchClassify[categoryIndex]!)

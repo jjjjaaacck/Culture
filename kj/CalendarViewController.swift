@@ -41,7 +41,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         getData()
-        // Do any additional setup after loading the view.
     }
     
     func getData() {

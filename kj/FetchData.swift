@@ -11,13 +11,9 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 
-//protocol FetchDataDelegate {
-//    func requestProgress(progress: Double)
-//}
 
 class FetchData {
     static var sharedInstance = FetchData()
-//    var delegate: FetchDataDelegate?
     
     init() {
     }
@@ -96,7 +92,7 @@ class FetchData {
     }
     
     func ifDataExsist(_ data:SwiftyJSON.JSON) -> String! {
-        if data != nil && data.string! != "" {
+        if data.exists() && data.string! != "" {
             return data.string!
         }
         else {

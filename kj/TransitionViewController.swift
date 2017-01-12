@@ -50,7 +50,6 @@ class TransitionViewController: UIViewController, UIViewControllerTransitioningD
         self.view.layoutIfNeeded()
         optionInteractionController.attachToViewController(self)
         fetchData()
-//        setDetailScrollView()
     }
     
     func fetchData() {

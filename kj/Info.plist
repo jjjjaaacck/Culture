@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
 	<key>FacebookAppID</key>
 	<string>185470681785536</string>
 	<key>FacebookDisplayName</key>
@@ -75,6 +75,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allowing access to your location, you can spot your position on the map.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>將使用你的照片</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

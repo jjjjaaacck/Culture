@@ -70,8 +70,7 @@
 		5AFD93EE1BD36F4500109085 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD93ED1BD36F4500109085 /* BookmarkViewController.swift */; };
 		5AFD93F01BD3EAC700109085 /* CalendarTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD93EF1BD3EAC700109085 /* CalendarTitle.swift */; };
 		5AFD93F21BD3ED4C00109085 /* otherTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD93F11BD3ED4C00109085 /* otherTitle.swift */; };
-		5AFD93F41BD52FE600109085 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD93F31BD52FE600109085 /* EventController.swift */; };
-		6D73EA6B35B10FFE7649AA97 /* Pods_kj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAE9E8C10AF14741E6E6150 /* Pods_kj.framework */; };
+		6D73EA6B35B10FFE7649AA97 /* Pods_kj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAE9E8C10AF14741E6E6150 /* Pods_kj.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,7 +110,6 @@
 		5A030A791B7888720063D05B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		5A030A7B1B79A7990063D05B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5A030A7D1B79CDB80063D05B /* DataTableViewCellWithImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DataTableViewCellWithImage.xib; sourceTree = "<group>"; };
-		5A030AB81B7AF9DB0063D05B /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "Pods/../build/Debug-iphoneos/Haneke.framework"; sourceTree = "<group>"; };
 		5A030ABA1B7AFCD00063D05B /* ChameleonFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChameleonFramework.framework; path = "Pods/../build/Debug-iphoneos/ChameleonFramework.framework"; sourceTree = "<group>"; };
 		5A030ABC1B7AFCE70063D05B /* ChameleonFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ChameleonFramework.framework; path = "Pods/../build/Debug-iphoneos/ChameleonFramework.framework"; sourceTree = "<group>"; };
 		5A0674FA1B8B63FC00A96C5E /* DetailScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScrollView.swift; sourceTree = "<group>"; };
@@ -167,18 +165,17 @@
 		5ADDA3711C57513800C35642 /* DataTableViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTableViews.swift; sourceTree = "<group>"; };
 		5ADEC5211B636B0100ADD96D /* OptionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionAnimator.swift; sourceTree = "<group>"; };
 		5AEB7E5E1BC66E090005064D /* BookmarkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkButton.swift; sourceTree = "<group>"; };
-		5AEF90021B28696A00C8E8CD /* kj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kj.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AEF90021B28696A00C8E8CD /* kj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = kj.app; path = culturelife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AEF90061B28696A00C8E8CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AEF90071B28696A00C8E8CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AEF900E1B28696A00C8E8CD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5AEF90111B28696A00C8E8CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		5AEF90171B28696A00C8E8CD /* kjTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kjTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AEF90171B28696A00C8E8CD /* culturelifeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = culturelifeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AEF901C1B28696A00C8E8CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AEF901D1B28696A00C8E8CD /* kjTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kjTests.swift; sourceTree = "<group>"; };
 		5AFD93ED1BD36F4500109085 /* BookmarkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		5AFD93EF1BD3EAC700109085 /* CalendarTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTitle.swift; sourceTree = "<group>"; };
 		5AFD93F11BD3ED4C00109085 /* otherTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = otherTitle.swift; sourceTree = "<group>"; };
-		5AFD93F31BD52FE600109085 /* EventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		6C3755149DCB9061C81077A8 /* Pods-kj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kj.release.xcconfig"; path = "Pods/Target Support Files/Pods-kj/Pods-kj.release.xcconfig"; sourceTree = "<group>"; };
 		DDAE9E8C10AF14741E6E6150 /* Pods_kj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -212,7 +209,6 @@
 			children = (
 				5A030ABC1B7AFCE70063D05B /* ChameleonFramework.framework */,
 				5A030ABA1B7AFCD00063D05B /* ChameleonFramework.framework */,
-				5A030AB81B7AF9DB0063D05B /* Haneke.framework */,
 				5A030A791B7888720063D05B /* SwiftyJSON.framework */,
 				DDAE9E8C10AF14741E6E6150 /* Pods_kj.framework */,
 			);
@@ -301,7 +297,7 @@
 			children = (
 				5A030A771B7885480063D05B /* Podfile */,
 				5A6133AF1DD0587000FFE9A5 /* .gitignore */,
-				5AEF90041B28696A00C8E8CD /* kj */,
+				5AEF90041B28696A00C8E8CD /* culturelife */,
 				5AEF901A1B28696A00C8E8CD /* kjTests */,
 				5AEF90031B28696A00C8E8CD /* Products */,
 				1BC5A4559755F8E8D8189B7B /* Frameworks */,
@@ -313,12 +309,12 @@
 			isa = PBXGroup;
 			children = (
 				5AEF90021B28696A00C8E8CD /* kj.app */,
-				5AEF90171B28696A00C8E8CD /* kjTests.xctest */,
+				5AEF90171B28696A00C8E8CD /* culturelifeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5AEF90041B28696A00C8E8CD /* kj */ = {
+		5AEF90041B28696A00C8E8CD /* culturelife */ = {
 			isa = PBXGroup;
 			children = (
 				5A38C59A1CF54843007CDFDC /* Extension */,
@@ -336,7 +332,6 @@
 				5AFD93EF1BD3EAC700109085 /* CalendarTitle.swift */,
 				5A1065C61BCD01DA007321E8 /* Category.swift */,
 				5A0674FA1B8B63FC00A96C5E /* DetailScrollView.swift */,
-				5AFD93F31BD52FE600109085 /* EventController.swift */,
 				5A418AD41BD8177900CDB3B3 /* LocationSearchTblViewCell.swift */,
 				5A418ACE1BD7DB0800CDB3B3 /* MapSearchTblViewCell.swift */,
 				5A418AD71BD823F800CDB3B3 /* nearByEventCell.swift */,
@@ -360,6 +355,7 @@
 				5ADB7BA01BADB1BD00AD5ABE /* Model.xcdatamodeld */,
 				5AEF90051B28696A00C8E8CD /* Supporting Files */,
 			);
+			name = culturelife;
 			path = kj;
 			sourceTree = "<group>";
 		};
@@ -403,9 +399,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5AEF90011B28696A00C8E8CD /* kj */ = {
+		5AEF90011B28696A00C8E8CD /* culturelife */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AEF90211B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "kj" */;
+			buildConfigurationList = 5AEF90211B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "culturelife" */;
 			buildPhases = (
 				2A2AC438B35BA642B152CB13 /* [CP] Check Pods Manifest.lock */,
 				5AEF8FFE1B28696A00C8E8CD /* Sources */,
@@ -420,14 +416,14 @@
 			);
 			dependencies = (
 			);
-			name = kj;
+			name = culturelife;
 			productName = kj;
 			productReference = 5AEF90021B28696A00C8E8CD /* kj.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5AEF90161B28696A00C8E8CD /* kjTests */ = {
+		5AEF90161B28696A00C8E8CD /* culturelifeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AEF90241B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "kjTests" */;
+			buildConfigurationList = 5AEF90241B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "culturelifeTests" */;
 			buildPhases = (
 				5AEF90131B28696A00C8E8CD /* Sources */,
 				5AEF90141B28696A00C8E8CD /* Frameworks */,
@@ -438,9 +434,9 @@
 			dependencies = (
 				5AEF90191B28696A00C8E8CD /* PBXTargetDependency */,
 			);
-			name = kjTests;
+			name = culturelifeTests;
 			productName = kjTests;
-			productReference = 5AEF90171B28696A00C8E8CD /* kjTests.xctest */;
+			productReference = 5AEF90171B28696A00C8E8CD /* culturelifeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -456,7 +452,7 @@
 				TargetAttributes = {
 					5AEF90011B28696A00C8E8CD = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = GGJY5669M6;
+						DevelopmentTeam = ZK3NJ8793V;
 						LastSwiftMigration = 0800;
 					};
 					5AEF90161B28696A00C8E8CD = {
@@ -465,7 +461,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5AEF8FFD1B28696A00C8E8CD /* Build configuration list for PBXProject "kj" */;
+			buildConfigurationList = 5AEF8FFD1B28696A00C8E8CD /* Build configuration list for PBXProject "culturelife" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -478,8 +474,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5AEF90011B28696A00C8E8CD /* kj */,
-				5AEF90161B28696A00C8E8CD /* kjTests */,
+				5AEF90011B28696A00C8E8CD /* culturelife */,
+				5AEF90161B28696A00C8E8CD /* culturelifeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -610,7 +606,6 @@
 				5A1065C91BCD0F39007321E8 /* SearchTblViewCell.swift in Sources */,
 				5AA05B221BD27F7A0085CAE8 /* CalendarTableViewCell.swift in Sources */,
 				5ADB7B9C1BAD057300AD5ABE /* WebViewController.swift in Sources */,
-				5AFD93F41BD52FE600109085 /* EventController.swift in Sources */,
 				5ADB7BA81BB2495600AD5ABE /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,7 +623,7 @@
 /* Begin PBXTargetDependency section */
 		5AEF90191B28696A00C8E8CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5AEF90011B28696A00C8E8CD /* kj */;
+			target = 5AEF90011B28696A00C8E8CD /* culturelife */;
 			targetProxy = 5AEF90181B28696A00C8E8CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -689,6 +684,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -729,6 +725,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
@@ -742,7 +739,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GGJY5669M6;
+				DEVELOPMENT_TEAM = ZK3NJ8793V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -753,45 +750,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
+					"-all_load",
 					"$(inherited)",
-					"-l\"c++\"",
-					"-l\"icucore\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accelerate\"",
-					"-framework",
-					"\"ChameleonFramework\"",
-					"-framework",
-					"\"CoreBluetooth\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"GLKit\"",
-					"-framework",
-					"\"GoogleMaps\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"OpenGLES\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SwiftyJSON\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.burdie.kj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jackliu.culturelife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kj/kj-Bridging-Header.h";
@@ -810,7 +772,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GGJY5669M6;
+				DEVELOPMENT_TEAM = ZK3NJ8793V;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -821,47 +783,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
+					"-all_load",
 					"$(inherited)",
-					"-l\"c++\"",
-					"-l\"icucore\"",
-					"-l\"z\"",
-					"-framework",
-					"\"AVFoundation\"",
-					"-framework",
-					"\"Accelerate\"",
-					"-framework",
-					"\"ChameleonFramework\"",
-					"-framework",
-					"\"CoreBluetooth\"",
-					"-framework",
-					"\"CoreData\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreLocation\"",
-					"-framework",
-					"\"CoreText\"",
-					"-framework",
-					"\"GLKit\"",
-					"-framework",
-					"\"GoogleMaps\"",
-					"-framework",
-					"\"Haneke\"",
-					"-framework",
-					"\"ImageIO\"",
-					"-framework",
-					"\"OpenGLES\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SwiftyJSON\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.burdie.kj;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jackliu.culturelife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "kj/kj-Bridging-Header.h";
@@ -885,7 +810,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jack.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kj.app/kj";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/culturelife.app/culturelife";
 			};
 			name = Debug;
 		};
@@ -901,14 +826,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jack.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/kj.app/kj";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/culturelife.app/culturelife";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5AEF8FFD1B28696A00C8E8CD /* Build configuration list for PBXProject "kj" */ = {
+		5AEF8FFD1B28696A00C8E8CD /* Build configuration list for PBXProject "culturelife" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AEF901F1B28696A00C8E8CD /* Debug */,
@@ -917,7 +842,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AEF90211B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "kj" */ = {
+		5AEF90211B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "culturelife" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AEF90221B28696A00C8E8CD /* Debug */,
@@ -926,7 +851,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AEF90241B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "kjTests" */ = {
+		5AEF90241B28696A00C8E8CD /* Build configuration list for PBXNativeTarget "culturelifeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AEF90251B28696A00C8E8CD /* Debug */,

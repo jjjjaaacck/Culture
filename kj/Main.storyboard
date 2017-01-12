@@ -36,7 +36,7 @@
         <scene sceneID="Rq7-st-ILg">
             <objects>
                 <navigationController storyboardIdentifier="CalendarNavigationController" navigationBarHidden="YES" id="8Rj-Mo-Oc5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hdR-Ps-5xu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hdR-Ps-5xu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -92,11 +92,11 @@
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.95916071290000005" green="0.96599965909999996" blue="0.98651649750000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="60" id="mme-UL-74u" customClass="OptionTableViewCell" customModule="kj" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OptionTableViewCell" rowHeight="60" id="mme-UL-74u" customClass="OptionTableViewCell" customModule="culturelife" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="250" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mme-UL-74u" id="rht-EM-upM">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d3-58-k3M">
@@ -157,7 +157,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="INS-3z-zNY"/>
                     <connections>
-                        <outlet property="leftBarTableView" destination="0n8-dj-fr3" id="m75-Xd-DZp"/>
+                        <outlet property="leftBarTableView" destination="0n8-dj-fr3" id="tff-fF-Kh8"/>
                         <outlet property="picView" destination="T2g-Ba-lTx" id="1Wf-Jp-Cpz"/>
                         <outlet property="profile_pic" destination="2wo-3W-LMJ" id="Ory-nh-TiY"/>
                         <outlet property="userName" destination="qfx-Fh-zLg" id="10r-nf-vkA"/>
@@ -171,7 +171,7 @@
         <scene sceneID="fEA-gu-SMx">
             <objects>
                 <navigationController storyboardIdentifier="BookmarkNavigationController" navigationBarHidden="YES" id="Qhq-NM-Ygd" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4fe-Pn-Q2W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="4fe-Pn-Q2W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -186,7 +186,7 @@
         <!--Near By View Controller-->
         <scene sceneID="89M-py-DLD">
             <objects>
-                <viewController id="B2h-6q-fcj" customClass="NearByViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="B2h-6q-fcj" customClass="NearByViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X5J-cf-wbR"/>
                         <viewControllerLayoutGuide type="bottom" id="YFc-67-741"/>
@@ -239,7 +239,7 @@
         <scene sceneID="eni-qb-U3S">
             <objects>
                 <navigationController storyboardIdentifier="MapNavigationController" navigationBarHidden="YES" id="ayk-zk-hsM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JUk-ND-7D5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JUk-ND-7D5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -254,7 +254,7 @@
         <!--My Map View Controller-->
         <scene sceneID="kuJ-zK-h0t">
             <objects>
-                <viewController id="0eg-hC-ZLX" customClass="MyMapViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0eg-hC-ZLX" customClass="MyMapViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zbi-yx-SK0"/>
                         <viewControllerLayoutGuide type="bottom" id="jlC-p2-jhq"/>
@@ -330,7 +330,7 @@
         <!--Bookmark View Controller-->
         <scene sceneID="Y3l-xQ-XEH">
             <objects>
-                <viewController storyboardIdentifier="BookmarkViewController" id="oTl-rN-huz" customClass="BookmarkViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookmarkViewController" id="oTl-rN-huz" customClass="BookmarkViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A5l-Ka-QjJ"/>
                         <viewControllerLayoutGuide type="bottom" id="udP-PK-F1W"/>
@@ -339,7 +339,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBH-Ki-Fch" customClass="CalendarTitle" customModule="kj" customModuleProvider="target">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBH-Ki-Fch" customClass="CalendarTitle" customModule="culturelife" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="barTintColor" red="0.98624199628829956" green="0.9426964828408787" blue="0.49666983179674229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -378,7 +378,7 @@
         <scene sceneID="dko-Ez-zqt">
             <objects>
                 <navigationController storyboardIdentifier="LocationNavigationController" id="KO4-Sm-p1P" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKh-l1-VnQ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zKh-l1-VnQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -393,7 +393,7 @@
         <!--Search Location View Controller-->
         <scene sceneID="ezf-83-phM">
             <objects>
-                <viewController id="Xt9-Ag-tml" customClass="SearchLocationViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xt9-Ag-tml" customClass="SearchLocationViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qof-0J-jTf"/>
                         <viewControllerLayoutGuide type="bottom" id="46B-WM-xJv"/>
@@ -406,11 +406,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="f6X-Ju-tXr" customClass="MapSearchTblViewCell" customModule="kj" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="f6X-Ju-tXr" customClass="MapSearchTblViewCell" customModule="culturelife" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6X-Ju-tXr" id="cII-vG-pf0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGT-0P-EK0">
@@ -454,7 +454,7 @@
         <!--Location Search Result View Controller-->
         <scene sceneID="5nV-ne-hcZ">
             <objects>
-                <viewController storyboardIdentifier="LocationSearchResultViewController" id="zdQ-bO-OEK" customClass="LocationSearchResultViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationSearchResultViewController" id="zdQ-bO-OEK" customClass="LocationSearchResultViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2d5-kn-far"/>
                         <viewControllerLayoutGuide type="bottom" id="lFf-AN-lmh"/>
@@ -489,7 +489,7 @@
         <!--Calendar View Controller-->
         <scene sceneID="nva-Tc-CrJ">
             <objects>
-                <viewController storyboardIdentifier="CalendarViewController" id="QEi-iE-jSm" customClass="CalendarViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarViewController" id="QEi-iE-jSm" customClass="CalendarViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kzf-Ut-iSj"/>
                         <viewControllerLayoutGuide type="bottom" id="P5c-5U-F0q"/>
@@ -556,7 +556,7 @@
         <scene sceneID="mk4-E8-1yl">
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" id="DKx-CO-ocV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Yw6-w6-qha">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="Yw6-w6-qha">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.84999999999999998"/>
@@ -577,7 +577,7 @@
         <!--活生藝文-->
         <scene sceneID="9Zz-7C-9I8">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="KRR-3t-5Af" customClass="ViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="KRR-3t-5Af" customClass="ViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="09P-kW-Q2V"/>
                         <viewControllerLayoutGuide type="bottom" id="eRe-uz-5wH"/>
@@ -595,7 +595,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bW7-4K-Zca">
                                 <rect key="frame" x="0.0" y="175" width="375" height="428"/>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6P-IE-kKQ" customClass="subtitle" customModule="kj" customModuleProvider="target">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6P-IE-kKQ" customClass="subtitle" customModule="culturelife" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="barTintColor" red="0.81010072970000002" green="0.81010072970000002" blue="0.81010072970000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
@@ -647,7 +647,7 @@
         <!--Transition View Controller-->
         <scene sceneID="Qqx-o5-sWg">
             <objects>
-                <viewController storyboardIdentifier="TransitionViewController" id="bmq-5O-kr7" customClass="TransitionViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransitionViewController" id="bmq-5O-kr7" customClass="TransitionViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5kO-B3-Dgx"/>
                         <viewControllerLayoutGuide type="bottom" id="55K-bX-x50"/>
@@ -656,7 +656,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iI-Id-Iq7" customClass="DetailScrollView" customModule="kj" customModuleProvider="target">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iI-Id-Iq7" customClass="DetailScrollView" customModule="culturelife" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </scrollView>
@@ -707,7 +707,7 @@
         <!--Map View Controller-->
         <scene sceneID="GTn-Ag-qQD">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="LjW-qc-n1e" customClass="MapViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="LjW-qc-n1e" customClass="MapViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VD0-b1-4iU"/>
                         <viewControllerLayoutGuide type="bottom" id="s8c-Tq-6nZ"/>
@@ -716,7 +716,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXH-8r-Udt" customClass="otherTitle" customModule="kj" customModuleProvider="target">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXH-8r-Udt" customClass="otherTitle" customModule="culturelife" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="地圖" id="4Zd-Oe-uDb">
@@ -758,7 +758,7 @@
         <!--Search View Controller-->
         <scene sceneID="o19-OA-K73">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="zRs-BX-q5A" customClass="SearchViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" id="zRs-BX-q5A" customClass="SearchViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OYR-Nx-EP3"/>
                         <viewControllerLayoutGuide type="bottom" id="MnL-3w-PIn"/>
@@ -771,11 +771,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="rgI-HC-EtI" customClass="SearchTblViewCell" customModule="kj" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="rgI-HC-EtI" customClass="SearchTblViewCell" customModule="culturelife" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rgI-HC-EtI" id="zBj-LO-c4l">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJs-BS-Ap1">
@@ -820,7 +820,7 @@
         <!--Session Table View Controller-->
         <scene sceneID="Uac-8g-i8R">
             <objects>
-                <viewController storyboardIdentifier="SessionTableViewController" id="fBI-ad-wur" customClass="SessionTableViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SessionTableViewController" id="fBI-ad-wur" customClass="SessionTableViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HD1-b6-0AF"/>
                         <viewControllerLayoutGuide type="bottom" id="V2J-kD-9eD"/>
@@ -829,7 +829,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-Pc-ECI" customClass="otherTitle" customModule="kj" customModuleProvider="target">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lrv-Pc-ECI" customClass="otherTitle" customModule="culturelife" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <items>
@@ -862,7 +862,7 @@
         <!--Web View Controller-->
         <scene sceneID="OSY-Xs-DE0">
             <objects>
-                <viewController storyboardIdentifier="WebViewController" id="ydr-Cs-Jbk" customClass="WebViewController" customModule="kj" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="ydr-Cs-Jbk" customClass="WebViewController" customModule="culturelife" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8LY-iT-woZ"/>
                         <viewControllerLayoutGuide type="bottom" id="n3c-Az-IOh"/>

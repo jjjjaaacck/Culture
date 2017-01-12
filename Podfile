@@ -12,7 +12,6 @@ target 'kj' do
     pod 'SnapKit'
     pod 'Bolts-Swift'
     pod 'Kingfisher'
-    pod 'R.swift'
 end
 
 post_install do |installer|

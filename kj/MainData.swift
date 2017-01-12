@@ -22,7 +22,6 @@ class MainData: Object {
     dynamic var webUrl = ""
     dynamic var masterUnit = ""
     dynamic var bookMark = false
-//    dynamic var informations = LinkingObjects(fromType: Information.self, property: "")
     var informations = List<Information>()
     
     override static func primaryKey() -> String? {

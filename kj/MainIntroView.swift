@@ -130,15 +130,7 @@ class MainIntroView: UIView {
             make.leading.equalTo(titleLabel)
             make.trailing.equalTo(shareButton.snp.leading)
             make.top.equalTo(ticketIcon)
-          //  make.height.equalTo(0)
         }
-        
-//        sessionButton.snp.makeConstraints { (make) in
-//            make.leading.equalTo(self)
-//            make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//            make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//            make.bottom.equalTo(self)
-//        }
         
         if !data.webUrl.isEmpty && !data.salesUrl.isEmpty {
             setButtonConstraint(button: sessionButton)
@@ -186,61 +178,6 @@ class MainIntroView: UIView {
                 make.centerX.equalTo(self)
             })
         }
-        
-//        if !data.webUrl.isEmpty {
-////            webButton.snp.makeConstraints({ (make) in
-////                make.centerX.equalTo(self)
-////                make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-////                make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-////                make.bottom.equalTo(self)
-////            })
-////            setButton(webButton, type: .web)
-//            
-//            if !data.salesUrl.isEmpty {
-//                sessionButton.snp.makeConstraints { (make) in
-//                    make.leading.equalTo(self)
-//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//                    make.bottom.equalTo(self)
-//                }
-//                
-//                webButton.snp.makeConstraints({ (make) in
-//                    make.centerX.equalTo(self)
-//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//                    make.bottom.equalTo(self)
-//                })
-//                setButton(webButton, type: .web)
-//                
-//                salesButton.snp.makeConstraints({ (make) in
-//                    make.trailing.equalTo(self)
-//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//                    make.bottom.equalTo(self)
-//                })
-//                setButton(salesButton, type: .sales)
-//            }
-//            else {
-//                sessionButton.snp.makeConstraints { (make) in
-//                    make.leading.equalTo(self)
-//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//                    make.bottom.equalTo(self)
-//                }
-//            }
-//        }
-//        
-//        else {
-//            if !data.salesUrl.isEmpty {
-//                salesButton.snp.makeConstraints({ (make) in
-//                    make.centerX.equalTo(self)
-//                    make.top.equalTo(ticketLabel.snp.bottom).offset(20)
-//                    make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
-//                    make.bottom.equalTo(self)
-//                })
-//                setButton(salesButton, type: .sales)
-//            }
-//        }
         
         shareButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self)
@@ -380,11 +317,6 @@ class MainIntroView: UIView {
                              (buttonSize.width-buttonSize.height+buttonSize.height/3 + 10) / 2)
         button.setTitleColor(UIColor.flatTeal(), for: UIControlState())
         button.titleLabel?.sizeToFit()
-//        button.titleEdgeInsets =
-//            UIEdgeInsetsMake(0,
-//                             0,
-//                             0,
-//                             0)
         button.titleEdgeInsets =
             UIEdgeInsetsMake((button.imageView?.bounds.size.width)! + 10,
                              -(buttonSize.width + (button.titleLabel?.bounds.size.width)!/2),
@@ -394,7 +326,6 @@ class MainIntroView: UIView {
     
     func setButtonConstraint(button: UIButton) {
         button.snp.makeConstraints { (make) in
-//            make.leading.equalTo(self)
             make.top.equalTo(ticketLabel.snp.bottom).offset(20)
             make.size.equalTo(CGSize(width: self.width / 3.5, height: self.width / 3.5))
             make.bottom.equalTo(self)
